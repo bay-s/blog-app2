@@ -22,10 +22,6 @@ const [message,setMessage] = useState({
 
 useEffect(() => {
  fetchPost()
- const timer = setTimeout(() => {
-  setLoader(false)
-  }, 1000);
-  return () => clearTimeout(timer);
 },[post])
 
 const fetchPost = async () => {
@@ -37,18 +33,20 @@ const fetchPost = async () => {
  .eq('id',id)
  if(data){
    setPost(data)
-   console.log(data);
-   console.log(data.length < 1);
-   if(data.length < 1) {
-    setMessage({...message,
-       pesan:'Post not found',
-       error:true
-        })
-   }else{
-    setMessage({
-        pesan:``,
-        error:false,
-      })
+if(data.length < 1) {
+setMessage({...message,
+pesan:'Post not found',
+error:true
+})        
+}else{
+setMessage({
+pesan:``,
+error:false,
+})
+      const timer = setTimeout(() => {
+        setLoader(false)
+        }, 1000);
+        return () => clearTimeout(timer);
 }
  }if(error) {
   setMessage({...message,
@@ -64,7 +62,7 @@ const postCard = post.length < 1 ? "" : post.map(posts => {
   return <PostCardSingle posts={posts} key={post}/>
  })
 
-console.log(post.length < 1);
+
     return(
         <>
         <Headers />
@@ -73,7 +71,7 @@ console.log(post.length < 1);
           <div className='column is-3 box bg-dark'>
               <SidebarHome />
           </div>
-<div className='column p-0'>
+<div className='column p-0 px-4'>
   {/* start post */}
 <ErrorMessage pesan={message.pesan} isError={message.error} sukses={false}/>
 {loader ? <AnimasiSkeleton /> : postCard}
@@ -92,9 +90,6 @@ dataComment.map(comment => {
    
     {/* START COMMENT FORM */}
 <div className={post.length < 1 ? "hide" : ''}>
-<h3 className={post.length < 1 ? 'hide' : 'text-title is-title px-3'}>
-Leave a Comment
-</h3>
 <CommentForm id={id}/>
 </div>
     {/* END COMMENT FORM */}

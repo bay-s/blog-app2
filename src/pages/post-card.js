@@ -47,16 +47,16 @@ const PostCard = (props) => {
 <ul className='is-flex is-flex-gap-lg align-center'>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <i class="fa fa-heart-o" aria-hidden="true"></i>
-  <span className='is-size-7'>30 Likes</span>
+  <span className='is-size-7'>{props.posts.total_likes < 1 ? '0' : props.posts.total_likes} Likes</span>
   </li>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <i class="fa fa-comment-o" aria-hidden="true"></i>
-  <span className='is-size-7'>20 Comment</span>
+  <span className='is-size-7'>{props.posts.total_comment < 1 ? '0' : props.posts.total_comment} Likes</span>
   </li>
 </ul>
-<li className='is-flex align-center is-flex-gap-md is-clickable'>
+<li className='is-flex align-center is-flex-gap-md is-clickable bookmark'>
   <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-  <span className='is-size-7'>20 Comment</span>
+  <span className='is-size-7'>Bookmark</span>
 </li>
 </div>
  </div>

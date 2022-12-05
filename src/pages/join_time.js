@@ -7,10 +7,9 @@ function joinTime(times){
      ];
 
 
-    const day = date.getDay()
+    const day = date.getDate()
     const month = monthNames[date.getMonth()]
     const year = date.getFullYear()
-
     return `${month} ${day} ${year}`
 }
 

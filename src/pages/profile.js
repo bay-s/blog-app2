@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams, Navigate, Link } from 'react-router-dom'
 import Headers from './headers'
 import { AppContext } from '../App';
 import supabase from '../supabase-config';
 import joinTime from './join_time';
 import akun from '../img/akun.jpg'
 import PostCard from './post-card';
+import ButtonFollow from './button-follow';
+
 
 const Profiles = (props) => {
     const {id} = useParams()
@@ -55,7 +57,7 @@ const Profiles = (props) => {
   :
 <div className='container is-fluid is-max-widescreen my-5 post'>
   <div className='columns is-multiline is-centered'>
-  <section className='column is-9 box is-centered mx-auto bg-dark'>
+  <section className='column is-9 box  bg-dark'>
   <article className='is-flex-column is-flex-gap-xl'>
   <figure class="image is-128x128 mx-auto">
 {
@@ -76,9 +78,9 @@ const Profiles = (props) => {
       </p>
       <a href='#' className='text-title is-size-7'>www.mywebsite.com</a>
       {
-        value.data.username === data.username ? ''
+        value.data.username === data.username ?   <Link to='/dashboard/edit-profile/' className='button is-primary is-small is-rounded'>Follow</Link>
         :
-        <button className='button is-primary is-small is-rounded'>Follow</button>
+        <ButtonFollow id={id} user_login_id={value.data.uid} user={value.data.users} data={value.data}/>
       }
      </div>
   </div>
@@ -100,13 +102,49 @@ const Profiles = (props) => {
  </div>
 </section>
 {/* START POST HISTORY */}
-<section className='is-flex-column column is-9 p-0'>
- {
-  post.length < 1 ? '' 
-  : post.map(posts => {
-    return <PostCard posts={posts} />
-  })
- }
+<section className='is-flex-column column is-9  box bg-transparent'>
+  <div className='columns is-multiline'>
+  <div className='column is-3 p-0 is-flex-column is-flex-gap-lg '>
+    <ul className='is-flex-column actions bg-dark p-2'>
+    <li className='is-flex align-center is-flex-gap-lg bg-'>
+       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
+       <span className='text-white'>Saved</span>
+      </li>
+      <li className='is-flex align-center is-flex-gap-lg'>
+      <i class="fa fa-rss" aria-hidden="true"></i>
+       <span className='text-white'>Posts</span>
+      </li>
+      <li className='is-flex align-center is-flex-gap-lg'>
+       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
+       <span className='text-white'>Saved</span>
+      </li>
+    </ul>
+
+    <ul className='is-flex-column actions bg-dark p-2'>
+    <li className='is-flex align-center is-flex-gap-lg'>
+       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
+       <span className='text-white'>Saved</span>
+      </li>
+      <li className='is-flex align-center is-flex-gap-lg'>
+       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
+       <span className='text-white'>Saved</span>
+      </li>
+      <li className='is-flex align-center is-flex-gap-lg'>
+       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
+       <span className='text-white'>Saved</span>
+      </li>
+    </ul>
+  </div>
+     <div className='column is-9 p-0'>
+      {
+        post.length < 1 ? ''
+        :
+        post.map(posts => {
+          return <PostCard posts={posts} />
+        })
+      }
+     </div>
+  </div>
 </section>
 {/* END POST HISTORY */}
   </div>

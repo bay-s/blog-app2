@@ -5,7 +5,7 @@ import supabase from '../supabase-config'
 const  PostPreview =  (props) => {
  const [nextPost,setNextPost] = useState([])
 const [prevPost,setPrevPost] = useState([])
-console.log(props.id);
+
  useEffect(() => {
  const fetchNext = async () => {
   const { data, error } = await supabase
@@ -16,14 +16,13 @@ console.log(props.id);
   .limit(1)
   if(error) console.log(error.message);
   else {
-     console.log(data);
      setNextPost(data[0])
   }
  }
  fetchNext()
  fetchPrev()
- },[prevPost,nextPost])
-
+//  },[prevPost,nextPost])
+},[])
  const fetchPrev = async () => {
      const { data, error } = await supabase
      .from('posts')
@@ -33,12 +32,12 @@ console.log(props.id);
      .limit(1)
      if(error) console.log(error.message);
      else {
-          console.log(data);
+
           setPrevPost(data[0])
      }
     }
 
-console.log(nextPost);
+
  return(
 <div className='is-flex justify-between align-center' >
 <div className={prevPost == undefined  ? 'hide' : 'is-flex is-flex-column is-flex-gap-sm navbar-start align-start'}>

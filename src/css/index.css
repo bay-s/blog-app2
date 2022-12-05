@@ -155,6 +155,10 @@ table {
   color: white !important;
 }
 
+.posts{
+  line-height: 1.5rem !important;
+}
+
 .quill svg{
   color: white !important;
   background-color: white !important;
@@ -220,12 +224,12 @@ width: 100% !important; */
 
 .home-sidebar{
   position: sticky !important;
-  top: 130px !important;
+  top: 100px !important;
 }
 
 .dashboard-sidebar{
   position: sticky !important;
-  top: 130px !important;
+  top: 100px !important;
 }
 
 .image{
@@ -630,9 +634,11 @@ text-align: left !important;
 .text-small{
   font-size: 10px !important;
 }
+
 .likes{
-  color: rgb(255, 40, 40) !important;
+  color: hsla(335, 96%, 70%, 0.986) !important;
 }
+
 .lh-sm {
   line-height: 1.25rem !important;
 }
@@ -803,14 +809,6 @@ height: 550px !important;
   right: 0;
 }
 
-.list-item:hover{
-  background: rgba( 255, 255, 255, 0.15 );
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 5.5px );
-  -webkit-backdrop-filter: blur( 5.5px );
-  cursor: pointer;
-transition: 250ms;
-}
 
 .actions li{
   padding: 5px 15px !important;
@@ -818,13 +816,14 @@ transition: 250ms;
 
 .actions li:hover{
   background: rgba(255, 255, 255, 0.041);
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 5.5px );
-  -webkit-backdrop-filter: blur( 5.5px );
 transition: 100ms;
 border-radius: 5px;
+cursor: pointer;
 }
 
+.actions .bookmark:hover{
+  background-color: hsla(207, 100%, 51%, 0.13) !important;
+}
 /* CURLS */
 /* Curl Top Left */
 .hvr-curl-top-left {

@@ -54,8 +54,11 @@ y = x;
         :  <Link to='/login/' className=' has-text-white'>Create Post</Link>
         }   
         </li>   
+        
         <li className={value.isLogin ? 'hvr-underline-from-center py-3' : 'hide'}><Link to='/dashboard/index' className=' has-text-white'>Dashboard</Link></li>
-
+        <li className='hvr-underline-from-center py-3'>
+        <i class="fa fa-bell-o text-white is-size-5" aria-hidden="true"></i>
+        </li>  
         <div className={value.isLogin ? "navbar-menu fadeIn animated faster" : "hide"} id="navbar-menu">
           <div className="navbar-end">
             <div className="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
