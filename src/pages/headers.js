@@ -6,33 +6,10 @@ import akun from '../img/akun.jpg'
 
 const Headers = () => {
 const {value} = useContext(AppContext);
-const [menus,setMenus] = useState([])
-const [siteInfo,setSiteInfo] = useState([])
-console.log(value);
-useEffect(() => {
-  const fetchMenu = async () => {
-    const { data, error } = await supabase
-    .from('menu')
-    .select()
-    if(data){
-      setMenus(data)
-    }if(error) console.log(error);
-     }
-     fetchMenu()
-     window.addEventListener('scroll',scrolls)
-     fetchSiteInfo()
-},[])
 
-const fetchSiteInfo = async () => {
-  const { data, error } = await supabase
-  .from('blog-info')
-  .select()
-  .eq('id',2)
-  if(error) console.log(error.message);
-  else {
-    setSiteInfo(data[0])
-  }
-}
+useEffect(() => {
+     window.addEventListener('scroll',scrolls)
+},[])
 
 
 let y = window.scrollX
@@ -82,15 +59,14 @@ y = x;
         <div className={value.isLogin ? "navbar-menu fadeIn animated faster" : "hide"} id="navbar-menu">
           <div className="navbar-end">
             <div className="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
-              <a className="navbar-link is-arrowless">
-                <div className="is-user-avatar">
-                  <img src={value.data.avatar === '' ? akun : value.data.avatar } alt="IMAGES" />
-                </div>
+              <a className="navbar-link is-arrowless is-flex is-flex-gap-lg">
+              <figure class="image is-24x24">
+                  <img className='avatars is-rounded' src={value.data.avatar === '' ? akun : value.data.avatar } alt="IMAGES" />
+              </figure>
                 <div className="is-user-name text-title"><span>{value.data.username}</span></div>
-                <span className="icon"><i className="mdi mdi-chevron-down"></i></span>
               </a>
               <div className="navbar-dropdown bg-dark">
-              <Link className="navbar-item" to='/dashboard/edit-profile'>
+              <Link className="navbar-item" to={`/profiles/${value.data.username}`} >
                   <span className="icon"><i className="fa fa-user text-white"></i></span>
                   <span className='text-white'>My Profile</span>
               </Link>

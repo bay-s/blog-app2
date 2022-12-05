@@ -58,10 +58,12 @@ const PostSidebar = (props) => {
       }
 
 {props.methods.catArr.length < 1 ? "" : props.methods.catArr.map(m => {
+  console.log(m)
       return <li>
-      <label class="checkbox">
-  <input type="checkbox" className='border-primary' value={m} onChange={props.methods.handlerChanges} />
-  <span className='px-2 text-white'>{m.category}</span>
+      <label class="b-checkbox checkbox">
+<input type="checkbox" value={m} onChange={props.methods.handlerChanges} />
+      <span class="check border-primary"></span>
+      <span className='px-2 text-white'>{m}</span>
 </label>
       </li>
       })
@@ -70,8 +72,8 @@ const PostSidebar = (props) => {
       </ul>
       <a href='#' className='is-size-7 text-white is-underlined p-3 ' onClick={openAddCategory}>Add New Category</a>
       <form className={openCategory ? 'p-3' : 'hide'} onSubmit={props.methods.addCategory}>
-      <input class="input is-info is-small mb-2 text-white bg-transparent" type="text" name='category' placeholder="Primary input" onChange={props.methods.handlerChanges}/>
-      <button className='button is-info is-outlined is-small'>Add New Category</button>
+      <input class="input  is-primary is-small mb-2 text-white bg-transparent" type="text" name='category' placeholder="Primary input" onChange={props.methods.handlerChanges}/>
+      <button className='button is-primary is-outlined is-small'>Add New Category</button>
       </form>
     </div>
 </article>
@@ -84,7 +86,7 @@ const PostSidebar = (props) => {
   <div className='is-flex is-flex-gap-md align-center p-3 flex-wrap'>
       {props.methods.tagArr.length < 1 ? "" : props.methods.tagArr.map((m,index) => {
         console.log(m)
-        return <div className='is-flex align-center tag is-info' key={index} data-index={index}>
+        return <div className='is-flex align-center tag  is-primary' key={index} data-index={index}>
   <span dangerouslySetInnerHTML={Card (m)} />
    <span class="delete is-small is-clickable" onClick={props.methods.removeTagArr}></span>
   </div>
@@ -93,8 +95,8 @@ const PostSidebar = (props) => {
 
       </div>
       <div className='p-3'>
-      <input class="input is-info is-small mb-2 bg-transparent text-white" type="text" name='tags' placeholder="Primary input" onChange={props.methods.handlerChanges}/>
-      <button className='button  is-info is-outlined is-small' onClick={props.methods.addTags}>Add Tags</button>
+      <input class="input  is-primary is-small mb-2 bg-transparent text-white" type="text" name='tags' placeholder="Primary input" onChange={props.methods.handlerChanges}/>
+      <button className='button  is-primary is-outlined is-small' onClick={props.methods.addTags}>Add Tags</button>
       </div>
     </div>
   </article>

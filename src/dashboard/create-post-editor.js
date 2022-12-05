@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useRef, useState }  from "react";
-import { Link } from 'react-router-dom';
-import Header from '../pages/header';
 import ReactQuill from 'react-quill';
 import PostSidebar from './create-post-sidebar';
 import supabase from '../supabase-config';
@@ -128,11 +126,11 @@ const PostEditor = (props) => {
     const addCategory = async (e) => {
       e.preventDefault();
       //  setCatArr(catArr => [...catArr, text.category]);
-      setArrValue({ ...arrValue, catArr: [...arrValue.catArr, text.category] });
       if (!text.category) {
         alert("Input cant be empty");
         return;
       }
+     setArrValue({ ...arrValue, catArr: [...arrValue.catArr, text.category] });
       const { data, err } = await supabase
         .from("category")
         .insert([{ category: text.category }])
@@ -196,10 +194,11 @@ const PostEditor = (props) => {
     catArr:arrValue.catArr,
   }  
     return(
-        <div className='columns is-multiline'>
-<div className='column is-9  '>
+      
+<div className='columns is-variable bd-klmn-columns is-2'>
+<div className='column is-9 py-0 px-5'>
 {/* START EDITOR*/}
-<section class="section is-main-section box bg-dark">
+<section class="section is-main-section box bg-dark ">
   <form className='is-flex is-flex-column is-flex-gap-md' onSubmit={createPost}>
 <div class="field">
   <div class="control">

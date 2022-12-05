@@ -50,6 +50,9 @@ const uploadImage = async e => {
     if(error){
         console.log(error); 
        alert(`Something wrong ${error.message}`)
+       setImages({...images ,
+       hide:false
+         })
     }
     if(data){
         console.log(data);
@@ -59,6 +62,7 @@ const uploadImage = async e => {
           isUpload:true
            })
         getURL(url)
+        console.log(url);
     }
   }
 
@@ -74,7 +78,7 @@ const getURL = async (url) => {
 
   const updateAvatar = async (url) => {
     const {data,err} = await supabase 
-    .from('user')
+    .from('users')
     .update({avatar:url})
     .eq('uid',value.data.uid)
     .select()
@@ -93,7 +97,7 @@ alert(`Something wrong ${err.message}`)
         <form className='my-3' onSubmit={uploadImage}>
         <div class="field is-flex is-flex-gap-xl is-align-items-center">
         <figure class="image is-48x48">
-        <img class="is-rounded edit-image h-100" src={images.imgUpload !== '' ? images.imgUpload : value.data.avatar === '' ? akun : value.data.avatar}  alt="profile"/>
+        <img class="is-rounded edit-image h-100 avatars" src={images.imgUpload !== '' ? images.imgUpload : value.data.avatar === '' ? akun : value.data.avatar}  alt="profile"/>
         </figure>
         <div class="file is-small  is-flex is-flex-direction-column is-flex-gap-sm">
         <label class="label p-0 m-0 text-white">{value.data.username}</label>

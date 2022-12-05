@@ -7,7 +7,6 @@ import EditProfile from './edit-profile';
 import Main from './main';
 import MediaLibrary from './media';
 import Menus from './menus';
-import Page from './pages';
 import Posts from './posts';
 import Sidebar from './sidebar';
 
@@ -22,18 +21,17 @@ const string_id = id.toString().toLowerCase()
 <div class="container is-fluid my-5">
 <div className='columns is-multiline dashboard-container'>
 {/* START SIDEBAR */}
-<div className='column is-2 bg-dark'>
+<div className='column is-3 bg-dark my-3'>
 <Sidebar />
 </div>
 {/* END SIDEBAR */}
-<div className='column is-10 p-0 px-3'>
+<div className='column is-9 '>
 <div className={string_id === 'index' ? 'box bg-dark shadow' : 'hide' }>
 <h3 className='is-bold is-title is-size-4 text-title capital'>{string_id === 
 'index' ? "Dashboard" : string_id}</h3>
 </div>
 {string_id === 'index' ?  <Main />  : ""}
 {string_id === 'posts' ?  <Posts />  : ""}
-{string_id === 'pages' ?  <Page />  : ""}
 {string_id === 'category' ?  <Category />  : ""}
 {string_id === 'edit-profile' ? <EditProfile /> : ""}
 {string_id === 'menus' ? <Menus /> : ""}

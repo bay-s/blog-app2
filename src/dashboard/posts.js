@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { AppContext } from '../App';
 import Pagination from '../pages/pagination';
 import supabase from '../supabase-config';
 import PostList from './post-list';
@@ -7,9 +8,10 @@ import PostList from './post-list';
 
 const Posts = (props) => {
   const [post,setPost] = useState([])
+  const {value} = useContext(AppContext)
   const [totalPost,setTotalPost] = useState(0)
   const {id} = useParams()
-  const [value,setValue] = useState({
+  const [values,setValue] = useState({
     page:0,
     leftPage:totalPost,
     counts:4
@@ -17,14 +19,15 @@ const Posts = (props) => {
   
   useEffect(() => {
    fetchPost()
-  },[value.page,value.counts])
+  },[values.page,values.counts])
 
   const fetchPost = async () => {
    const { data, error ,count} = await supabase
    .from('posts')
    .select('*', { count: 'exact' })
+   .eq('author_id',value.data.uid)
    .order("id", { ascending: true })
-   .range(value.page,value.counts)
+   .range(values.page,values.counts)
    if(data){
      console.log(data);
      setTotalPost(count)

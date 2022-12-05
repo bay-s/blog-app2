@@ -26,7 +26,7 @@ const Author = (props) => {
     return(
 userComment.length < 1 ? "" : userComment.map(m => {
     return <div className='is-flex align-center is-flex-gap-md avatars'>
-    <Link to={`/profile/${m.uid}`} className='text-title is-size-6 is-title'>{m.username}</Link>
+    <Link to={`/profiles/${m.username}`} className='text-title is-size-6 is-title'>{m.username}</Link>
 </div>
 })
     )

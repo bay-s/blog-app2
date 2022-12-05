@@ -23,16 +23,9 @@ if(e.target.classList.contains('site')) {
 }
 }
     return(
-<>
-<div className='box shadow bg-dark is-flex justify-between align-center'>
-<h3 className='is-bold is-title is-size-4 text-title'>
-    {!open ? 'Edit Profile' : 'Edit Site info'}
-</h3>
-</div>
-{/* END TABS PANEL */}
+
 <EditProfileForm />
 
-</>
     )
 }
 

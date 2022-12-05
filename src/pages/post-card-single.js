@@ -16,21 +16,21 @@ const PostCardSingle = (props) => {
     
     return(
   <div className="tile is-parent" key={posts.id}>
-       <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column ">
-<div className="card-image mb-2 feature-image-container bertasbihlah">
+ <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column ">
+       {posts.post_thumbnail !== '' ? 
+<div className="card-image mb-2 feature-image-container">
 <figure className="image is-16by9 feature-image" >
-{posts.post_thumbnail !== '' ? 
   <img src={posts.post_thumbnail} alt="Placeholder image" className='post-image w-100 h-100'/>
-  : <img src={img} alt="Placeholder image" className='post-image w-100 h-100'/>
-  }
 </figure> 
 </div>
+: ''
+  }
 {/* POST CAPTION */}
 <header className='p-1 is-flex is-flex-column is-flex-gap-md'>
-    <div className='is-flex align-center is-flex-gap-md'>
+<p className="title is-3 text-title is-bold p-0 m-0 ">{posts.post_title}</p>
+<div className='is-flex align-center is-flex-gap-md'>
     <PostTag tag={posts.post_tag}/>
     </div>
-<p className="title is-3 text-title is-bold p-0 m-0 ">{posts.post_title}</p>
 <div className='is-flex align-center is-flex-gap-md'>
 <p className="is-title is-size-6 has-text-grey-lighter">
 {timeDifference(posts.created_at)}  -</p>

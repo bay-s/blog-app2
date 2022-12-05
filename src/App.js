@@ -6,15 +6,13 @@ import Home from "./pages/Home"
 import CreatePost from "./dashboard/create-post"
 import LoginPage from "./dashboard/login"
 import RegisterPages from "./dashboard/register"
-import Pages from "./pages/pages"
-import CreatePage from "./dashboard/create-pages"
 import NotFound from ".//pages/404not"
 import PostDetail from "./pages/post"
 import EditPost from "./dashboard/edit-post"
-import EditPage from "./dashboard/edit-page"
 import GetPost from "./dashboard/get-post-by"
 import PostByCategory from "./pages/post-by-category"
 import SearchResult from "./pages/search-result"
+import Profiles from "./pages/profile"
 
 
 
@@ -82,7 +80,7 @@ function App() {
     }
     if(data){
       setData(data)
-      const check = data.is_admin ? setIsLogin(true)  : setIsLogin(false) 
+      const check = data !== null ? setIsLogin(true)  : setIsLogin(false) 
     }
   }
 
@@ -102,11 +100,9 @@ function App() {
       <Route path='/post/:id' element={<PostDetail />} /> 
       <Route path='/dashboard/:id' element={isLogin ? <DashBoard /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/dashboard/create-post/' element={isLogin ? <CreatePost /> : <LoginPage  isLogin={isLogin}/>} />
-      <Route path='/dashboard/create-page/' element={isLogin ? <CreatePage /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/dashboard/edit-post/:id' element={isLogin ? <EditPost /> : <LoginPage  isLogin={isLogin}/>} />
-      <Route path='/dashboard/edit-page/:id' element={isLogin ? <EditPage /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/posts/:id' element={<SearchResult />} />
-      <Route path='/pages/:id' element={<Pages />} />
+      <Route path='/profiles/:id' element={<Profiles />} />
       <Route path='/post/category-name/:id' element={<GetPost />} />
       <Route path='/posts/category-name/:id' element={<PostByCategory />} />
       <Route path='*' element={<NotFound />} />

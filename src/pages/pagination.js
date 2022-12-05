@@ -29,10 +29,10 @@ const prevPage = (e) => {
 console.log(props.value.page );
 console.log(props.value.page <= 1);
     return(
-  <div className={props.value.page <= 4 ? 'hide' : 'py-5 px-4'}>   
+<div className={props.value.page <= 4 ? 'hide' : 'py-5 px-4'}>   
 <nav className="is-flex justify-center pagination is-medium" role="navigation" aria-label="pagination">
-  <button className={props.value.page <= 1 ? "pagination-previous is-disabled" : "pagination-previous hvr-sweep-to-right text-title is-outlined border-primary bg-transparent"} onClick={props.value.page <= 1 ? '' : prevPage }>Previous</button>
-  <button className={totalPage <= 4 ? "pagination-next  is-disabled" : "pagination-next hvr-sweep-to-right text-title is-outlined border-primary bg-transparent"} onClick={totalPage <= 4 ? '' : nextPage}>Next page
+  <button className={props.value.page <= 1 ? "pagination-previous is-disabled is-small" : "pagination-previous hvr-sweep-to-right text-title is-outlined border-primary bg-transparent is-small"} onClick={props.value.page <= 1 ? '' : prevPage }>Previous</button>
+  <button className={totalPage <= 4 ? "pagination-next  is-disabled is-small" : "pagination-next hvr-sweep-to-right text-title is-outlined border-primary bg-transparent is-small"} onClick={totalPage <= 4 ? '' : nextPage}>Next page
   </button>
 </nav>
 </div>
