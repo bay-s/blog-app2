@@ -22,11 +22,11 @@ const [message,setMessage] = useState({
 
 useEffect(() => {
  fetchPost()
-},[post])
-
+},[])
+// },[post])
 const fetchPost = async () => {
  const comments = await HasComment(id);
- setDataComment(comments)
+ setDataComment(comments);
  const { data, error } = await supabase
  .from('posts')
  .select()
@@ -59,40 +59,40 @@ error:false,
 
 
 const postCard = post.length < 1 ? "" : post.map(posts => {
-  return <PostCardSingle posts={posts} key={post}/>
+  return <PostCardSingle  posts={posts} key={posts}/>
  })
 
-
+console.log(post[0]);
     return(
         <>
         <Headers />
  <div className='container is-fluid is-max-widescreen my-5 post'>
-      <article className='columns is-multilne single-container'>
-          <div className='column is-3 box bg-dark'>
+<article className='columns is-multilne single-container'>
+<div className='column is-3 box bg-dark'>
               <SidebarHome />
-          </div>
-<div className='column p-0 px-4'>
-  {/* start post */}
+</div>
+<div className='column p-0 px-4 is-flex-column is-flex-gap-lg'>
+{/* start post */}
 <ErrorMessage pesan={message.pesan} isError={message.error} sukses={false}/>
 {loader ? <AnimasiSkeleton /> : postCard}
-    {/* END POST */}
+{/* END POST */}
+
+{/* START COMMENT FORM */}
+<div className={post.length < 1 ? "hide" : 'box bg-dark p-6'}>
+<CommentForm id={id} key={post[0]} post={post[0]} />
+
 {/* DISPLAY COMMENT */}
-
-<article className='section is-main-section px-5 py-1'>
-
+<article className='is-flex-column is-flex-gap-md py-4'>
 {dataComment == undefined ? "" :
 dataComment.map(comment => {
-  return <CommentCard comment={comment}/>
+  return <CommentCard key={dataComment} comment={comment} post={post[0]}/>
 })
 }
 </article>
-    {/* END DISPLAY */}
-   
-    {/* START COMMENT FORM */}
-<div className={post.length < 1 ? "hide" : ''}>
-<CommentForm id={id}/>
+  {/* END DISPLAY */}
+
 </div>
-    {/* END COMMENT FORM */}
+{/* END COMMENT FORM */}
 </div>
           {/* end column card */}
       </article>

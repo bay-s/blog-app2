@@ -1,28 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { AppContext } from '../App';
 import supabase from '../supabase-config';
 import CommentList from './comment-list';
 import ReplyList from './comment-reply-list';
 
 
 const Comment = (props) => {
-    const [post,setPost] = useState([])
+     const {value} = useContext(AppContext)
+    const [comment,setComment] = useState([])
     const [totalPost,setTotalPost] = useState(0)
     const [reply,setReply] = useState([])
 
     useEffect(() => {
-     fetchPost()
+      fetchComment()
      fetchCommentReply()
     },[])
   
-    const fetchPost = async () => {
+    const fetchComment = async () => {
      const { data, error ,count} = await supabase
      .from('comment')
      .select('*', { count: 'exact' })
+     .eq('author_id',value.data.uid)
      if(data){
        console.log(data);
        setTotalPost(count)
-       setPost(data)
+       setComment(data)
      }if(error) console.log(error.message);
     }
     const fetchCommentReply = async () => {
@@ -56,7 +59,7 @@ const Comment = (props) => {
               </thead>
               <tbody>
 {/* POST LIST */}
-<CommentList  post={post} key={post}/>
+<CommentList  post={comment} key={comment}/>
 <ReplyList post={reply} key={reply}/>
 {/* END POST LIST */}
               </tbody>

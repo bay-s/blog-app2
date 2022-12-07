@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import timeDifference from './timestamp'
-import akun from '../img/akun.jpg'
 import { AppContext } from '../App'
 import ReplyForm from './reply-form'
 import supabase from '../supabase-config'
 import ReplyCard from './comment-reply-card'
+import Avatar from '../dashboard/avatar'
+import Author from '../dashboard/author'
+import LikesComment from './likes-comment'
+
+
 
 const CommentCard = (props) => {
   const {value} = useContext(AppContext)
-
+  const [commentId,setCommentId] = useState('')
   const [openReply,setOpenReply] = useState(false)
   const [dataReply,setDataReply] = useState([])
   const input = useRef(null)
@@ -18,54 +22,80 @@ const CommentCard = (props) => {
 
    const HasReply = async (id) => {
         const { data, error } = await supabase
-        .from('reply_comment')
+        .from('comment_reply')
         .select()
         .eq('comment_id',comment.id)
-        if(error){
-            alert(error.message)
-        }else{
+        if(error) console.log(error.message);
+        else{
             console.log(data);
             setDataReply(data)
         }
     }
     HasReply()
-
  },[])
 
-    const createMarkup = (posts) => {
+const createMarkup = (posts) => {
         return {__html:posts.comment_content};
-       }
+}
 
   const opensReply = (e) => {
     setOpenReply(!openReply)
-    input.current.classList.toggle('hides')
+    const comment_id = parseFloat(e.target.dataset.comment)
+    setCommentId(comment_id)
+    input.current?.classList.toggle('hides')
+    console.log(commentId);
   }     
-    return(
 
- <div className='bg-dark shadow is-flex is-flex-column is-flex-gap-md p-4'>
+
+    return(
+<>
+<div className='border box bg-transparent is-flex is-flex-column is-flex-gap-md p-4'>
+{/* AUTHOR AVATAR */}
  <div className='is-flex align-center is-flex-gap-md'>
  <figure className="image is-32x32">
-  <img className="is-rounded" src={akun} />
+ <Avatar id={comment.author_id} />
 </figure>
- <h3 className='is-title text-title is-size-7'>
-  {comment.author_name}
-</h3>
+<div className='is-flex-column'>
+ <Author id={comment.author_id}/>
  <span className='has-text-grey is-size-7 is-title'>
 {timeDifference(comment.created_at)}
  </span>
+</div>
   </div>
+  {/* END AUTHOR AVATAR */}
 <div className='px-1 mb-2' dangerouslySetInnerHTML={createMarkup(comment)} />
- {value.isLogin ?  <input className='input is-small bg-dark is-primary' ref={input} placeholder='Write a reply' onClick={opensReply}/> 
- : ""}
+ {
+value.isLogin ? 
+ <ul className='is-flex is-flex-gap-xl align-center actions'>
+  <li className='is-flex align-center is-flex-gap-md is-clickable'>
+  <LikesComment id={comment.id} user={value.data} post_id={comment.post_id}/>
+  <span className='is-size-7'>{comment.total_likes < 1 ? '0' : comment.total_likes} Likes</span>
+  </li>
+  <li className='is-flex align-center is-flex-gap-md is-clickable' data-comment={comment.id} onClick={opensReply}> 
+  <i class="fa fa-comment-o" aria-hidden="true"  data-comment={comment.id}></i>
+  <span className='is-size-7'  data-comment={comment.id}>Reply</span>
+  </li>
+</ul> 
+:''
+}
  {/* START REPLY FORM */}
- <div className={openReply ? 'fade' : 'hides'}>
- <ReplyForm opensReply={opensReply} id={comment.id} />
+ <div className={openReply ? 'fade my-3' : 'hides'}>
+ <ReplyForm opensReply={opensReply} receive_id={comment.author_id} comment_id={commentId} post_id={comment.post_id} />
  </div>
  {/* END REPLY FORM */}
- {dataReply.length < 1 ? "" : dataReply.map(reply => {
-  return <ReplyCard reply={reply}/>
- })}
 </div>
+{/* END COMMENT CONTAINER */}
+
+{/* !-- REPLY CONTAINER */}
+<div className='pl-5'>
+{
+  dataReply.length < 1 ? "" : dataReply.map(reply => {
+  return <ReplyCard reply={reply} />
+ })
+ }
+</div>
+{/* !-- END REPLY CONTAINER */}
+</>
     )
 }
 

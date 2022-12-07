@@ -252,13 +252,12 @@ width: 100% !important; */
 } */
 /* END POST */
 .fade{
-  animation: fadeIn 1s  !important;
+  animation: fadeIn 500ms  !important;
   -webkit-animation: fadeIn 1s !important;
   -moz-animation: fadeIn 1s  !important;
   -o-animation: fadeIn 1s  !important;
   -ms-animation: fadeIn 1s   !important;
 }
-
 
 @keyframes fadeIn {
   0% { opacity: 0; }
@@ -525,7 +524,7 @@ border: none !important;
 }
 
 .border{
-  border: 2px solid rgba(0, 0, 0, 0.219) !important;
+  border: 2px solid rgba(255, 255, 255, 0.13) !important;
 }
 
 .border-butt{

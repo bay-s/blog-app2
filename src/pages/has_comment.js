@@ -7,8 +7,9 @@ const HasComment = async (id) => {
     .select()
     .eq('post_id',id)
     if(error){
-        // alert(error.message)
+    console.log(error);
     }else{
+        console.log(data);
         return data
     }
 }

@@ -8,6 +8,7 @@ import PostPreview from './next-post'
 import LikesAction from './likes-action'
 import { AppContext } from '../App'
 import Bookmarked from './bookmark'
+import Avatar from '../dashboard/avatar'
 
 const PostCardSingle = (props) => {
      const {value} = useContext(AppContext)
@@ -28,14 +29,23 @@ return(
 : ''
   }
 {/* POST CAPTION */}
-<header className='p-1 is-flex is-flex-column is-flex-gap-md p-4'>
+<header className='is-flex is-flex-column is-flex-gap-md px-6'>
 <p className="title is-3 text-title is-bold p-0 m-0 ">{posts.post_title}</p>
 
-<div className='is-flex align-center is-flex-gap-md'>
-<p className="is-title is-size-6 has-text-grey-lighter">
-{timeDifference(posts.created_at)} - </p>
+<div className='py-3 p-0  is-flex-column justify-start is-flex-gap-lg'>
+ {/* AVATAR */}
+<div className='is-flex align-center is-flex-gap-lg'>
+<figure class="image is-32x32">
+<Avatar  id={posts.author_id}/>
+</figure>
+<div className='is-flex-column'>
 <Author id={posts.author_id}/>
+<p className="subtitle is-7 has-text-grey">{timeDifference(posts.created_at)}</p>
 </div>
+</div>
+ {/* END AVATAR */}
+</div>
+
 <div className='is-flex align-center is-flex-gap-md'>
     <PostTag tag={posts.post_tag}/>
 </div>
@@ -44,9 +54,9 @@ return(
 </div>
  </header>
  {/* END POST CAPTION */}
- <div className='my-3 posts px-4' dangerouslySetInnerHTML={createMarkup(posts)} />
+ <div className='my-3 posts px-6' dangerouslySetInnerHTML={createMarkup(posts)} />
  {/* post action */}
-<div className='is-flex justify-between align-center actions px-1'>
+<div className='is-flex justify-between align-center actions px-5'>
 <ul className='is-flex is-flex-gap-lg align-center'>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <LikesAction post={posts} user={value.data} />

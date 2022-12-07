@@ -55,13 +55,13 @@ addLikes = async (e) => {
         this.setState({isLikes:false})
         console.log("ada like");
         e.target.classList.remove('marked')
-        // this.RemoveLikes(id,lid)
+        this.RemoveLikes(id,lid)
         }else{
          console.log("tidakada like");
          e.target.classList.add('marked')
          this.setState({isLikes:true})
          console.log(this.state.isLikes);
-        //  this.UpdateLikes(id)
+         this.UpdateLikes(id)
         }
       }
 }

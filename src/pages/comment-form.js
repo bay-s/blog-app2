@@ -4,9 +4,12 @@ import ReactQuill from 'react-quill';
 import ErrorMessage from '../dashboard/error-message';
 import supabase from '../supabase-config';
 import ReplyForm from './reply-form';
+import Avatar from '../dashboard/avatar';
+import { AppContext } from '../App';
 
 
 const CommentForm = (props) => {
+    const {value} = useContext(AppContext)
     const [isSubmit, setIsSubmit] = useState(false);
     const [message, setMessage] = useState({
       pesan: "",
@@ -14,12 +17,8 @@ const CommentForm = (props) => {
       sukses: false,
     });
     const [values, setValue] = useState({
-      name: "",
-      email:'',
       quill: "",
-      ref:useRef(null),
-      names:useRef(null),
-      emails:useRef(null)
+      ref:useRef(null)
     });
 
       const handlerChange = (e) => {
@@ -27,35 +26,24 @@ const CommentForm = (props) => {
         .getText().length
         setValue({
         ...values,
-        name:values.names.current?.value,
-        email:values.emails.current?.value,
         quill:values.ref.current?.value
         });
-
-         if (strlen > 1) {
-           setIsSubmit(true);
+         if (strlen <= 2) {
+          setIsSubmit(false);
          } else {
-           setIsSubmit(false);
+           setIsSubmit(true);
          }
       };
 
      const postComment = async (e) => {
       e.preventDefault()
       setIsSubmit(false)
-      if(!values.email || !values.name){
-        setMessage({
-          pesan:`Name and email required`,
-          isError: true,
-          sukses: false,
-        });
-        return
-      }
       const { error } = await supabase.from('comment')
       .insert({ 
         comment_content:values.quill,
-        author_name:values.name,
-        author_email:values.email,
-        post_id:props.id
+        author_id:value.data.uid,
+        receiver_id:props.post.author_id,
+        post_id:props.id,
       })
       if(error){
         setMessage({
@@ -64,6 +52,7 @@ const CommentForm = (props) => {
           sukses: false,
         });
       }else{
+        incrementTotalComment()
         setMessage({
           pesan:`Comment posted`,
           isError: false,
@@ -77,15 +66,33 @@ const CommentForm = (props) => {
           });
       }
      } 
+
+     const incrementTotalComment = async () => {
+      const { err ,datas}= await supabase.from('posts')
+      .update({ total_comment:props.post.total_comment + 1})
+      .eq('id',props.id)
+       if(err) console.log(err);
+       else console.log(datas);   
+     }
     return(
 <section className="section is-main-section p-1">
-<form className='is-flex is-flex-column is-flex-gap-md box bg-dark' onSubmit={postComment}>
-<h3 className='text-title is-title  mb-3'>
+<form className='is-flex is-flex-column is-flex-gap-md ' onSubmit={postComment}>
+<h3 className='text-title is-title  mb-5'>
 Leave a Comment
 </h3>
-<ReactQuill ref={values.ref} theme="snow" value={values.quill} name='quill'  modules={module.toolbars} formats={module.formats} onChange={handlerChange}/>
-{isSubmit ? <button type='submit' className='button is-primary navbar-end'>Submit</button> :
-<button className='button is-primary navbar-end' disabled>Submit</button>}
+<div className='is-flex is-flex-gap-xl'>
+<figure className="image is-48x48">
+  <Avatar id={value.data.uid}/>
+</figure>
+<div className='w-100'>
+<ReactQuill  ref={values.ref} theme="snow" value={values.quill} name='quill'  modules={module.toolbars} formats={module.formats} onChange={handlerChange}/>
+<div className='button-quill'>
+{isSubmit ? <button type='submit' className='button is-primary '>Submit</button> :
+  <button className='button is-primary mt-3' disabled>Submit</button>}
+</div>
+</div>
+</div>
+
 <ErrorMessage pesan={message.pesan} isError={message.isError} sukses={message.sukses}/>
 </form>
 
