@@ -49,7 +49,7 @@ const Main = (props) => {
         <div class="tile is-child box bg-dark">
         <div class="level-item has-text-centered">
             <div>
-              <p class="heading is-size-6 text-white">Followings</p>
+              <p class="heading is-size-6 text-white">Following</p>
               <p class="title text-white">{value.data.total_following == null ? "0" : value.data.total_following}</p>
             </div>
         </div>

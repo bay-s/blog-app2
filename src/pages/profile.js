@@ -48,7 +48,10 @@ const Profiles = (props) => {
      }if(error) console.log(error.message);
     }
    
-  
+    const createMarkup = (biodata) => {
+      return {__html:biodata};
+     }
+   
     return(
 <>
 <Headers />
@@ -69,9 +72,9 @@ const Profiles = (props) => {
 
   <div className='is-flex-column is-flex-gap-sm text-center'>
     <h1 className='text-white is-title is-bold is-size-5'>{data.fullname}</h1>
-     <div className='biodata'>
-      {data.biodata == null ? "" : data.biodata}
-     </div>
+    
+     <div className={data.biodata == null ? "hide" : "biodata"} dangerouslySetInnerHTML={createMarkup(data.biodata)} />  
+
      <div className='is-flex align-center is-flex-gap-lg justify-center'>
       <p className='is-flex align-center is-flex-gap-md'>
       <i class="fa fa-calendar is-size-7" aria-hidden="true"></i>

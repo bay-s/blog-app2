@@ -55,7 +55,7 @@ if(datas.username.length < 1){
 }
 
 const handlerQuillChange = (e) => {
-  const texts = ref.current
+
   setDatas({...datas,
     biodata:ref.current?.value
    })
@@ -136,7 +136,7 @@ console.log(value);
 <div class="field">
 <label class="label text-white">Biodata</label>
 <div class="control biodata">
-<ReactQuill ref={ref} theme="snow" value={value.data.biodata} onChange={handlerQuillChange} name='quill'  modules={module.toolbars} formats={module.formats} />
+<ReactQuill ref={ref} theme="snow" value={datas.biodata} onChange={handlerQuillChange} name='quill'  modules={module.toolbars} formats={module.formats} />
 </div>
 </div>
 

@@ -77,14 +77,14 @@ getIdFollowing = async () => {
     if (is_follows === id) {
       console.log(';test');
       if (e.target.classList.contains("following")) {
-        e.target.textContent = 'Follow'
+        this.setState({isFollow:false})
         console.log("ada FOLLOW");
         e.target.classList.remove('following')
         this.removeFollower(id,fid)
         this.removeFollowing(f_id)
       } else {
         console.log("KOSONG");
-        e.target.textContent = 'Following'
+        this.setState({isFollow:true})
         e.target.classList.add('following')
         this.updateFollower()
         this.updateUserFollowing()
@@ -95,15 +95,11 @@ getIdFollowing = async () => {
 
   updateFollower = async () => {
     const id = this.props.current_user.id
-    const { updata, err }= await supabase
-    .rpc('increments', { x: 1, row_id: id})
-    if(updata){
-        alert("Add follow sukes")
-        console.log(updata);
-      }if(err){
-        alert(err)
-        console.log(err);
-      }
+    const { err ,datas}= await supabase.from('users')
+    .update({total_follower : this.props.data.total_follower + 1})
+    .eq('uid',this.props.data.uid)
+     if(err) console.log(err);
+     else console.log(datas);
   
     const { data, error } = await supabase
       .from('follower')
@@ -124,14 +120,11 @@ getIdFollowing = async () => {
     }
         
     removeFollower = async (id,fid) => {
-      const { updata, err }= await supabase
-      .rpc('decrement', { x: 1, row_id: this.props.data.id})
-    if(updata){
-        alert("Remove follow sukes")
-        console.log(updata);
-      }if(err){
-       console.log(err);
-      }
+      const { err ,datas}= await supabase.from('users')
+      .update({total_follower : this.props.data.total_follower - 1})
+      .eq('uid',this.props.data.uid)
+       if(err) console.log(err);
+       else console.log(datas);
 
     const { data, error } = await supabase
     .from('follower')
@@ -149,7 +142,7 @@ getIdFollowing = async () => {
     updateUserFollowing = async () => {
       const id = this.props.current_user.id
       const { err ,datas}= await supabase.from('users')
-      .update({ total_following: this.props.current_user.total_following})
+      .update({ total_following: this.props.current_user.total_following + 1})
       .eq('id',id)
        if(err) console.log(err);
        else console.log(datas);
@@ -175,15 +168,12 @@ getIdFollowing = async () => {
     
         removeFollowing = async (f_id) => {
             const id = this.props.current_user.id
-            const { updata, err }= await supabase
-            .rpc('follow_decrement ', { x: 1, row_id:id})
-            if(updata){
-                alert("remove follow sukes")
-                console.log(updata);
-              }if(err){
-                alert(err)
-                console.log(err);
-              }
+            const { err ,datas}= await supabase.from('users')
+            .update({ total_following: this.props.current_user.total_following - 1})
+            .eq('id',id)
+             if(err) console.log(err);
+             else console.log(datas);
+          
             
               const { data, error } = await supabase
               .from('following')

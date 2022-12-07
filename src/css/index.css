@@ -647,7 +647,9 @@ text-align: left !important;
 .likes{
   color: hsla(335, 96%, 70%, 0.986) !important;
 }
-
+.marked{
+  color: white !important;
+}
 .lh-sm {
   line-height: 1.25rem !important;
 }

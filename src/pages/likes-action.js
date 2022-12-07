@@ -51,12 +51,11 @@ addLikes = async (e) => {
     if(parseFloat(e.target.dataset.id) === id){
       if(e.target.classList.contains('likes')){
         console.log("ada like");
+        this.setState({isLikes:false})
         e.target.classList.remove('likes')
-        total_likes = total_likes - 0
         this.RemoveLikes(id,lid,total_likes)
         this.setState({isLikes:false})
         }else{
-          total_likes = total_likes + 1
          console.log("tidakada like");
          e.target.classList.add('likes')
          this.UpdateLikes(id,total_likes)
@@ -69,7 +68,7 @@ addLikes = async (e) => {
 UpdateLikes = async (id, total_likes) => {
   // increment total_likes
   const { err ,datas}= await supabase.from('posts')
-  .update({ total_likes: total_likes})
+  .update({ total_likes:total_likes + 1})
   .eq('id',id)
 if(err) console.log(err);
 else console.log(datas);
@@ -94,9 +93,9 @@ const { data, error } = await supabase
 
 RemoveLikes = async (id,lid,total_likes) => {
   // decrement total_likes
-  const { err ,datas}= await supabase.from('posts')
-  .update({ total_likes: total_likes})
-  .eq('id',id)
+const { err ,datas}= await supabase.from('posts')
+.update({ total_likes: total_likes - 1})
+.eq('id',id)
 if(err) console.log(err);
 else console.log(datas);
 

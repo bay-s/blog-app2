@@ -49,21 +49,25 @@ addLikes = async (e) => {
     e.preventDefault()
     const id = this.props.post.id
     const lid = parseInt(e.target.dataset.likes) 
-    
+    console.log(parseFloat(e.target.dataset.id));
     if(parseFloat(e.target.dataset.id) === id){
       if(e.target.classList.contains('marked')){
+        this.setState({isLikes:false})
         console.log("ada like");
         e.target.classList.remove('marked')
-        this.RemoveLikes(id,lid)
+        // this.RemoveLikes(id,lid)
         }else{
          console.log("tidakada like");
          e.target.classList.add('marked')
-        this.UpdateLikes(id)
+         this.setState({isLikes:true})
+         console.log(this.state.isLikes);
+        //  this.UpdateLikes(id)
         }
       }
 }
 
-UpdateLikes = async (id) => {
+UpdateLikes = async () => {
+const id = this.props.post.id
 const { data, error } = await supabase
   .from('bookmark')
   .insert([

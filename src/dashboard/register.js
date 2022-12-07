@@ -41,7 +41,14 @@ class RegisterPages extends React.Component{
         pesan:"Input field required"
       })
       return
-    } if(this.state.password.length < 7){
+    }if(/\s/.test(this.state.username)){
+      this.setState({
+        error:true,
+        pesan:"Username can`t contain white space"
+      })
+      return
+    }
+     if(this.state.password.length < 7){
       this.setState({
         error:true,
         pesan:"Password atleast 8 character"

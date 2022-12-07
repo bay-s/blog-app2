@@ -16,7 +16,7 @@ const PostCardSingle = (props) => {
         return {__html:posts.post_content};
        }
          
-    return(
+return(
 <div className="tile is-parent p-0" key={posts.id}>
  <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column p-0">
        {posts.post_thumbnail !== '' ? 
@@ -59,7 +59,6 @@ const PostCardSingle = (props) => {
 </ul>
 <li className='is-flex align-center is-flex-gap-md is-clickable'>
 <Bookmarked  post={posts} user={value.data} />
-  <span className='is-size-7'>Bookmark</span>
 </li>
 </div>
  {/* end post action */}

@@ -35,7 +35,9 @@ const PostEditor = (props) => {
     const ref = useRef(null);
     const titles = useRef(null);
 
-    const handlerChange = (e) => {
+    // GET QUILL EDITOR TEXT
+const handlerChange = (e) => {
+
       const texts = ref.current
         .getEditor()
         .getText()
@@ -46,14 +48,14 @@ const PostEditor = (props) => {
         quill: ref.current?.value,
         excerpt: texts[0],
       });
-      if (values.quill.length > 0) {
-        setIsSubmit(true);
-      } else {
+      if (ref.current.getEditor().getText().length <= 2) {
         setIsSubmit(false);
+      } else {
+        setIsSubmit(true);
       }
     };
 
-    const createPost = async (e) => {
+const createPost = async (e) => {
       setIsSubmit(true);
       setMessage({ ...message, isUpload: true });
       e.preventDefault();
@@ -192,15 +194,6 @@ else console.log(datas);
 }
 
 
-const methods = {
-    removeTagArr,
-    addTags,
-    addCategory,
-    handlerChanges,
-    tagArr:arrValue.tagArr,
-    catArr:arrValue.catArr,
-}  
-
 // FUNCTION UPLOAD IMAGE
 
 const [images,setImages] = useState({
@@ -266,8 +259,30 @@ const getPublicUrls = (url) => {
     });
   }
 
-
  }
+
+ const removeImage = async (e) => {
+  e.preventDefault()
+  setImages({...images ,
+    imgUpload:'',
+    hide:false,
+     })
+
+const { data, error } = await supabase.storage.from('images')
+  .remove([`public/${images.imgName}`])
+  if(error) alert(error)
+  else console.log(data);
+ }
+
+ const methods = {
+  removeTagArr,
+  addTags,
+  addCategory,
+  handlerChanges,
+  tagArr:arrValue.tagArr,
+  catArr:arrValue.catArr,
+}  
+
     return(
       
 <div className='columns is-variable bd-klmn-columns is-2'>
@@ -298,6 +313,7 @@ const getPublicUrls = (url) => {
 </figure>
 </div>
 
+<button className={images.hide ? "button is-outlined is-danger is-small" : 'hide'} onClick={removeImage}>Remove</button>
 </div>
 
 <div class="field">
