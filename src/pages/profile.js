@@ -59,12 +59,14 @@ const Profiles = (props) => {
   <div className='columns is-multiline is-centered'>
   <section className='column is-9 box  bg-dark'>
   <article className='is-flex-column is-flex-gap-xl'>
+
   <figure class="image is-128x128 mx-auto">
 {
   data.avatar === '' || null ? <img class="is-rounded avatars" src={akun} />
   :   <img class="is-rounded avatars" src={data.avatar} />
 }
   </figure>
+
   <div className='is-flex-column is-flex-gap-sm text-center'>
     <h1 className='text-white is-title is-bold is-size-5'>{data.fullname}</h1>
      <div className='biodata'>
@@ -78,25 +80,25 @@ const Profiles = (props) => {
       </p>
       <a href='#' className='text-title is-size-7'>www.mywebsite.com</a>
       {
-        value.data.username === data.username ?   <Link to='/dashboard/edit-profile/' className='button is-primary is-small is-rounded'>Follow</Link>
+    value.data.username === data.username ?  <Link to='/dashboard/edit-profile/' className='button is-primary is-outlined is-small '>Edit Profilew</Link>
         :
-        <ButtonFollow id={id} user_login_id={value.data.uid} user={value.data.users} data={value.data}/>
+        <ButtonFollow id={id} current_user={value.data} data={data}/>
       }
      </div>
   </div>
   </article>
   <hr className='divider'/>
- <div className='is-flex align-center'>
-     <div className='is-flex-column text-center has-text-white'>
-      <h1 className='text-title'>Education</h1>
+ <div className='columns is-multiline'>
+     <div className={data.education === null || '' ?  'hide' : 'column is-flex-column text-center has-text-white'}>
+      <h1 className='text-title is-bold is-title'>Education</h1>
       <span>
-      Line 23:4:  React Hook useEffect has a missing dependency: 'searchPost'. Either include it or remove the dependency array
+    {data.education}
       </span>
      </div>
-     <div className='is-flex-column text-center has-text-white'>
-      <h1 className='text-title'>Education</h1>
+     <div className={data.job === null || '' ? 'hide' : 'column is-flex-column text-center has-text-white'}>
+      <h1 className='text-title is-bold is-title'>Work</h1>
       <span>
-      Line 23:4:  React Hook useEffect has a missing dependency: 'searchPost'. Either include it or remove the dependency array
+      {data.job}
       </span>
      </div>
  </div>

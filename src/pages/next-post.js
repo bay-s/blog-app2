@@ -39,7 +39,7 @@ const [prevPost,setPrevPost] = useState([])
 
 
  return(
-<div className='is-flex justify-between align-center' >
+<div className='is-flex justify-between align-center p-4' >
 <div className={prevPost == undefined  ? 'hide' : 'is-flex is-flex-column is-flex-gap-sm navbar-start align-start'}>
    <span className='is-flex align-center is-flex-gap-md'>
    <i class="fa fa-long-arrow-left text-white" aria-hidden="true"></i>

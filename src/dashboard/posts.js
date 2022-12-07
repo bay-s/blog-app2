@@ -38,45 +38,15 @@ const Posts = (props) => {
 
     return(
 <>
-<div className='box shadow is-flex align-center is-flex-gap-md bg-dark'>
+<div className='is-flex align-center is-flex-gap-md bg-transparent px-2 mb-2'>
 <h3 className='is-bold is-title is-size-4 text-title'>Posts</h3>
 <Link to='/dashboard/create-post/' className='button hvr-sweep-to-right is-outlined border-primary bg-transparent text-title is-small'>Add New</Link>
 </div>
 
     {/* start table */}
 <section class="section is-main-section p-2">
-<div class="card has-table ">
-      <div class="card-content ">
-        <div class="b-table has-pagination">
-          <div class="table-wrapper has-mobile-cards">
-            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
-              <thead>
-              <tr>
-                <th class="is-checkbox-cell">
-         #
-                </th>
-                <th></th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Categories</th>
-                <th>Tags</th>
-                <th >Created</th>
-                <th></th>
-              </tr>
-              </thead>
-              <tbody>
-{/* POST LIST */}
 <PostList post={post} key={post}/>
-{/* END POST LIST */}
-              </tbody>
-            </table>
-          </div>
-{/* PAGINATION */}
-<Pagination setValue={setValue} totalPost={totalPost} value={value} />
-{/* END PAGINATION */}
-        </div>
-      </div>
-    </div>
+    {/* <Pagination setValue={setValue} totalPost={totalPost} value={value} /> */}
 </section>
 {/* end table */}
 </>

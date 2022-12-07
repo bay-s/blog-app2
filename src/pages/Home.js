@@ -30,7 +30,7 @@ const Home = () => {
   const { data, error,count} = await supabase
   .from('posts')
   .select('*', { count: 'exact' })
-  .range(value.page,value.counts)
+  // .range(value.page,value.counts)
   if(data){
     console.log(data);
     setTotalPost(count)

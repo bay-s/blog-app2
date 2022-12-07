@@ -57,7 +57,7 @@ y = x;
         
         <li className={value.isLogin ? 'hvr-underline-from-center py-3' : 'hide'}><Link to='/dashboard/index' className=' has-text-white'>Dashboard</Link></li>
         <li className='hvr-underline-from-center py-3'>
-        <i class="fa fa-bell-o text-white is-size-5" aria-hidden="true"></i>
+        <i class="fa fa-bell-o text-white is-size-5 is-clickable" aria-hidden="true"></i>
         </li>  
         <div className={value.isLogin ? "navbar-menu fadeIn animated faster" : "hide"} id="navbar-menu">
           <div className="navbar-end">

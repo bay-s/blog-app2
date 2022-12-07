@@ -13,15 +13,16 @@ const PostCard = (props) => {
 <div className="tile is-parent px-3 p-0 mb-4 ">
         <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column p-0">
         {
-          props.posts.post_thumbnail !==  ''  ? 
-         <div className="card-image mb-2">
+          props.posts.post_thumbnail ===  ''  ? 
+ ""
+          : 
+           <div className="card-image mb-2">
             <figure className="image is-3by1">
              <Link to={`/post/${props.posts.id}`} >
              <img src={props.posts.post_thumbnail} alt="Placeholder image" className='post-image'/>
              </Link>
             </figure>
           </div> 
-          : ''
         } 
           {/* POST CONTENT */}
 <div className='p-3 px-5 is-flex-column justify-start is-flex-gap-lg'>

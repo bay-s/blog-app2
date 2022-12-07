@@ -18,7 +18,7 @@ const PostCardSingle = (props) => {
          
     return(
 <div className="tile is-parent p-0" key={posts.id}>
- <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column ">
+ <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column p-0">
        {posts.post_thumbnail !== '' ? 
 <div className="card-image mb-2 feature-image-container">
 <figure className="image is-16by9 feature-image" >
@@ -28,10 +28,10 @@ const PostCardSingle = (props) => {
 : ''
   }
 {/* POST CAPTION */}
-<header className='p-1 is-flex is-flex-column is-flex-gap-md'>
+<header className='p-1 is-flex is-flex-column is-flex-gap-md p-4'>
 <p className="title is-3 text-title is-bold p-0 m-0 ">{posts.post_title}</p>
 
-<div className='is-flex align-center is-flex-gap-md '>
+<div className='is-flex align-center is-flex-gap-md'>
 <p className="is-title is-size-6 has-text-grey-lighter">
 {timeDifference(posts.created_at)} - </p>
 <Author id={posts.author_id}/>
@@ -44,9 +44,9 @@ const PostCardSingle = (props) => {
 </div>
  </header>
  {/* END POST CAPTION */}
- <div className='my-3 posts' dangerouslySetInnerHTML={createMarkup(posts)} />
+ <div className='my-3 posts px-4' dangerouslySetInnerHTML={createMarkup(posts)} />
  {/* post action */}
-<div className='is-flex justify-between align-center actions'>
+<div className='is-flex justify-between align-center actions px-1'>
 <ul className='is-flex is-flex-gap-lg align-center'>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <LikesAction post={posts} user={value.data} />

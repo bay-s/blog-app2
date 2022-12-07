@@ -74,7 +74,10 @@ console.log(value);
   .update({
      username:datas.username,
      fullname:datas.fullname,
-     biodata:datas.biodata
+     biodata:datas.biodata,
+     job:datas.job,
+     education:datas.education,
+     social_link:datas.social_link
     })
   .eq('id',value.data.id)
   .select()

@@ -46,33 +46,35 @@ addLikes = async (e) => {
     e.preventDefault()
     const id = this.props.post.id
     const lid = parseInt(e.target.dataset.likes) 
+    let total_likes = parseInt(e.target.parentElement.firstChild.nextElementSibling.textContent)
     this.setState({likesToggle:!this.state.likesToggle})
     if(parseFloat(e.target.dataset.id) === id){
       if(e.target.classList.contains('likes')){
         console.log("ada like");
         e.target.classList.remove('likes')
-        this.RemoveLikes(id,lid)
+        total_likes = total_likes - 0
+        this.RemoveLikes(id,lid,total_likes)
         this.setState({isLikes:false})
         }else{
+          total_likes = total_likes + 1
          console.log("tidakada like");
          e.target.classList.add('likes')
-         this.UpdateLikes(id)
+         this.UpdateLikes(id,total_likes)
          this.setState({isLikes:true})
         }
       }
+      console.log(total_likes);
 }
 
-UpdateLikes = async (id) => {
-const { updata, err }= await supabase
-.rpc('increment_likes', { x: 1, row_id: id})
-if(updata){
-    alert("Add likes sukes")
-    console.log(updata);
-  }if(err){
-    alert(err)
-    console.log(err);
-  }
+UpdateLikes = async (id, total_likes) => {
+  // increment total_likes
+  const { err ,datas}= await supabase.from('posts')
+  .update({ total_likes: total_likes})
+  .eq('id',id)
+if(err) console.log(err);
+else console.log(datas);
 
+// add likes id
 const { data, error } = await supabase
   .from('likes')
   .insert([
@@ -90,16 +92,15 @@ const { data, error } = await supabase
   }
 }
 
-RemoveLikes = async (id,lid) => {
-  const { updata, err }= await supabase
-.rpc('decrement_likes', { x: 1, row_id: id})
-if(updata){
-    alert("Remove likes sukes")
-    console.log(updata);
-  }if(err){
-   console.log(err);
-  }
+RemoveLikes = async (id,lid,total_likes) => {
+  // decrement total_likes
+  const { err ,datas}= await supabase.from('posts')
+  .update({ total_likes: total_likes})
+  .eq('id',id)
+if(err) console.log(err);
+else console.log(datas);
 
+// remove likes id
 const { data, error } = await supabase
 .from('likes')
 .delete()

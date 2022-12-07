@@ -8,15 +8,18 @@ import module from './quill-modules';
 
 const PostEditor = (props) => {
     const { value } = useContext(AppContext);
+
     const [message, setMessage] = useState({
       pesan: "",
       isError: false,
       sukses: false,
       isUpload: false,
     });
+
     const [values, setValues] = useState({
       title: "",
       quill: "",
+      imgUrl:""
     });
     const [text, setText] = useState({
       category: "",
@@ -74,7 +77,7 @@ const PostEditor = (props) => {
           post_cat: arrValue.checkArr,
           post_tag: arrValue.tagArr,
           the_excerpt: values.excerpt,
-          post_thumbnail:props.data.imgPreview,
+          post_thumbnail:values.imgUrl,
           author_id: value.data.uid,
         })
         .select();
@@ -178,28 +181,125 @@ const PostEditor = (props) => {
       }
     };
 
-    const incrementPosts = async () => {
-      const { data, error } = await supabase
-      .rpc('increment', { x: 1, row_id:value.data.id })
-      if(error) console.log(error.message);
-      else console.log(data);
-     }
+    // increment total post
+const incrementPosts = async () => {
+const { err ,datas}= await supabase.from('users')
+.update({total_post:value.data.total_post + 1})
+.eq('uid',value.data.uid)
+if(err) console.log(err);
+else console.log(datas);
 
-  const methods = {
+}
+
+
+const methods = {
     removeTagArr,
     addTags,
     addCategory,
     handlerChanges,
     tagArr:arrValue.tagArr,
     catArr:arrValue.catArr,
-  }  
+}  
+
+// FUNCTION UPLOAD IMAGE
+
+const [images,setImages] = useState({
+  imgName:'',
+  url:'',
+  imgUpload:'',
+  isUpload:false,
+  hide:false,
+  media:[],
+  media_url:[]
+})
+
+const  ImageChange = event => {
+  console.log(event.target.files);
+  if (event.target.files && event.target.files[0]) {
+    let img = event.target.files[0];
+    const randName =  (Math.random() + 1).toString(36).substring(3);
+    const imgStr = img.name.split(".")
+    const names = `${randName}.${imgStr[1]}`
+    uploadImage(img,names)
+    setImages({...images ,
+      imgUpload: URL.createObjectURL(img),
+      url:img,
+      hide:true,
+      isUpload:true,
+      imgName:`${randName}.${imgStr[1]}`
+       })
+
+       
+    }
+};
+
+const uploadImage = async (images,names) => {
+  // e.preventDefault()
+  setImages({...images ,
+      isUpload:false
+       })
+  const { data, error} = await supabase.storage
+  .from('images')
+  .upload(`public/${names}`, images,{
+    cacheControl: '604800',
+    upsert: false
+  })
+  if(error){
+console.log(error);
+  }
+  if(data){
+   console.log(data);
+   getPublicUrls(data.path)
+  }
+}
+
+const getPublicUrls = (url) => {
+  const { data } = supabase
+  .storage.from('images')
+  .getPublicUrl(url)
+  if(data){
+    const imgUrl= data.publicUrl;
+    console.log(imgUrl);
+    setValues({
+      ...values,
+      imgUrl:imgUrl
+    });
+  }
+
+
+ }
     return(
       
 <div className='columns is-variable bd-klmn-columns is-2'>
 <div className='column is-9 py-0 px-5'>
 {/* START EDITOR*/}
 <section class="section is-main-section box bg-dark ">
-  <form className='is-flex is-flex-column is-flex-gap-md' onSubmit={createPost}>
+<form className='is-flex is-flex-column is-flex-gap-md' onSubmit={createPost}>
+
+<div className="is-flex align-center is-flex-gap-xl">
+
+<div class="file is-info has-name mb-2">
+  <label class="file-label">
+    <input class="file-input" type="file" name="resume" onChange={ImageChange}/>
+    <span class="file-cta">
+      <span class="file-icon">
+        <i class="fa fa-upload"></i>
+      </span>
+      <span class="file-label">
+        Add thumbnail
+      </span>
+    </span>
+  </label>
+</div>
+
+<div className={images.hide ? '' : 'hide'} >
+<figure class="image is-96x96">
+<img src={images.imgUpload} />
+</figure>
+</div>
+
+</div>
+
 <div class="field">
   <div class="control">
     <input class="input is-primary is-bold is-size-4 bg-transparent text-white holder-white" type="text" ref={titles }  placeholder="Post title" name='title' onChange={handlerChange}/>

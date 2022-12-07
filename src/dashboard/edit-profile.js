@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Header from '../pages/header';
 import EditProfileForm from './edit-profile-form';
-import Sidebar from './sidebar';
+
 
 
 const EditProfile = () => {

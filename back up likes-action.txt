@@ -1,0 +1,53 @@
+
+UpdateLikes = async (id) => {
+  console.log("Test");
+  console.log(id);
+const { updata, err }= await supabase
+.rpc('increment_likes', { x: 1, row_id: id})
+if(updata){
+    alert("Add likes sukes")
+    console.log(updata);
+}if(err){
+    alert(err)
+    console.log(err);
+}
+
+const { data, error } = await supabase
+  .from('likes')
+  .insert([
+    { 
+        likes_id: this.props.user.uid,
+        post_id:id
+    }
+  ])
+  if(data){
+    alert("Add likes sukes")
+    console.log(data);
+  }if(error){
+    alert(error)
+    console.log(error);
+  }
+}
+
+RemoveLikes = async (id,lid) => {
+  const { updata, err }= await supabase
+.rpc('decrement_likes', { x: 1, row_id: id})
+if(updata){
+    alert("Remove likes sukes")
+    console.log(updata);
+  }if(err){
+   console.log(err);
+  }
+
+const { data, error } = await supabase
+.from('likes')
+.delete()
+.eq('id',lid)
+
+if(data){
+    alert("Remove likes sukes")
+    console.log(data);
+  }if(error){
+    console.log(error);
+  }
+}

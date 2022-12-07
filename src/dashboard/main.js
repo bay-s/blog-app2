@@ -11,7 +11,7 @@ const Main = (props) => {
       const { data, error ,count} = await supabase
       .from('users')
       .select('*', { count: 'exact' })
-      .order("id", { ascending: true })
+      .eq('uid',value.uid)
       if(data){
         console.log(data);
         setTotalUser(count)
@@ -20,13 +20,13 @@ const Main = (props) => {
      fetchUser()
   },[])
     return(
-   <div className='columns'>
+   <div className='columns is-multiline'>
         <div className='column is-4 '>
         <div class="tile is-child box  bg-dark ">
         <div class="level-item has-text-centered ">
             <div className=''>
               <p class="heading is-size-6 text-white">Posts</p>
-              <p class="title text-white">{value.data.total_post == null ? "0" : value.data.total_post}</p>
+              <p class="title text-white is-bold">{value.data.total_post < 1 ? "0" : value.data.total_post}</p>
             </div>
         </div>
         </div>
@@ -49,8 +49,20 @@ const Main = (props) => {
         <div class="tile is-child box bg-dark">
         <div class="level-item has-text-centered">
             <div>
-              <p class="heading is-size-6 text-white">Pages</p>
-              <p class="title text-white">{value.data.total_pages == null ? "0" : value.data.total_pages}</p>
+              <p class="heading is-size-6 text-white">Followings</p>
+              <p class="title text-white">{value.data.total_following == null ? "0" : value.data.total_following}</p>
+            </div>
+        </div>
+        </div>
+        {/* end tile */}
+        </div>
+        {/* END COL */}
+        <div className='column is-4'>
+        <div class="tile is-child box bg-dark">
+        <div class="level-item has-text-centered">
+            <div>
+              <p class="heading is-size-6 text-white">Followers</p>
+              <p class="title text-white">{value.data.total_follower == null ? "0" : value.data.total_follower}</p>
             </div>
         </div>
         </div>

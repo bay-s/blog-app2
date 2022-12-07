@@ -18,21 +18,26 @@ class ButtonFollow extends React.Component{
         this.getIdFollower()
         this.getIdFollowing()
         }
-        
+        componentDidUpdate(){
+          this.getIdFollower()
+          this.getIdFollowing()
+          }  
         getIdFollower = async () => {
-          const id = this.props.user.uid
+          const id = this.props.current_user.uid
+          console.log(id);
           const { data, error } = await supabase
-          .from('follow')
+          .from('follower')
           .select()
-          .eq('user_id',this.props.id)
+          .eq('user_id',this.props.data.uid)
           if(error){
             console.log(`${error} No data`);
           }
           if(data){
-            console.log(data);
+            console.log("Test");
             data.map(follow => {
               this.setState({follower_id:follow.id})
-              console.log(follow);
+              console.log(follow.follower_id);
+              console.log(id);
                 if (follow.follower_id === id) {
                     console.log("sama");
                       this.setState({
@@ -45,8 +50,8 @@ class ButtonFollow extends React.Component{
           }
         }
         
-        getIdFollowing = async () => {
-          const id = this.props.user.uid
+getIdFollowing = async () => {
+          const id = this.props.current_user.uid
           const { data, error } = await supabase
           .from('following')
           .select()
@@ -64,30 +69,32 @@ class ButtonFollow extends React.Component{
         
 
  AddFollow = async (e) => {
-    const id = this.props.id;
+    const id = this.props.data.uid;
     const is_follows = e.target.dataset.follow;
     const fid = parseInt(e.target.dataset.id)
     const f_id = parseInt(e.target.dataset.following)
 
     if (is_follows === id) {
+      console.log(';test');
       if (e.target.classList.contains("following")) {
         e.target.textContent = 'Follow'
         console.log("ada FOLLOW");
         e.target.classList.remove('following')
-        this.RemoveFollow(id,fid)
-        this.RemoveUserFollow(f_id)
+        this.removeFollower(id,fid)
+        this.removeFollowing(f_id)
       } else {
         console.log("KOSONG");
         e.target.textContent = 'Following'
         e.target.classList.add('following')
-        this.UpdateFollow()
+        this.updateFollower()
+        this.updateUserFollowing()
       }
     }
   };
   
 
-  UpdateFollow = async () => {
-    const id = this.props.data.id
+  updateFollower = async () => {
+    const id = this.props.current_user.id
     const { updata, err }= await supabase
     .rpc('increments', { x: 1, row_id: id})
     if(updata){
@@ -99,24 +106,24 @@ class ButtonFollow extends React.Component{
       }
   
     const { data, error } = await supabase
-      .from('follow')
+      .from('follower')
       .insert([
         { 
-            follower_id:this.props.user.uid,
-            user_id:this.props.id,
-            detail:`${this.props.user.username} Has Follow ${this.props.data.username}`
+            follower_id:this.props.current_user.uid,
+            user_id:this.props.data.uid,
+            detail:`${this.props.current_user.username} Has Follow ${this.props.data.username}`
         }
       ])
       if(data){
         alert("Add follow sukes")
         console.log(data);
-        this.UpdateUserFollow()
+        this.updateUserFollowing()
       }if(error){
         console.log(error);
       }
     }
         
-    RemoveFollow = async (id,fid) => {
+    removeFollower = async (id,fid) => {
       const { updata, err }= await supabase
       .rpc('decrement', { x: 1, row_id: this.props.data.id})
     if(updata){
@@ -127,7 +134,7 @@ class ButtonFollow extends React.Component{
       }
 
     const { data, error } = await supabase
-    .from('follow')
+    .from('follower')
     .delete()
     .eq('id',fid)
     
@@ -139,25 +146,22 @@ class ButtonFollow extends React.Component{
       }
     }
 
-    UpdateUserFollow = async () => {
-      const id = this.props.user.id
-      const { updata, err }= await supabase
-      .rpc('user_increment', { x: 1, row_id: id})
-        if(updata){
-            alert("Add follow sukes")
-            console.log(updata);
-          }if(err){
-            alert(err)
-            console.log(err);
-          }
+    updateUserFollowing = async () => {
+      const id = this.props.current_user.id
+      const { err ,datas}= await supabase.from('users')
+      .update({ total_following: this.props.current_user.total_following})
+      .eq('id',id)
+       if(err) console.log(err);
+       else console.log(datas);
+    
         
           const { data, error } = await supabase
           .from('following')
           .insert([
             { 
-                following_id:this.props.id,
-                user_id:this.props.user.uid,
-                detail:`${this.props.user.username} Has Follow ${this.props.data.username}`
+                following_id:this.props.data.uid,
+                user_id:this.props.current_user.uid,
+                detail:`${this.props.current_user.username} Has Followwing ${this.props.data.username}`
             }
           ])
           if(data){
@@ -169,10 +173,10 @@ class ButtonFollow extends React.Component{
           }
         }
     
-        RemoveUserFollow = async (f_id) => {
-            const id = this.props.user.id
+        removeFollowing = async (f_id) => {
+            const id = this.props.current_user.id
             const { updata, err }= await supabase
-            .rpc('user_decrement ', { x: 1, row_id:id})
+            .rpc('follow_decrement ', { x: 1, row_id:id})
             if(updata){
                 alert("remove follow sukes")
                 console.log(updata);
@@ -195,12 +199,12 @@ class ButtonFollow extends React.Component{
             }
         
     render(){
-
+console.log( this.state.isFollow);
       const buttonFollow =
       this.state.isFollow ? 
-      <button class="button is-info is-primaryd is-title is-size-7 is-small following" data-id={this.state.follower_id} data-following={this.state.following_id} data-follow={this.props.id}
+      <button class="button is-info is-primary is-rounded is-title is-size-7 is-small following" data-id={this.state.follower_id} data-following={this.state.following_id} data-follow={this.props.data.uid}
       onClick={this.AddFollow}>Following</button>   
-      :       <button class="button is-primary is-rounded is-title is-size-7 is-small" data-following={this.state.following_id}  data-id={this.state.follower_id} data-follow={this.props.id}
+      :       <button class="button is-primary is-rounded is-title is-size-7 is-small" data-following={this.state.following_id}  data-id={this.state.follower_id} data-follow={this.props.data.uid}
       onClick={this.AddFollow}>Follow</button>
   
         return(

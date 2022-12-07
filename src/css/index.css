@@ -95,6 +95,10 @@ button {
   cursor: pointer;
 }
 
+.button.is-primary:hover{
+  color:black !important;
+  font-weight: bold !important;
+}
 a {
   text-decoration: none;
 }
@@ -156,7 +160,8 @@ table {
 }
 
 .posts{
-  line-height: 1.5rem !important;
+  /* line-height: 1.5rem !important; */
+  line-height:1.75rem !important;
 }
 
 .quill svg{
@@ -177,11 +182,14 @@ table {
 .quill strong {
   color: white;
 }
+
 .post-image{
-object-fit: cover!important;
-vertical-align: bottom !important;
-object-position: 0 -50px !important;
+object-fit:cover;
+max-width: 100% !important;
+height: 100% !important;
 }
+
+
 .post p {
   color: white;
 }
@@ -198,6 +206,7 @@ object-position: 0 -50px !important;
 .post a:hover{
   color:#08e0d281 !important;
 }
+
 #image-media:focus{
   border: 3px solid var(--info) !important;
   transition: 50ms;
