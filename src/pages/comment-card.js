@@ -13,10 +13,17 @@ import LikesComment from './likes-comment'
 const CommentCard = (props) => {
   const {value} = useContext(AppContext)
   const [commentId,setCommentId] = useState('')
+  const comment = props.comment
+  const [dataComment,setDataComment] = useState({
+    commentId:'',
+    post_id:comment.post_i,
+    receive_id:comment.author_id
+  })
+
   const [openReply,setOpenReply] = useState(false)
   const [dataReply,setDataReply] = useState([])
   const input = useRef(null)
-    const comment = props.comment
+
     
  useEffect(() => {
 
@@ -38,12 +45,17 @@ const createMarkup = (posts) => {
         return {__html:posts.comment_content};
 }
 
+const test = useRef(null)
+
   const opensReply = (e) => {
     setOpenReply(!openReply)
     const comment_id = parseFloat(e.target.dataset.comment)
     setCommentId(comment_id)
     input.current?.classList.toggle('hides')
-    console.log(commentId);
+    setDataComment({
+      ...dataComment,
+     commentId: comment_id
+    });
   }     
 
 
@@ -55,7 +67,7 @@ const createMarkup = (posts) => {
  <figure className="image is-32x32">
  <Avatar id={comment.author_id} />
 </figure>
-<div className='is-flex-column'>
+<div className='is-flex-column' ref={test}>
  <Author id={comment.author_id}/>
  <span className='has-text-grey is-size-7 is-title'>
 {timeDifference(comment.created_at)}
@@ -66,7 +78,7 @@ const createMarkup = (posts) => {
 <div className='px-1 mb-2' dangerouslySetInnerHTML={createMarkup(comment)} />
  {
 value.isLogin ? 
- <ul className='is-flex is-flex-gap-xl align-center actions'>
+ <ul className='is-flex is-flex-gap-md align-center actions'>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <LikesComment id={comment.id} user={value.data} post_id={comment.post_id}/>
   <span className='is-size-7'>{comment.total_likes < 1 ? '0' : comment.total_likes} Likes</span>
@@ -80,7 +92,7 @@ value.isLogin ?
 }
  {/* START REPLY FORM */}
  <div className={openReply ? 'fade my-3' : 'hides'}>
- <ReplyForm opensReply={opensReply} receive_id={comment.author_id} comment_id={commentId} post_id={comment.post_id} />
+ <ReplyForm opensReply={opensReply} dataComment={dataComment} />
  </div>
  {/* END REPLY FORM */}
 </div>

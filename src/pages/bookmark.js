@@ -99,10 +99,16 @@ if(data){
     console.log(error);
   }
 }
+
+allertMessage = (e) => {
+  e.preventDefault()
+  console.log("Test");
+  alert('You need login first')
+}
 render(){
 
-    const is_marked = this.state.isLikes ? <i className="fa fa-bookmark is-size-5 is-clickable marked"  data-likes={this.state.likes_id} data-id={this.props.post.id} onClick={this.addLikes}></i>
-    : <i className="fa fa-bookmark-o  is-size-5 is-clickable" data-likes={this.state.likes_id} data-id={this.props.post.id} onClick={this.addLikes}></i> 
+    const is_marked = this.state.isLikes ? <i className="fa fa-bookmark is-size-5 is-clickable marked"  data-likes={this.state.likes_id} data-id={this.props.post.id} onClick={this.props.isLogin ? this.addLikes : this.allertMessage}></i>
+    : <i className="fa fa-bookmark-o  is-size-5 is-clickable" data-likes={this.state.likes_id} data-id={this.props.post.id} onClick={this.props.isLogin ? this.addLikes : this.allertMessage}></i> 
     return(
 is_marked
     )

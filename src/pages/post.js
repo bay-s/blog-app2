@@ -9,8 +9,10 @@ import HasComment from './has_comment'
 import PostCardSingle from './post-card-single'
 import CommentCard from './comment-card'
 import ErrorMessage from '../dashboard/error-message'
+import { AppContext } from '../App'
 
 const PostDetail = (props) => {
+const {value} = useContext(AppContext)
 const {id} = useParams()
 const [post,setPost] = useState([])
 const [loader,setLoader] = useState(true)
@@ -62,7 +64,7 @@ const postCard = post.length < 1 ? "" : post.map(posts => {
   return <PostCardSingle  posts={posts} key={posts}/>
  })
 
-console.log(post[0]);
+
     return(
         <>
         <Headers />
@@ -78,9 +80,10 @@ console.log(post[0]);
 {/* END POST */}
 
 {/* START COMMENT FORM */}
-<div className={post.length < 1 ? "hide" : 'box bg-dark p-6'}>
+<div className='box bg-dark p-6'>
+<div className={!value.isLogin ? 'hide' : ''}>
 <CommentForm id={id} key={post[0]} post={post[0]} />
-
+</div>
 {/* DISPLAY COMMENT */}
 <article className='is-flex-column is-flex-gap-md py-4'>
 {dataComment == undefined ? "" :

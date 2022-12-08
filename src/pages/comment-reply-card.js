@@ -43,7 +43,7 @@ const ReplyCard = (props) => {
     return(
 <div className='border box bg-transparent is-flex is-flex-column is-flex-gap-md p-4'>
 {/* AUTHOR AVATAR */}
- <div className='is-flex align-center is-flex-gap-md'>
+<div className='is-flex align-start is-flex-gap-md'>
  <figure className="image is-32x32">
  <Avatar id={reply.author_id} />
 </figure>
@@ -53,12 +53,19 @@ const ReplyCard = (props) => {
 {timeDifference(reply.created_at)}
  </span>
 </div>
+<div className='is-flex align-center is-flex-gap-lg mx-6'>
+<Author id={reply.author_id}/> 
+<span className='is-size-7 text-white'>
+has replied to 
+</span>
+ <Author id={reply.receive_id}/>
+</div>
   </div>
   {/* END AUTHOR AVATAR */}
 <div className='px-1 mb-2' dangerouslySetInnerHTML={createMarkup(reply)} />
  {
 value.isLogin ? 
- <ul className='is-flex is-flex-gap-xl align-center actions'>
+ <ul className='is-flex is-flex-gap-md align-center actions'>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <LikesComment id={reply.id} user={value.data} post_id={reply.post_id}/>
   <span className='is-size-7'>{reply.total_likes < 1 ? '0' : reply.total_likes} Likes</span>

@@ -5,8 +5,17 @@ import img from '../img/no-image.png'
 import Author from '../dashboard/author';
 import PostTag from '../dashboard/post-tag';
 import Avatar from '../dashboard/avatar';
+import { useReadingTime } from "react-hook-reading-time";
 
 const PostCard = (props) => {
+
+   const  {
+    text, // 1 min read
+    minutes, // 1
+    words, // 168
+    time, // 0.5309090909090909
+  } = useReadingTime(props.posts.post_content);
+  
 
     return(
       <Link to={`/post/${props.posts.id}`} >
@@ -55,10 +64,18 @@ const PostCard = (props) => {
   <span className='is-size-7'>{props.posts.total_comment < 1 ? '0' : props.posts.total_comment} Likes</span>
   </li>
 </ul>
+<ul className='is-flex is-flex-gap-sm align-center'>
+<li>
+<span className='is-size-7'>
+{text}
+</span>
+</li>
 <li className='is-flex align-center is-flex-gap-md is-clickable bookmark'>
   <i class="fa fa-bookmark-o" aria-hidden="true"></i>
   <span className='is-size-7'>Bookmark</span>
 </li>
+</ul>
+
 </div>
  </div>
            {/* END POST CONTENT */}

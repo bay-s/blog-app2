@@ -111,6 +111,13 @@ if(data){
     console.log(error);
   }
 }
+
+
+allertMessage = (e) => {
+  e.preventDefault()
+  console.log("Test");
+  alert('You need login first')
+}
 render(){
 
     const is_likes = this.state.isLikes ? <i className="fa fa-heart is-size-5 is-clickable likes"  data-likes={this.state.likes_id} data-id={this.props.id} onClick={this.addLikes}></i> 

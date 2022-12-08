@@ -53,9 +53,9 @@ const ReplyForm = (props) => {
       .insert({ 
         reply_content:values.quill,
         author_id:value.data.uid,
-        comment_id:props.comment_id,
-        post_id:props.post_id,
-        receive_id:props.receive_id
+        comment_id:props.dataComment.comment_id,
+        post_id:props.dataComment.post_id,
+        receive_id:props.dataComment.receive_id
       })
       if(error){
         setMessage({

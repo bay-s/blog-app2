@@ -23,14 +23,23 @@ const TotalFollowing = () => {
     },[])
 
     return(
-<div className='box shadow is-flex align-center is-flex-gap-md bg-dark'>
+<div className='columns is-multiline'>
 {
     followingUser.length < 1 ? '' 
     :
     followingUser.map(following => {
-        return <Author id={following.following_id}/>
+        return <div className='column is-4 '>
+        <div class="tile is-child box  bg-dark ">
+        <div class="level-item has-text-centered ">
+        <Author id={following.following_id}/>
+        </div>
+        </div>
+        {/* end tile */}
+ </div>
     })
 }
+
+
 </div>
     )
 }

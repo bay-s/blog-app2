@@ -30,7 +30,6 @@ return(
   }
 {/* POST CAPTION */}
 <header className='is-flex is-flex-column is-flex-gap-md px-6'>
-<p className="title is-3 text-title is-bold p-0 m-0 ">{posts.post_title}</p>
 
 <div className='py-3 p-0  is-flex-column justify-start is-flex-gap-lg'>
  {/* AVATAR */}
@@ -46,6 +45,8 @@ return(
  {/* END AVATAR */}
 </div>
 
+<p className="title is-3 text-title is-bold p-0 m-0 ">{posts.post_title}</p>
+
 <div className='is-flex align-center is-flex-gap-md'>
     <PostTag tag={posts.post_tag}/>
 </div>
@@ -59,7 +60,7 @@ return(
 <div className='is-flex justify-between align-center actions px-5'>
 <ul className='is-flex is-flex-gap-lg align-center'>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
-  <LikesAction post={posts} user={value.data} />
+  <LikesAction post={posts} user={value.data}  isLogin={value.isLogin} />
   <span className='is-size-7'>{posts.total_likes < 1 ? '0' : posts.total_likes}</span>
   </li>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
@@ -68,7 +69,7 @@ return(
   </li>
 </ul>
 <li className='is-flex align-center is-flex-gap-md is-clickable'>
-<Bookmarked  post={posts} user={value.data} />
+<Bookmarked  post={posts} user={value.data} isLogin={value.isLogin}/>
 </li>
 </div>
  {/* end post action */}

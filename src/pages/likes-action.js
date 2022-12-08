@@ -114,8 +114,8 @@ if(data){
 }
 render(){
 
-    const is_likes = this.state.isLikes ? <i className="fa fa-heart is-size-5 is-clickable likes"  data-likes={this.state.likes_id} data-id={this.props.post.id} onClick={this.addLikes}></i> 
-    :   <i className="fa fa-heart-o  is-size-5 is-clickable" data-likes={this.state.likes_id} data-id={this.props.post.id} onClick={this.addLikes}></i>
+    const is_likes = this.state.isLikes ? <i className="fa fa-heart is-size-5 is-clickable likes"  data-likes={this.state.likes_id} data-id={this.props.post.id} onClick={this.props.isLogin ? this.addLikes : this.allertMessage}></i> 
+    :   <i className="fa fa-heart-o  is-size-5 is-clickable" data-likes={this.state.likes_id} data-id={this.props.post.id} onClick={this.props.isLogin ? this.addLikes : this.allertMessage}></i>
     return(
         is_likes
     )
