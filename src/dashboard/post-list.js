@@ -41,14 +41,11 @@ const PostList = (props) => {
 
     return(
 props.post.length < 1 ? "" : props.post.map((posts ,index) => {
-return   <article className='box bg-dark is-flex align-center justify-between'>
-<div className='is-flex-column align-start'>
-<Link  to={`/post/${posts.id}`}  className='is-size-6 has-text-info'>{posts.post_title}</Link>
-<small class="text-white  is-abbr-like text-nowrap is-size-6" title= {posts.created_at}>
-    {joinTime(posts.created_at)}
-</small>
-</div>
-
+return <tr className=' box bg-dark align-center justify-between'>
+<td class="is-checkbox-cell w-25" >
+<Link  to={`/post/${posts.id}`}  className='is-size-6 text-title'>{posts.post_title}</Link>
+</td>
+<td class="is-image-cell w-25">
 <div className='is-flex justify-between align-center actions'>
 <ul className='is-flex is-flex-gap-lg align-center'>
   <li className='is-flex align-center is-flex-gap-md '>
@@ -61,12 +58,19 @@ return   <article className='box bg-dark is-flex align-center justify-between'>
   </li>
 </ul>
 </div>
-
-  <div class="buttons is-right is-flex align-center is-flex-gap-lg">
+</td>
+<td data-label="Author w-25">
+<small class="text-white  is-abbr-like text-nowrap is-size-6" title= {posts.created_at}>
+    {joinTime(posts.created_at)}
+</small>
+</td>
+<td data-label="Action">
+<div class="buttons is-right is-flex align-center is-flex-gap-lg">
     <Link to={`/dashboard/edit-post/${posts.id}`} className='is-title is-size-6 text-title'>Edit</Link>
      <i class="fa fa-trash has-text-danger is-size-5 is-clickable" data-target={posts.id} type="button" onClick={deletePost }></i>
   </div>
-</article>
+</td>
+</tr>
 })        
 
     )

@@ -1,6 +1,0 @@
-    const incrementPosts = async () => {
-      const { data, error } = await supabase
-      .rpc('increment_post', { x: 1, row_id:value.data.id})
-      if(error) console.log(error.message);
-      else console.log(data);
-     }

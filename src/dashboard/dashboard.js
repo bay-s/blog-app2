@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { useParams ,Navigate} from 'react-router-dom';
 import Header from '../pages/header';
+import Bookmarked from './bookmarked';
 import Comment from './comment';
 import EditProfile from './edit-profile';
 import Main from './main';
@@ -32,6 +33,7 @@ const string_id = id.toString().toLowerCase()
 {string_id === 'index' ?  <Main />  : ""}
 {string_id === 'posts' ?  <Posts />  : ""}
 {string_id === 'edit-profile' ? <EditProfile /> : ""}
+{string_id === 'bookmark' ? <Bookmarked /> : ""}
 {string_id === 'comment' ? <Comment /> : ""}
 {string_id === 'follower' ? <TotalFollower /> : ""}
 {string_id === 'following' ? <TotalFollowing /> : ""}

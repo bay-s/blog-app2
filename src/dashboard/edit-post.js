@@ -6,7 +6,6 @@ import ReactQuill from 'react-quill';
 import supabase from '../supabase-config';
 import ErrorMessage from './error-message';
 import { AppContext } from '../App';
-import UploadMedia from './upload-media';
 import EditPostSidebar from './edit-post-sidebar';
 import module from './quill-modules';
 
@@ -15,16 +14,24 @@ const EditPost = (props) => {
   const {value} = useContext(AppContext)
   const {id} = useParams()
   const [post,setPost] = useState([])
-  const [modal,setModal] = useState(false)
   const [isSave,setIsSave] = useState(false)
   const [values, setValues] = useState({
       title:'',
       quill:'',
-      excerpt:'',
-      imgPreview:'',
-      imagesRef:useRef(null)
+      excerpt:''
     });
 
+    // IMAGES
+    const [images,setImages] = useState({
+      imgName:'',
+      url:'',
+      imgUpload:'',
+      isUpload:false,
+      hide:false,
+      media:[],
+      media_url:[]
+    })
+// END IMAGES
    const [message,setMessage] = useState({
     pesan:'',
     isError:false,
@@ -62,6 +69,9 @@ useEffect(() => {
      setValues({...values ,
             quill:data[0].post_content,
        })
+       setImages({...images,
+        imgUpload:data[0].post_thumbnail,
+      })
     }if(error) console.log(error);
 }
 
@@ -184,34 +194,79 @@ const removeTagArr = e => {
  }
 }
 
-const openModal = (e) => {
-  e.preventDefault()
-  setModal(!modal)
+
+// FUNCTION UPLOAD IMAGE
+
+
+const  ImageChange = event => {
+  console.log(event.target.files);
+  if (event.target.files && event.target.files[0]) {
+    let img = event.target.files[0];
+    const randName =  (Math.random() + 1).toString(36).substring(3);
+    const imgStr = img.name.split(".")
+    const names = `${randName}.${imgStr[1]}`
+    uploadImage(img,names)
+    setImages({...images ,
+      imgUpload: URL.createObjectURL(img),
+      url:img,
+      hide:true,
+      isUpload:true,
+      imgName:`${randName}.${imgStr[1]}`
+       })
+
+       
+    }
+};
+
+const uploadImage = async (images,names) => {
+  // e.preventDefault()
+  setImages({...images ,
+      isUpload:false
+       })
+  const { data, error} = await supabase.storage
+  .from('images')
+  .upload(`public/${names}`, images,{
+    cacheControl: '604800',
+    upsert: false
+  })
+  if(error){
+console.log(error);
+  }
+  if(data){
+   console.log(data);
+   getPublicUrls(data.path)
+  }
+}
+
+const getPublicUrls = (url) => {
+  const { data } = supabase
+  .storage.from('images')
+  .getPublicUrl(url)
+  if(data){
+    const imgUrl= data.publicUrl;
+    console.log(imgUrl);
+    setValues({
+      ...values,
+      imgUrl:imgUrl
+    });
+  }
+
  }
 
- const selectImage = (e) => {
+ const removeImage = async (e) => {
   e.preventDefault()
-  console.log(e.target.src);
-  console.log( values.imagesRef.current);
-     if(e.target.classList.contains('remove')){
-      setValues({...values ,
-        imgPreview:''
-         })
-         setIsSave(false)
-         values.imagesRef.current.classList.add('hide')
-     }else{
-      setValues({...values ,
-        imgPreview:e.target.src
-         })
-     }
-}
+  setImages({...images ,
+    imgUpload:'',
+    hide:false,
+     })
 
-const saveImage = (e) => {
-  e.preventDefault()
-  setIsSave(true)
-  setModal(!modal)
-  console.log(isSave);
-}
+const { data, error } = await supabase.storage.from('images')
+  .remove([`public/${images.imgName}`])
+  if(error) alert(error)
+  else console.log(data);
+ }
+
+
 const data = {
   removeTagArr,
   addTags,
@@ -220,11 +275,6 @@ const data = {
   tagArr:arrValue.tagArr,
   catArr:arrValue.catArr,
   text,
-  openModal,
-  selectImage,
-  imgPreview:values.imgPreview,
-  isSave,
-  imagesRef:values.imagesRef
 }
 
     return(
@@ -240,10 +290,36 @@ const data = {
 {/* START COLUMN RIGHT */}
 <div className='column is-10'>
 <div className='columns is-multiline'>
-<div className='column is-9  '>
+<div className='column is-9  p-0 px-4'>
 {/* start table */}
 <section class="section is-main-section box bg-dark">
-  <form className='is-flex is-flex-column is-flex-gap-md' onSubmit={updatePost}>
+<form className='is-flex is-flex-column is-flex-gap-md' onSubmit={updatePost}>
+{/* THUMBNAIL ATTACHMENT */}
+<div className="is-flex align-center is-flex-gap-xl">
+
+<div class="file is-info has-name mb-2">
+  <label class="file-label">
+    <input class="file-input" type="file" name="resume" onChange={ImageChange}/>
+    <span class="file-cta">
+      <span class="file-icon">
+        <i class="fa fa-upload"></i>
+      </span>
+      <span class="file-label">
+        Add thumbnail
+      </span>
+    </span>
+  </label>
+</div>
+
+<div className={post.post_thumbnail === null || '' ? 'hide' : ''} >
+<figure class="image is-96x96">
+<img src={post.post_thumbnail} />
+</figure>
+</div>
+
+<button className={post.post_thumbnail === null || '' ? 'hide' : "button is-outlined is-danger is-small"} onClick={removeImage}>Remove</button>
+</div>
+{/* END THUMBNAIL ATTACH */}
 <div class="field">
   <div class="control">
     <input class="input is-primary is-bold is-size-4 bg-transparent text-white holder-white" type="text" ref={titles }  placeholder="Post title" name='title' defaultValue={post.post_title} onChange={handlerChange}/>
@@ -272,13 +348,7 @@ const data = {
 </div>
 {/* end container */}
 
-    {/* modal */}
-<div class={modal ? "modal is-active" : "modal"}>
-<div class="modal-background"></div>
-<UploadMedia saveImage ={saveImage }  openModal={openModal} selectImage={selectImage}/>
-<button class="modal-close is-large" aria-label="close" onClick={openModal}></button>
-</div>
-{/* end modal */}
+
 </div>
 
     )

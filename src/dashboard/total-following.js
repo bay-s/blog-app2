@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 import supabase from "../supabase-config";
 import Author from "./author";
+import Avatar from "./avatar";
 
 
 const TotalFollowing = () => {
@@ -30,7 +31,10 @@ const TotalFollowing = () => {
     followingUser.map(following => {
         return <div className='column is-4 '>
         <div class="tile is-child box  bg-dark ">
-        <div class="level-item has-text-centered ">
+        <div class="level-item has-text-centered is-flex-gap-md">
+<figure class="image is-32x32">
+<Avatar id={following.following_id}/>
+</figure>
         <Author id={following.following_id}/>
         </div>
         </div>

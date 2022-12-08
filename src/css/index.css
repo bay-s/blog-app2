@@ -341,6 +341,9 @@ html{
   z-index: 30;
 }
 
+.v-center{
+vertical-align:center !important;
+}
 
 aside.aside {
   /* display: none; */

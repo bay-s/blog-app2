@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 import supabase from "../supabase-config";
 import Author from "./author";
-
+import Avatar from "./avatar";
 
 const TotalFollower = () => {
     const {value} = useContext(AppContext)
@@ -24,12 +24,22 @@ console.log(value.data.uid);
     },[])
 
     return(
-<div className='box shadow is-flex align-center is-flex-gap-md bg-dark'>
+<div className='columns is-multiline'>
 {
     followerUser.length < 1 ? '' 
     :
     followerUser.map(following => {
-        return <Author id={following.follower_id}/>
+        return <div className='column is-4 '>
+        <div class="tile is-child box  bg-dark ">
+        <div class="level-item has-text-centered is-flex-gap-md">
+<figure class="image is-32x32">
+<Avatar id={following.follower_id}/>
+</figure>
+        <Author id={following.follower_id}/>
+        </div>
+        </div>
+        {/* end tile */}
+ </div>
     })
 }
 </div>

@@ -47,7 +47,7 @@ const Sidebar = () => {
             </Link>
             </li>
             <li>
-            <Link to='/dashboard/menus' class="has-icon">
+            <Link to='/dashboard/bookmark' class="has-icon">
             <span class="icon"><i class="mdi mdi-account-circle"></i></span>
                 <span class="menu-item-label">Bookmarked</span>
             </Link>
