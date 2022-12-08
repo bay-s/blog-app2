@@ -1,5 +1,6 @@
 import React from 'react'
 import supabase from '../supabase-config'
+import PushNotifications from './notification'
 
 
 class LikesAction extends React.Component{
@@ -45,6 +46,7 @@ getIdLikes = async () => {
 addLikes = async (e) => {
     e.preventDefault()
     const id = this.props.post.id
+    const author_id = this.props.post.author_id
     const lid = parseInt(e.target.dataset.likes) 
     let total_likes = parseInt(e.target.parentElement.firstChild.nextElementSibling.textContent)
     this.setState({likesToggle:!this.state.likesToggle})
@@ -60,6 +62,7 @@ addLikes = async (e) => {
          e.target.classList.add('likes')
          this.UpdateLikes(id,total_likes)
          this.setState({isLikes:true})
+         PushNotifications('likes post',author_id,id,this.props.user.uid)
         }
       }
       console.log(total_likes);

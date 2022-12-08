@@ -1,5 +1,6 @@
 import React from 'react'
 import supabase from '../supabase-config'
+import PushNotifications from './notification'
 
 
 class LikesComment extends React.Component{
@@ -45,19 +46,23 @@ addLikes = async (e) => {
     e.preventDefault()
     const id = this.props.id
     const lid = parseInt(e.target.dataset.likes) 
+    const author_id = this.props.author_id
     let total_likes = parseInt(e.target.parentElement.firstChild.nextElementSibling.textContent)
-console.log(lid);
     if(parseFloat(e.target.dataset.id) === id){
       if(e.target.classList.contains('likes')){
         console.log("ada like");
         this.setState({isLikes:false})
         e.target.classList.remove('likes')
         this.RemoveLikes(id,lid,total_likes)
+        this.decrementReplyLikes(id,total_likes);
+        PushNotifications('likes comment',author_id,id,this.props.user.uid)
         }else{
          console.log("tidakada like");
          this.setState({isLikes:true})
          e.target.classList.add('likes')
          this.UpdateLikes(id,total_likes)
+         this.incrementReplyLikes(id,total_likes);
+         PushNotifications('likes',author_id,lid)
         }
       }
 
@@ -112,6 +117,21 @@ if(data){
   }
 }
 
+incrementReplyLikes = async (id,total_likes) => {
+  const { err ,datas}= await supabase.from('comment_reply')
+  .update({ total_likes: total_likes + 1})
+  .eq('id',id)
+  if(err) console.log(err);
+  else console.log(datas);
+}
+
+decrementReplyLikes = async (id,total_likes) => {
+  const { err ,datas}= await supabase.from('comment_reply')
+  .update({ total_likes: total_likes - 1})
+  .eq('id',id)
+  if(err) console.log(err);
+  else console.log(datas);
+}
 
 allertMessage = (e) => {
   e.preventDefault()

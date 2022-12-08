@@ -80,7 +80,7 @@ const test = useRef(null)
 value.isLogin ? 
  <ul className='is-flex is-flex-gap-md align-center actions'>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
-  <LikesComment id={comment.id} user={value.data} post_id={comment.post_id}/>
+  <LikesComment id={comment.id} author_id={comment.author_id} user={value.data} post_id={comment.post_id}/>
   <span className='is-size-7'>{comment.total_likes < 1 ? '0' : comment.total_likes} Likes</span>
   </li>
   <li className='is-flex align-center is-flex-gap-md is-clickable' data-comment={comment.id} onClick={opensReply}> 

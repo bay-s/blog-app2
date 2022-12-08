@@ -153,6 +153,16 @@ table {
   height:130px !important;
   margin-bottom: 50px;
 }
+
+.post .ql-picker-item{
+  color: black !important;
+}
+
+.notif{
+position: relative;
+left: -8px;
+top: -13px;
+}
 .quill{
   height:350px !important;
   margin-bottom: 50px;

@@ -13,6 +13,7 @@ import GetPost from "./dashboard/get-post-by"
 import PostByCategory from "./pages/post-by-category"
 import SearchResult from "./pages/search-result"
 import Profiles from "./pages/profile"
+import NotificationPage from "./pages/notification-page"
 
 
 
@@ -103,6 +104,7 @@ function App() {
       <Route path='/dashboard/edit-post/:id' element={isLogin ? <EditPost /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/posts/:id' element={<SearchResult />} />
       <Route path='/profiles/:id' element={<Profiles />} />
+      <Route path='/notification/:id' element={<NotificationPage />} />
       <Route path='/post/category-name/:id' element={<GetPost />} />
       <Route path='/posts/category-name/:id' element={<PostByCategory />} />
       <Route path='*' element={<NotFound />} />
