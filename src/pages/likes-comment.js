@@ -55,7 +55,7 @@ addLikes = async (e) => {
         e.target.classList.remove('likes')
         this.RemoveLikes(id,lid,total_likes)
         this.decrementReplyLikes(id,total_likes);
-        PushNotifications('likes comment',author_id,id,this.props.user.uid)
+        PushNotifications('likes comment',author_id,this.props.post_id,this.props.user.uid)
         }else{
          console.log("tidakada like");
          this.setState({isLikes:true})
