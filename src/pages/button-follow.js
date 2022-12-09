@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import supabase from '../supabase-config';
-
+import PushNotifications from './notification'
 
 
 class ButtonFollow extends React.Component{
@@ -70,6 +70,7 @@ getIdFollowing = async () => {
 
  AddFollow = async (e) => {
     const id = this.props.data.uid;
+    const current_user = this.props.current_user.uid
     const is_follows = e.target.dataset.follow;
     const fid = parseInt(e.target.dataset.id)
     const f_id = parseInt(e.target.dataset.following)
@@ -88,6 +89,7 @@ getIdFollowing = async () => {
         e.target.classList.add('following')
         this.updateFollower()
         this.updateUserFollowing()
+        PushNotifications('follow',id,id,current_user)
       }
     }
   };

@@ -4,6 +4,7 @@ import RegisterForm from './register-form';
 import supabase from '../supabase-config';
 import RegisterPageLeft from './register-left';
 import Headers from '../pages/headers';
+import PushNotifications from '../pages/notification'
 
 class RegisterPages extends React.Component{
   constructor(){
@@ -88,6 +89,7 @@ class RegisterPages extends React.Component{
         })
       }
       this.insertDataUser(data.user.id)
+      PushNotifications('welcome',data.user.id,data.user.id,'test')
   }
   
 

@@ -13,8 +13,11 @@ const Profiles = (props) => {
     const {id} = useParams()
     const {value} = useContext(AppContext)
     const [post,setPost] = useState([])
+    const [bookmark,setBookmark] = useState([])
     const [notFound,setNotFound] = useState(false)
-     const [data,setData] = useState([])
+    const [tabs,setTabs] = useState('post')
+    const [data,setData] = useState([])
+
     useEffect(() => {
       const getUserDetail = async () => {
         const {data,error} = await supabase
@@ -27,9 +30,11 @@ const Profiles = (props) => {
           setNotFound(true)
         }
         if(data){
+          const datas = data.uid
           setData(data)
-          fetchPost(data)
+          fetchPost(datas)
           setNotFound(false)
+          bookmarkPosts(datas)
           console.log(data);
         }
       }
@@ -38,20 +43,55 @@ const Profiles = (props) => {
 
 
     const fetchPost = async (datas) => {
-     const { data, error ,count} = await supabase
+     const { data, error } = await supabase
      .from('posts')
      .select('*', { count: 'exact' })
-     .eq('author_id',datas.uid)
+     .eq('author_id',datas)
      if(data){
        console.log(data);
        setPost(data)
      }if(error) console.log(error.message);
     }
    
+    const bookmarkPosts = async (user) => {
+      const { data, error} = await supabase
+      .from('bookmark')
+      .select()
+      .eq('mark_id',user)
+      if(data){
+        data.map(item => {
+          return fetchPostBookmark(item.post_id)
+        })
+      }if(error) console.log(error.message);
+    }
+
+    const fetchPostBookmark = async (id) => {
+      const { data, error} = await supabase
+      .from('posts')
+      .select()
+      .eq('id',id)
+      if(data){
+        console.log(data);
+        setBookmark(data)
+      }if(error) console.log(error.message);
+    } 
+const openTabs = (e) =>{
+e.preventDefault()
+setTabs(e.target.dataset.tabs)
+    }
     const createMarkup = (biodata) => {
       return {__html:biodata};
      }
+
+     const postCard = post.length < 1 ? '' :
+     post.map(posts => {
+       return <PostCard posts={posts} />
+     })
    
+     const bookmarkPost = bookmark.length < 1 ? '' :
+     bookmark.map(posts => {
+       return <PostCard posts={posts} key={posts}/>
+     })
     return(
 <>
 <Headers />
@@ -111,24 +151,30 @@ const Profiles = (props) => {
   <div className='columns is-multiline'>
   <div className='column is-3 p-0 is-flex-column is-flex-gap-lg '>
     <ul className='is-flex-column actions bg-dark p-2'>
-    <li className='is-flex align-center is-flex-gap-lg bg-'>
-       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
-       <span className='text-white'>Saved</span>
+    <li className='is-flex align-center is-flex-gap-lg' data-tabs="post" onClick={openTabs}>
+      <i class="fa fa-rss" aria-hidden="true" data-tabs="post"></i>
+       <span className='text-white' data-tabs="post">Posts</span>
+       {
+      post.length < 1 || undefined ? ''
+      :
+      <span className="tag is-info is-title is-bold"  data-tabs="post">{post.length}</span>
+        }
       </li>
-      <li className='is-flex align-center is-flex-gap-lg'>
-      <i class="fa fa-rss" aria-hidden="true"></i>
-       <span className='text-white'>Posts</span>
-      </li>
+    <li className='is-flex align-center is-flex-gap-lg bg-' data-tabs="saved" onClick={openTabs}>
+       <i class="fa fa-bookmark-o " aria-hidden="true" data-tabs="saved"></i>
+       <span className='text-white' data-tabs="saved">Saved</span>
+       {
+      bookmark.length < 1 || undefined ? ''
+      :
+      <span className="tag is-info is-title is-bold"  data-tabs="saved">{bookmark.length}</span>
+        }
+    </li>
     </ul>
 
   </div>
-     <div className='column is-9 p-0'>
+     <div className='column is-9 p-0 fade'>
       {
-        post.length < 1 ? ''
-        :
-        post.map(posts => {
-          return <PostCard posts={posts} />
-        })
+      tabs === 'post' ? postCard : bookmarkPost
       }
      </div>
   </div>
