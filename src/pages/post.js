@@ -24,7 +24,7 @@ const [message,setMessage] = useState({
 
 useEffect(() => {
  fetchPost()
-},[])
+},[post])
 // },[post])
 const fetchPost = async () => {
  const comments = await HasComment(id);
@@ -61,7 +61,7 @@ error:false,
 
 
 const postCard = post.length < 1 ? "" : post.map(posts => {
-  return <PostCardSingle  posts={posts} key={posts}/>
+  return <PostCardSingle  posts={posts} />
  })
 
 

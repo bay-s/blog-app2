@@ -119,26 +119,8 @@ const Profiles = (props) => {
       <i class="fa fa-rss" aria-hidden="true"></i>
        <span className='text-white'>Posts</span>
       </li>
-      <li className='is-flex align-center is-flex-gap-lg'>
-       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
-       <span className='text-white'>Saved</span>
-      </li>
     </ul>
 
-    <ul className='is-flex-column actions bg-dark p-2'>
-    <li className='is-flex align-center is-flex-gap-lg'>
-       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
-       <span className='text-white'>Saved</span>
-      </li>
-      <li className='is-flex align-center is-flex-gap-lg'>
-       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
-       <span className='text-white'>Saved</span>
-      </li>
-      <li className='is-flex align-center is-flex-gap-lg'>
-       <i class="fa fa-bookmark-o " aria-hidden="true"></i>
-       <span className='text-white'>Saved</span>
-      </li>
-    </ul>
   </div>
      <div className='column is-9 p-0'>
       {

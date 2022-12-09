@@ -5,10 +5,11 @@ import supabase from '../supabase-config';
 
 const SidebarHome = () => {
     const [category,setCategory] = useState([])
+    const [post,setPost] = useState([])
     const [search,setSearch] = useState('')
     const navigate = useNavigate();
 
-    useEffect(() => {
+useEffect(() => {
    const fetchCategory = async () => {
     const { data, error } = await supabase
     .from('category')
@@ -19,8 +20,19 @@ const SidebarHome = () => {
     }if(error) console.log(error);
    }
    fetchCategory()
+   fetchPost()
     },[])
     
+   const fetchPost = async () => {
+    const { data, error } = await supabase
+    .from('posts')
+    .select()
+    .gt('total_likes', 3)
+    if(data){
+      console.log(data);
+      setPost(data)
+    }if(error) console.log(error);
+   } 
     const handlerChange = (e) => {
       const {name,value} = e.target
       setSearch({[name]:value})
@@ -38,11 +50,18 @@ const SidebarHome = () => {
       })
     }
 
+
     const categories = category.length < 1 ? "" : category.map(cats => {
-      return <li className='list-item border-butt '>
+      return <li className='list-item border-butt'>
       <Link to={`/posts/category-name/${cats.category}`} className='text-white'>{cats.category}</Link>
      </li>
-    }) 
+     }) 
+
+     const topPost = post.length < 1 ? "" : post.map(cats => {
+      return <li className='list-item border-butt' >
+      <Link to={`/post/${cats.id}/`} className='text-white'>{cats.post_title}</Link>
+     </li>
+     }) 
     return(
  <aside className='is-flex is-flex-column is-flex-gap-lg home-sidebar'>
 
@@ -72,21 +91,7 @@ const SidebarHome = () => {
      Popular Post
      </h3>
      <ul className='is-flex is-flex-column is-flex-gap-md menu-list'>
-     <li className='list-item border-butt '>
-      <Link to='' className='text-white'>
-       TEST
-      </Link>
-     </li>
-     <li className='list-item border-butt '>
-      <Link to='' className='text-white'>
-       TEST 321 123
-      </Link>
-     </li>
-     <li className='list-item border-butt '>
-      <Link to='' className='text-white'>
-       TEST 123 321
-      </Link>
-     </li>
+     {topPost}
      </ul>
    </div>
 

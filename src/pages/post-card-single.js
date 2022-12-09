@@ -18,7 +18,7 @@ const PostCardSingle = (props) => {
        }
          
 return(
-<div className="tile is-parent p-0" key={posts.id}>
+<div className="tile is-parent p-0">
  <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column p-0">
        {posts.post_thumbnail !== '' ? 
 <div className="card-image mb-2 feature-image-container">

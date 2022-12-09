@@ -99,6 +99,14 @@ button {
   color:black !important;
   font-weight: bold !important;
 }
+
+.menu-list a:hover{
+  background-color: rgba(128, 128, 128, 0.171) !important;
+  border-radius: 3px;
+  transition: 100ms;
+  color: rgba(255, 255, 255, 0.856) !important;
+}
+
 a {
   text-decoration: none;
 }
