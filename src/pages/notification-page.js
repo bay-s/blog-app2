@@ -65,6 +65,9 @@ type = 'Has likes your comment'
  case 'replycomment':
 type = 'Has replied to your comment'
  break;
+ case 'welcome':
+type = 'Welcome to medium now you can create some post'
+ break;
   default:
     // code block
 }
@@ -84,9 +87,17 @@ type = 'Has replied to your comment'
   </div>
   {/* END AUTHOR AVATAR */}
   <div className='notifs'>
+{
+  notifs.type === 'welcome'  ? <div className='is-flex align-center is-flex-gap-md'>
+  <Author id={notifs.receive_id}/> 
     <span className='text-white is-size-7'>
-{type}
+       {type}
     </span>
+</div>
+    : <span className='text-white is-size-7'>
+  {type}
+    </span>
+}
   </div>
         </Link>
     })

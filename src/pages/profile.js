@@ -39,7 +39,7 @@ const Profiles = (props) => {
         }
       }
       getUserDetail()
-    },[])
+    },[data])
 
 
     const fetchPost = async (datas) => {
@@ -92,6 +92,8 @@ setTabs(e.target.dataset.tabs)
      bookmark.map(posts => {
        return <PostCard posts={posts} key={posts}/>
      })
+
+
     return(
 <>
 <Headers />
@@ -121,7 +123,12 @@ setTabs(e.target.dataset.tabs)
       <span className='is-size-7'>Joined on</span>
       <span className='is-size-7'>{joinTime(data.created_at)}</span>
       </p>
-      <a href='#' className='text-title is-size-7'>www.mywebsite.com</a>
+      <a href={data.social_link} className='text-title is-size-7' rel="noopener" target="_blank">
+        {
+          data.social_link === '' ? '' 
+          : data.social_link 
+        }
+      </a>
       {
     value.data.username === data.username ?  <Link to='/dashboard/edit-profile/' className='button is-primary is-outlined is-small '>Edit Profilew</Link>
         :
@@ -132,7 +139,7 @@ setTabs(e.target.dataset.tabs)
   </article>
   <hr className='divider'/>
  <div className='columns is-multiline'>
-     <div className={data.education === null || '' ?  'hide' : 'column is-flex-column text-center has-text-white'}>
+     <div className={data.education === '' || null ?  'hide' : 'column is-flex-column text-center has-text-white'}>
       <h1 className='text-title is-bold is-title'>Education</h1>
       <span>
     {data.education}
@@ -151,18 +158,22 @@ setTabs(e.target.dataset.tabs)
   <div className='columns is-multiline'>
   <div className='column is-3 p-0 is-flex-column is-flex-gap-lg '>
     <ul className='is-flex-column actions bg-dark p-2'>
-    <li className='is-flex align-center is-flex-gap-lg' data-tabs="post" onClick={openTabs}>
-      <i class="fa fa-rss" aria-hidden="true" data-tabs="post"></i>
-       <span className='text-white' data-tabs="post">Posts</span>
+    <li className='is-flex align-center is-flex-gap-lg justify-between' data-tabs="post" onClick={openTabs}>
+       <div>
+       <i class="fa fa-rss" aria-hidden="true" data-tabs="post"></i>
+       <span className='text-white mx-3'  data-tabs="post">Posts</span>
+       </div>
        {
       post.length < 1 || undefined ? ''
       :
       <span className="tag is-info is-title is-bold"  data-tabs="post">{post.length}</span>
         }
       </li>
-    <li className='is-flex align-center is-flex-gap-lg bg-' data-tabs="saved" onClick={openTabs}>
-       <i class="fa fa-bookmark-o " aria-hidden="true" data-tabs="saved"></i>
-       <span className='text-white' data-tabs="saved">Saved</span>
+    <li className='is-flex align-center justify-between' data-tabs="saved" onClick={openTabs}>
+      <div>
+      <i class="fa fa-bookmark-o " aria-hidden="true" data-tabs="saved"></i>
+       <span className='text-white mx-3' data-tabs="saved">Saved</span>
+      </div>
        {
       bookmark.length < 1 || undefined ? ''
       :

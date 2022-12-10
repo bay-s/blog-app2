@@ -1,13 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import joinTime from '../pages/join_time'
+import supabase from '../supabase-config'
 import Author from './author'
 import Avatar from './avatar'
 
 
 const BookmarkList = (props) => {
     const posts = props.post
-    console.log(posts);
+
+    const deletePost = async (e) => {
+        e.preventDefault()
+        const id = parseInt(e.target.dataset.target)
+        const container = e.target.parentElement.parentElement
+        if(window.confirm("Are you sure want to delete this  ?")){
+          const { data,error } = await supabase.from('posts')
+           .delete()
+           .eq('id', id)
+           .select()
+           if(data)  {
+            alert("Delete post success")
+            container.classList.add('hide')
+          }
+           if(error) alert(`Something wrong ${error.message}`)
+        }
+      }
     return(
     <tr className=' box bg-dark align-center justify-between'>
         <td class="is-checkbox-cell w-25" >
@@ -28,11 +45,6 @@ const BookmarkList = (props) => {
         </div>
         </td>
         <td data-label="Author w-25">
-        <small class="text-white  is-abbr-like text-nowrap is-size-6" title= {posts.created_at}>
-            {joinTime(posts.created_at)}
-        </small>
-        </td>
-        <td>
 <div className='is-flex align-center is-flex-gap-lg'>
 <figure class="image is-32x32">
 <Avatar  id={posts.author_id}/>
@@ -41,7 +53,11 @@ const BookmarkList = (props) => {
 <Author id={posts.author_id}/>
 </div>
 </div>
- {/* END AVATAR */}
+        </td>
+        <td>
+<div class="buttons is-right is-flex align-center is-flex-gap-lg">
+     <i class="fa fa-trash has-text-danger is-size-5 is-clickable" data-target={posts.id} type="button" onClick={deletePost }></i>
+  </div>
         </td>
     </tr>
     )

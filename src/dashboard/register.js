@@ -81,6 +81,8 @@ class RegisterPages extends React.Component{
       if(data){
         console.log(data.user.id);
         console.log(data);
+        PushNotifications('welcome',data.user.id,data.user.id,'Unnamed')
+        console.log(        PushNotifications('welcome',data.user.id,1,'Unnamed'));
         this.setState({
           sukses:true,
           error:false,
@@ -89,7 +91,6 @@ class RegisterPages extends React.Component{
         })
       }
       this.insertDataUser(data.user.id)
-      PushNotifications('welcome',data.user.id,data.user.id,'test')
   }
   
 

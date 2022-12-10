@@ -52,10 +52,10 @@ if(datas.username.length < 1){
   setDatas({...datas,
       [name]:value
       })
+      console.log(datas);
 }
 
 const handlerQuillChange = (e) => {
-
   setDatas({...datas,
     biodata:ref.current?.value
    })
@@ -68,7 +68,16 @@ const updateProfiles = async (e) => {
     isSubmit:true
   })
 
-console.log(value);
+  if(!isValidUrl(datas.social_link)) {
+    setMessage({
+      pesan:`URL ARE NOT VALID URL `,
+      error:true,
+      sukses:false,
+      isSubmit:false
+    })
+    return
+  }
+
   const { data, error } = await supabase
   .from('users')
   .update({
@@ -97,6 +106,18 @@ console.log(value);
     })
   }
 }
+
+// CHECK URL 
+const isValidUrl = urlString => {
+	const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
+	    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+	    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+	    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+	    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+	    '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+	  return !!urlPattern.test(urlString);
+}
+
     return(
  <div className='px-5 text-white bg-dark py-2'>
  <h3 className='is-bold is-title is-size-4 text-title pt-5 mt-4'>
@@ -136,7 +157,7 @@ console.log(value);
 <div class="field">
 <label class="label text-white">Biodata</label>
 <div class="control biodata">
-<ReactQuill ref={ref} theme="snow" value={datas.biodata} onChange={handlerQuillChange} name='quill'  modules={module.toolbars} formats={module.formats} />
+<ReactQuill ref={ref} theme="snow" value={datas.biodata} onChange={handlerQuillChange} name='quill' />
 </div>
 </div>
 
