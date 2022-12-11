@@ -7,7 +7,7 @@ import NotificationList from './notification-list';
 
 const Headers = () => {
 const {value} = useContext(AppContext);
-
+const [dropDown,setDropDown] = useState(false)
 useEffect(() => {
      window.addEventListener('scroll',scrolls)
 },[])
@@ -34,10 +34,16 @@ y = x;
     const { error } = await supabase.auth.signOut()
     console.log(error);
   }
+
+  const openDropDown = e => {
+    e.preventDefault()
+    setDropDown(!dropDown)
+  }
     return(
 <header className='headers p-2 bg-dark' ref={header}>
-<nav className=" is-flex align-center is-flex-gap-xl justify-between bg-transparent container" role="navigation" aria-label="main navigation">
-  <div className="navbar-brand">
+<nav className=" is-flex align-center is-flex-gap-xl justify-between bg-transparent container" role="navigation" aria-label="main navigation" id='navbar-home'>
+<div className="navbar-brand is-flex align-center is-flex-gap-md">
+<i class="fa fa-bars text-white  is-clickable is-size-4 burger" aria-hidden="true" onClick={value.openSidebar}></i>
     <Link className="navbar-item main-title hvr-underline-from-center" to='/'>
     <h3 className='text-title is-title is-size-4 is-bold main-title '>SimpleForums</h3>
     </Link>
@@ -45,47 +51,50 @@ y = x;
 
      <ul className='is-flex  is-flex-gap-xl '>
         <li className='hvr-underline-from-center py-3'>
-        <Link to='/dashboard/index' className=' has-text-white'>For you</Link>
-        </li>
-         <li className='hvr-underline-from-center py-3'>
-         <Link to='/dashboard/index' className=' has-text-white'>Following</Link>
-         </li>
-        <li className='hvr-underline-from-center py-3'>
         {value.isLogin  ? <Link to='/dashboard/create-post' className=' has-text-white'>Create Post</Link>
         :  <Link to='/login/' className=' has-text-white'>Create Post</Link>
         }   
         </li>   
-        
-        <li className={value.isLogin ? 'hvr-underline-from-center py-3' : 'hide'}><Link to='/dashboard/index' className=' has-text-white'>Dashboard</Link></li>
+  
         {value.isLogin ?  <NotificationList /> : ''}
-        <div className={value.isLogin ? "navbar-menu fadeIn animated faster" : "hide"} id="navbar-menu">
-          <div className="navbar-end">
-            <div className="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
-              <a className="navbar-link is-arrowless is-flex is-flex-gap-lg">
-              <figure class="image is-24x24">
-                  <img className='avatars is-rounded' src={value.data.avatar === '' ? akun : value.data.avatar } alt="IMAGES" />
-              </figure>
-                <div className="is-user-name text-title"><span>{value.data.username}</span></div>
-              </a>
-              <div className="navbar-dropdown bg-dark">
-              <Link className="navbar-item" to={`/profiles/${value.data.username}`} >
-                  <span className="icon"><i className="fa fa-user text-white"></i></span>
-                  <span className='text-white'>My Profile</span>
-              </Link>
-                <Link className="navbar-item" to='/dashboard/edit-profile'>
-                  <span className="icon"><i className="fa fa-cog text-white"></i></span>
-                  <span className='text-white'>Settings</span>
-                </Link>
-                <hr className="navbar-divider" />
-                <a className="navbar-item">
-                  <span className="icon"><i className="fa fa-sign-out text-white"></i></span>
-                  <span onClick={Logout} className='text-white'>Log Out</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        {/* START DROPDOWN */}
+<div class={dropDown ? "dropdown is-right is-active" : "dropdown is-right"}>
+<li className={value.isLogin ? 'hvr-underline-from-center py-3 is-clickable akun' : 'hide'} onClick={openDropDown}>
+<div className="is-flex align-center is-flex-gap-md"
+>
+<figure className="image is-24x24">
+<img className='avatars is-rounded' src={value.data.avatar === '' ? akun : value.data.avatar } alt="IMAGES" />
+</figure>
+<span className='text-title '>{value.data.username}</span>
+</div>
+</li>
+<div class="dropdown-menu fade" id="dropdown-menu" role="menu">
+  <div class="dropdown-content bg-dark dropdown-contents">
+    <Link className="dropdown-item" to={`/profiles/${value.data.username}`} >
+    <span className="icon"><i className="fa fa-user text-white"></i></span>
+    <span className='text-white'>My Profile</span>
+    </Link>
+    <Link className="navbar-item" to='/dashboard/create-post'>
+    <span className="icon"><i className="fa fa-cog text-white"></i></span>
+    <span className='text-white'>Create Post</span>
+    </Link>
+    <Link className="navbar-item" to='/dashboard/index/'>
+    <i class="fa fa-lock" aria-hidden="true"></i>
+    <span className='text-white'>DashBoard</span>
+    </Link>
+    <Link className="navbar-item" to='/dashboard/edit-profile'>
+    <span className="icon"><i className="fa fa-cog text-white"></i></span>
+    <span className='text-white'>Settings</span>
+    </Link>
+    <hr class="dropdown-divider" />
+    <a href="#" class="dropdown-item is-flex">
+    <span className="icon"><i className="fa fa-sign-out text-white"></i></span>
+    <span onClick={Logout} className='text-white'>Log Out</span>
+    </a>
+  </div>
+</div>
+</div>
+{/* END DROPDOWN */}
      </ul>
 
 </nav>

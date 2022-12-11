@@ -30,7 +30,7 @@ const Header = () => {
           <div className="navbar-end">
             <div className="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
             <a className="navbar-link is-arrowless is-flex is-flex-gap-lg">
-              <figure class="image is-24x24">
+              <figure className="image is-24x24">
                   <img className='avatars is-rounded' src={value.data.avatar === '' ? akun : value.data.avatar } alt="IMAGES" />
                 </figure>
                 <div className="is-user-name text-title"><span>{value.data.username}</span></div>
@@ -44,10 +44,6 @@ const Header = () => {
                   <span className="icon"><i className="fa fa-cog text-white"></i></span>
                   <span className='text-white'>Settings</span>
                 </Link>
-                <a className="navbar-item">
-                  <span className="icon"><i className="fa fa-envelope text-white"></i></span>
-                  <span className='text-white'>Messages</span>
-                </a>
                 <hr className="navbar-divider" />
                 <a className="navbar-item">
                   <span className="icon"><i className="fa fa-sign-out text-white"></i></span>

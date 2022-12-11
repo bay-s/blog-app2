@@ -37,7 +37,7 @@ const PostCard = (props) => {
 <div className='p-3 px-5 is-flex-column justify-start is-flex-gap-lg'>
            {/* AVATAR */}
 <div className='is-flex align-center is-flex-gap-lg'>
-<figure class="image is-32x32">
+<figure className="image is-32x32">
 <Avatar  id={props.posts.author_id}/>
 </figure>
 <div className='is-flex-column'>
@@ -55,13 +55,13 @@ const PostCard = (props) => {
 
 <div className='is-flex justify-between align-center actions'>
 <ul className='is-flex is-flex-gap-lg align-center'>
-  <li className='is-flex align-center is-flex-gap-md is-clickable'>
-  <i class="fa fa-heart-o" aria-hidden="true"></i>
-  <span className='is-size-7'>{props.posts.total_likes < 1 ? '0' : props.posts.total_likes} Likes</span>
+  <li className={props.posts.total_likes < 1 ? 'hide' : 'is-flex align-center is-flex-gap-md is-clickable'}>
+  <i className="fa fa-heart-o" aria-hidden="true"></i>
+  <span className='is-size-7'>{props.posts.total_likes} Likes</span>
   </li>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
-  <i class="fa fa-comment-o" aria-hidden="true"></i>
-  <span className='is-size-7'>{props.posts.total_comment < 1 ? '0' : props.posts.total_comment} Likes</span>
+  <i className="fa fa-comment-o" aria-hidden="true"></i>
+  <span className='is-size-7'>{props.posts.total_comment < 1 ? 'Add a ' : props.posts.total_comment} Comment</span>
   </li>
 </ul>
 <ul className='is-flex is-flex-gap-sm align-center'>
@@ -71,7 +71,7 @@ const PostCard = (props) => {
 </span>
 </li>
 <li className='is-flex align-center is-flex-gap-md is-clickable bookmark'>
-  <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+  <i className="fa fa-bookmark-o" aria-hidden="true"></i>
   <span className='is-size-7'>Bookmark</span>
 </li>
 </ul>

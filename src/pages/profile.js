@@ -160,7 +160,7 @@ setTabs(e.target.dataset.tabs)
     <ul className='is-flex-column actions bg-dark p-2'>
     <li className='is-flex align-center is-flex-gap-lg justify-between' data-tabs="post" onClick={openTabs}>
        <div>
-       <i class="fa fa-rss" aria-hidden="true" data-tabs="post"></i>
+       <i className="fa fa-rss" aria-hidden="true" data-tabs="post"></i>
        <span className='text-white mx-3'  data-tabs="post">Posts</span>
        </div>
        {
@@ -171,7 +171,7 @@ setTabs(e.target.dataset.tabs)
       </li>
     <li className='is-flex align-center justify-between' data-tabs="saved" onClick={openTabs}>
       <div>
-      <i class="fa fa-bookmark-o " aria-hidden="true" data-tabs="saved"></i>
+      <i className="fa fa-bookmark-o " aria-hidden="true" data-tabs="saved"></i>
        <span className='text-white mx-3' data-tabs="saved">Saved</span>
       </div>
        {

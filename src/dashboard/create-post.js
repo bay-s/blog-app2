@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Header from '../pages/header';
 import Sidebar from './sidebar';
-import UploadMedia from './upload-media';
 import PostEditor from './create-post-editor';
 
 
@@ -61,7 +60,7 @@ const data = {
 return(
 <div id="app">
 <Header />
-<div class="container is-fluid my-5 pt-3 ">
+<div className="container is-fluid my-5 pt-3 ">
 <div className='columns is-multiline'>
 {/* START SIDEBAR */}
 <div className='column is-2 bg-dark'>
@@ -78,13 +77,6 @@ return(
 </div>
 {/* end container */}
 
-    {/* modal */}
-<div class={modal ? "modal is-active" : "modal"}>
-<div class="modal-background"></div>
-<UploadMedia saveImage ={saveImage}  openModal={openModal} selectImage={selectImage}/>
-<button class="modal-close is-large" aria-label="close" onClick={openModal}></button>
-</div>
-{/* end modal */}
 </div>
 
     )

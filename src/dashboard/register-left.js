@@ -23,13 +23,13 @@ function RegisterPageLeft(props){
                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis ex deleniti aliquam tempora libero excepturi vero soluta odio optio sed.
                </p>
         
-        <article class={props.error ? "message is-danger" : 'hide'}>
-          <div class="message-body">
+        <article className={props.error ? "message is-danger" : 'hide'}>
+          <div className="message-body">
          <i> {props.pesan}</i>
           </div>
         </article>
-        <article class={props.sukses ? "message is-success" : 'hide'}>
-          <div class="message-body">
+        <article className={props.sukses ? "message is-success" : 'hide'}>
+          <div className="message-body">
          <i> {props.pesan}</i>
           </div>
         </article>

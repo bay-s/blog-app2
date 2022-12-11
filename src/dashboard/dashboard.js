@@ -18,7 +18,7 @@ const string_id = id.toString().toLowerCase()
     return( 
 <div id="app">
 <Header />
-<div class="container is-fluid my-5">
+<div className="container is-fluid my-5">
 <div className='columns is-multiline dashboard-container'>
 {/* START SIDEBAR */}
 <div className='column is-3 bg-dark my-3'>

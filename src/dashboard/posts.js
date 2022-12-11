@@ -44,7 +44,7 @@ const Posts = (props) => {
 </div>
 
     {/* start table */}
-<section class="section is-main-section p-2">
+<section className="section is-main-section p-2">
 <PostList post={post} key={post}/>
     {/* <Pagination setValue={setValue} totalPost={totalPost} value={value} /> */}
 </section>

@@ -95,26 +95,26 @@ alert(`Something wrong ${err.message}`)
 
       return(
         <form className='my-3' onSubmit={uploadImage}>
-        <div class="field is-flex is-flex-gap-xl is-align-items-center">
-        <figure class="image is-48x48">
-        <img class="is-rounded edit-image h-100 avatars" src={images.imgUpload !== '' ? images.imgUpload : value.data.avatar === '' ? akun : value.data.avatar}  alt="profile"/>
+        <div className="field is-flex is-flex-gap-xl is-align-items-center">
+        <figure className="image is-48x48">
+        <img className="is-rounded edit-image h-100 avatars" src={images.imgUpload !== '' ? images.imgUpload : value.data.avatar === '' ? akun : value.data.avatar}  alt="profile"/>
         </figure>
-        <div class="file is-small  is-flex is-flex-direction-column is-flex-gap-sm">
-        <label class="label p-0 m-0 text-white">{value.data.username}</label>
-        <label class="file-label">
-        <input class="file-input" type="file" name="resume" onChange={ImageChange}/>
-        <span class="file-cta">
-        <span class="file-icon">
-        <i class="fa fa-upload"></i>
+        <div className="file is-small  is-flex is-flex-direction-column is-flex-gap-sm">
+        <label className="label p-0 m-0 text-white">{value.data.username}</label>
+        <label className="file-label">
+        <input className="file-input" type="file" name="resume" onChange={ImageChange}/>
+        <span className="file-cta">
+        <span className="file-icon">
+        <i classNames="fa fa-upload"></i>
         </span>
-        <span class="file-label  px-2">
+        <span className="file-label  px-2">
         {images.name === '' ? "Upload Image" : images.name}
         </span>
         </span>
   
         </label>
         <div className={images.hide ? "" : 'hide'} >
-        {images.isUpload ?  <button type='submit' class="button is-info is-small" >Save</button> : <button class="button is-link  is-loading is-small" disabled>Loading</button>}
+        {images.isUpload ?  <button type='submit' className="button is-info is-small" >Save</button> : <button class="button is-link  is-loading is-small" disabled>Loading</button>}
         </div>
         </div>
         </div>

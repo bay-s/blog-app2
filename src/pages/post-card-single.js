@@ -34,7 +34,7 @@ return(
 <div className='py-3 p-0  is-flex-column justify-start is-flex-gap-lg'>
  {/* AVATAR */}
 <div className='is-flex align-center is-flex-gap-lg'>
-<figure class="image is-32x32">
+<figure className="image is-32x32">
 <Avatar  id={posts.author_id}/>
 </figure>
 <div className='is-flex-column'>
@@ -64,7 +64,7 @@ return(
   <span className='is-size-7'>{posts.total_likes < 1 ? '0' : posts.total_likes}</span>
   </li>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
-  <i class="fa fa-comment-o" aria-hidden="true"></i>
+  <i className="fa fa-comment-o" aria-hidden="true"></i>
   <span className='is-size-7'>20 </span>
   </li>
 </ul>

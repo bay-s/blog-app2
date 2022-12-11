@@ -59,6 +59,7 @@ const fetchComment = async () => {
  }
     return(
         <aside className="home-sidebar dashboard-sidebar">
+
         <div className="menu is-menu-main">
           <ul className="menu-list">
             <li>
@@ -70,8 +71,8 @@ const fetchComment = async () => {
           </ul>
           <ul className="menu-list py-2">
             <li>
-              <Link to='/dashboard/posts' clasName="has-icon">
-                <span className="icon has-update-mark"><i clasName="mdi mdi-table"></i></span>
+              <Link to='/dashboard/posts'  className="is-flex align-center justify-between px-5">
+                {/* <span className="icon has-update-mark"><i clasName="mdi mdi-table"></i></span> */}
                 <span className="menu-item-label">Posts</span>
                 {
                   totalPost.length < 1 || undefined ? ''
@@ -81,8 +82,7 @@ const fetchComment = async () => {
               </Link>
             </li>
             <li>
-            <Link to='/dashboard/comment/' className="has-icon">
-                <span className="icon"><i className="mdi mdi-square-edit-outline"></i></span>
+            <Link to='/dashboard/comment/'  className="is-flex align-center justify-between px-5">
                 <span className="menu-item-label">Comment</span>
                 {
                   totalComment.length < 1 || undefined ? ''
@@ -92,8 +92,7 @@ const fetchComment = async () => {
             </Link>
             </li>
             <li>
-            <Link to='/dashboard/follower/' className="has-icon">
-                <span className="icon"><i className="mdi mdi-account-circle"></i></span>
+            <Link to='/dashboard/follower/' className="is-flex align-center justify-between px-5">
                 <span className="menu-item-label">Follower</span>
                 {
                   totalFollower.length < 1 || undefined ? ''
@@ -104,8 +103,7 @@ const fetchComment = async () => {
             </li>
             <li>
             <li>
-            <Link to='/dashboard/following/' className="has-icon">
-                <span className="icon"><i className="mdi mdi-square-edit-outline"></i></span>
+            <Link to='/dashboard/following/' className="is-flex align-center justify-between px-5">
                 <span className="menu-item-label">Following</span>
                 {
                   totalFollowing.length < 1 || undefined ? ''
@@ -114,15 +112,15 @@ const fetchComment = async () => {
                 }
             </Link>
             </li>
-            <Link to='/dashboard/edit-profile/' className="has-icon">
-                <span className="icon"><i className="mdi mdi-account-circle"></i></span>
+            <Link to='/dashboard/edit-profile/' className="is-flex align-center justify-between px-5">
                 <span className="menu-item-label">Setting</span>
+
             </Link>
             </li>
             <li>
             <Link to='/dashboard/bookmark' className="has-icon">
             <span className="icon"><i classNames="mdi mdi-account-circle"></i></span>
-                <span className="menu-item-label">Bookmarked</span>
+            <span className="menu-item-label">Bookmarked</span>
             </Link>
             </li>
           </ul>

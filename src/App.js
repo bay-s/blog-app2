@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { createContext, useEffect, useState } from "react"
+import { createContext, useEffect, useRef, useState } from "react"
 import supabase from "./supabase-config"
 import DashBoard from "./dashboard/dashboard"
 import Home from "./pages/Home"
@@ -25,6 +25,7 @@ function App() {
   const [isLogin,setIsLogin] = useState(false)
   const [open,setOpen] = useState(false)
   const [data,setData] = useState([])
+  const sidebars = useRef(null)
 
   useEffect(() => {
     const user = getUsers()
@@ -85,11 +86,18 @@ function App() {
     }
   }
 
+  const openSidebar = e => {
+    e.preventDefault()
+    setOpen(!open)
+    sidebars.current.classList.toggle('slides')
+  }
+
   const value = {
     data,
     users,
     openModal,
-    isLogin
+    isLogin,
+    openSidebar
   }
 
   return (
@@ -97,7 +105,7 @@ function App() {
 <BrowserRouter>
       {/* <Headers /> */}
       <Routes>
-      <Route path='/' element={<Home />} /> 
+      <Route path='/' element={<Home sidebars={sidebars} closeModal={openSidebar} modal={open}/>} /> 
       <Route path='/post/:id' element={<PostDetail />} /> 
       <Route path='/dashboard/:id' element={isLogin ? <DashBoard /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/dashboard/create-post/' element={isLogin ? <CreatePost /> : <LoginPage  isLogin={isLogin}/>} />

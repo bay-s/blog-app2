@@ -39,7 +39,7 @@ const CommentList = (props) => {
     return(
 props.post.length < 1 ? "" : props.post.map((posts ,index) => {
 return   <tr className='table-comment'>
-<td class="is-checkbox-cell w-25" >
+<td className="is-checkbox-cell w-25" >
 <h3 className='is-size-7 has-text-info'>
     {posts.author_name}
 </h3>
@@ -47,7 +47,7 @@ return   <tr className='table-comment'>
     {posts.author_email}
 </h3>
 </td>
-<td class="is-image-cell w-25">
+<td className="is-image-cell w-25">
 <span className='is-size-7' dangerouslySetInnerHTML={createMarkup(posts)} />
 <div className='action is-flex align-center is-flex-gap-md'>
 <button className='navbar-item has-text-info btn-transparent is-size-7'>Reply</button>

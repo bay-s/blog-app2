@@ -70,12 +70,12 @@ const postCard = post.length < 1 ? "" : post.map(posts => {
         <Headers />
  <div className='container is-fluid is-max-widescreen my-5 post'>
 <article className='columns is-multilne single-container'>
-<div className='column is-3 box bg-dark'>
+<div className='column is-3 box bg-dark sidebars'>
               <SidebarHome />
 </div>
 <div className='column p-0 px-4 is-flex-column is-flex-gap-lg'>
 {/* start post */}
-<ErrorMessage pesan={message.pesan} isError={message.error} sukses={false}/>
+{/* <ErrorMessage pesan={message.pesan} isError={message.error} sukses={false}/> */}
 {loader ? <AnimasiSkeleton /> : postCard}
 {/* END POST */}
 

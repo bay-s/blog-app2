@@ -26,7 +26,7 @@ getPost()
 return(
 <div id="app">
 <Header />
-<div class="container is-fluid my-5 pt-3">
+<div className="container is-fluid my-5 pt-3">
 <div className='columns is-multiline'>
 {/* START SIDEBAR */}
 <div className='column is-2 bg-dark'>
@@ -40,27 +40,27 @@ return(
 </div>
 
 {/* start table */}
-<section class="section is-main-section ">
-<div class="card has-table ">
-      <header class="card-header ">
-        <p class="card-header-title">
-          <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+<section className="section is-main-section ">
+<div className="card has-table ">
+      <header className="card-header ">
+        <p className="card-header-title">
+          <span className="icon"><i className="mdi mdi-account-multiple"></i></span>
           Clients
         </p>
-        <a href="#" class="card-header-icon">
-          <span class="icon"><i class="mdi mdi-reload"></i></span>
+        <a href="#" className="card-header-icon">
+          <span className="icon"><i className="mdi mdi-reload"></i></span>
         </a>
       </header>
-      <div class="card-content ">
-        <div class="b-table has-pagination">
-          <div class="table-wrapper has-mobile-cards">
-            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+      <div classNames="card-content ">
+        <div className="b-table has-pagination">
+          <div className="table-wrapper has-mobile-cards">
+            <table className="table is-fullwidth is-striped is-hoverable is-fullwidth">
               <thead>
               <tr>
-                <th class="is-checkbox-cell">
-                  <label class="b-checkbox checkbox">
+                <th className="is-checkbox-cell">
+                  <label className="b-checkbox checkbox">
                     <input type="checkbox" value="false" />
-                    <span class="check"></span>
+                    <span className="check"></span>
                   </label>
                 </th>
                 <th></th>
@@ -79,19 +79,19 @@ return(
               </tbody>
             </table>
           </div>
-          <div class="notification">
-            <div class="level">
-              <div class="level-left">
-                <div class="level-item">
-                  <div class="buttons has-addons">
-                    <button type="button" class="button is-active">1</button>
-                    <button type="button" class="button">2</button>
-                    <button type="button" class="button">3</button>
+          <div className="notification">
+            <div className="level">
+              <div className="level-left">
+                <div className="level-item">
+                  <div className="buttons has-addons">
+                    <button type="button" className="button is-active">1</button>
+                    <button type="button" className="button">2</button>
+                    <button type="button" className="button">3</button>
                   </div>
                 </div>
               </div>
-              <div class="level-right">
-                <div class="level-item">
+              <div className="level-right">
+                <div className="level-item">
                   <small>Page 1 of 3</small>
                 </div>
               </div>

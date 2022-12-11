@@ -42,7 +42,7 @@ const [prevPost,setPrevPost] = useState([])
 <div className='is-flex justify-between is-flex-gap-xl align-center p-6' >
 <div className={prevPost == undefined  ? 'hide' : 'is-flex is-flex-column is-flex-gap-sm navbar-start align-start'}>
    <span className='is-flex align-center is-flex-gap-md'>
-   <i class="fa fa-long-arrow-left text-white" aria-hidden="true"></i>
+   <i className="fa fa-long-arrow-left text-white" aria-hidden="true"></i>
      <span className='text-white'>Prev post</span>
    </span>
    <Link to={`/post/${prevPost == undefined ? '' : prevPost.id}`}  className="title is-6 text-title is-bold p-0 m-0 text-wrap">{prevPost == undefined ? '' : prevPost.post_title}</Link>
@@ -50,7 +50,7 @@ const [prevPost,setPrevPost] = useState([])
    <div className={nextPost == undefined ? 'hide' : 'is-flex is-flex-column is-flex-gap-sm navbar-end align-end'}>
    <span className='is-flex align-center is-flex-gap-md'>
      <span className='text-white'>Next post</span>
-     <i class="fa fa-long-arrow-right text-white" aria-hidden="true"></i>
+     <i className="fa fa-long-arrow-right text-white" aria-hidden="true"></i>
    </span>
    <Link to={`/post/${nextPost == undefined ? '' : nextPost.id}`}  className="title is-6 text-title is-bold p-0 m-0 text-wrap">{nextPost == undefined ? '' : nextPost.post_title}</Link>
   </div>  

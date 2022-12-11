@@ -72,7 +72,7 @@ type = 'Welcome to medium now you can create some post'
     // code block
 }
         return <Link to={url} className='column is-9 box  bg-dark is-flex is-flex-gap-xl align-start notification'>
-        <button class="delete" data-id={notifs.id} onClick={deleteNotif}></button>
+        <button className="delete" data-id={notifs.id} onClick={deleteNotif}></button>
 {/* AUTHOR AVATAR */}
 <div className='is-flex align-center is-flex-gap-md'>
  <figure className="image is-32x32">

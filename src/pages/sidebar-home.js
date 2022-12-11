@@ -64,7 +64,9 @@ useEffect(() => {
      }) 
     return(
  <aside className='is-flex is-flex-column is-flex-gap-lg home-sidebar'>
-
+<h3 className='is-title is-size-3 is-bold main-title '>
+<Link className="main-title text-title" to='/'>SimpleForums</Link>
+</h3>
 <form className="field py-3" onSubmit={goToPosts}>
   <div className="control has-icons-left has-icons-right">
     <input className="input  bg-dark text-white is-primary" type="text" placeholder="Search post" name='search' onChange={handlerChange }/>

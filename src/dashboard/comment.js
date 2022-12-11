@@ -43,12 +43,12 @@ const Comment = (props) => {
 </div>
 
     {/* start table */}
-<section class="section is-main-section p-2 ">
-<div class="card has-table ">
-      <div class="card-content ">
-        <div class="b-table has-pagination">
-          <div class="table-wrapper has-mobile-cards">
-            <table class="table is-fullwidth is-striped is-hoverable is-fullwidth">
+<section className="section is-main-section p-2 ">
+<div className="card has-table ">
+      <div className="card-content ">
+        <div className="b-table has-pagination">
+          <div className="table-wrapper has-mobile-cards">
+            <table className="table is-fullwidth is-striped is-hoverable is-fullwidth">
               <thead className='border-butt'>
               <tr>
                 <th>Author</th>

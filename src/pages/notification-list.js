@@ -34,13 +34,12 @@ const readNotif = async (e) => {
     return(
    <li className='hvr-underline-from-center py-3 is-clickable '>
         <Link to={`/notification/${value.data.uid}`} onClick={readNotif}>
-        <i class="fa fa-bell-o text-white is-size-5" aria-hidden="true"></i>
+        <i className="fa fa-bell-o text-white is-size-5" aria-hidden="true"></i>
         </Link>
         {
         notif.length < 1 || undefined ? '' : 
-        <span class="tag is-info is-rounded notif py-1 px-2 is-title is-bold ">{notif === undefined ? '' : notif.length}</span>
-        }
-        
+        <span className="tag is-info is-rounded notif py-1 px-2 is-title is-bold ">{notif === undefined ? '' : notif.length}</span>
+        }   
    </li>  
     )
 }

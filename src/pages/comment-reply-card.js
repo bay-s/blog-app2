@@ -71,7 +71,7 @@ value.isLogin ?
   <span className='is-size-7'>{reply.total_likes < 1 ? '0' : reply.total_likes} Likes</span>
   </li>
   <li className='is-flex align-center is-flex-gap-md is-clickable' data-comment={reply.id} onClick={opensReply}> 
-  <i class="fa fa-comment-o" aria-hidden="true"  data-comment={reply.id}></i>
+  <i className="fa fa-comment-o" aria-hidden="true"  data-comment={reply.id}></i>
   <span className='is-size-7'  data-comment={reply.id}>Reply</span>
   </li>
 </ul> 

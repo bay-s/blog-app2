@@ -288,17 +288,17 @@ const { data, error } = await supabase.storage.from('images')
 <div className='columns is-variable bd-klmn-columns is-2'>
 <div className='column is-9 py-0 px-5'>
 {/* START EDITOR*/}
-<section class="section is-main-section box bg-dark ">
+<section className="section is-main-section box bg-dark ">
 <form className='is-flex is-flex-column is-flex-gap-md' onSubmit={createPost}>
 
 <div className="is-flex align-center is-flex-gap-xl">
 
-<div class="file is-info has-name mb-2">
-  <label class="file-label">
-    <input class="file-input" type="file" name="resume" onChange={ImageChange}/>
-    <span class="file-cta">
-      <span class="file-icon">
-        <i class="fa fa-upload"></i>
+<div className="file is-info has-name mb-2">
+  <label className="file-label">
+    <input className="file-input" type="file" name="resume" onChange={ImageChange}/>
+    <span className="file-cta">
+      <span className="file-icon">
+        <i className="fa fa-upload"></i>
       </span>
       <span class="file-label">
         Add thumbnail
@@ -308,7 +308,7 @@ const { data, error } = await supabase.storage.from('images')
 </div>
 
 <div className={images.hide ? '' : 'hide'} >
-<figure class="image is-96x96">
+<figure className="image is-96x96">
 <img src={images.imgUpload} />
 </figure>
 </div>
@@ -316,9 +316,9 @@ const { data, error } = await supabase.storage.from('images')
 <button className={images.hide ? "button is-outlined is-danger is-small" : 'hide'} onClick={removeImage}>Remove</button>
 </div>
 
-<div class="field">
-  <div class="control">
-    <input class="input is-primary is-bold is-size-4 bg-transparent text-white holder-white" type="text" ref={titles }  placeholder="Post title" name='title' onChange={handlerChange}/>
+<div className="field">
+  <div className="control">
+    <input className="input is-primary is-bold is-size-4 bg-transparent text-white holder-white" type="text" ref={titles }  placeholder="Post title" name='title' onChange={handlerChange}/>
   </div>
 </div>
 <ReactQuill ref={ref} theme="snow" value={values.quill} onChange={handlerChange} name='quill'  modules={module.toolbars} formats={module.formats} />

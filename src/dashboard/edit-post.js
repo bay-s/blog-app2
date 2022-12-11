@@ -312,7 +312,7 @@ const data = {
 </div>
 
 <div className={post.post_thumbnail === null || '' ? 'hide' : ''} >
-<figure class="image is-96x96">
+<figure className="image is-96x96">
 <img src={post.post_thumbnail} />
 </figure>
 </div>
@@ -320,13 +320,12 @@ const data = {
 <button className={post.post_thumbnail === null || '' ? 'hide' : "button is-outlined is-danger is-small"} onClick={removeImage}>Remove</button>
 </div>
 {/* END THUMBNAIL ATTACH */}
-<div class="field">
-  <div class="control">
-    <input class="input is-primary is-bold is-size-4 bg-transparent text-white holder-white" type="text" ref={titles }  placeholder="Post title" name='title' defaultValue={post.post_title} onChange={handlerChange}/>
+<div className="field">
+  <div className="control">
+    <input className="input is-primary is-bold is-size-4 bg-transparent text-white holder-white" type="text" ref={titles }  placeholder="Post title" name='title' defaultValue={post.post_title} onChange={handlerChange}/>
   </div>
 </div>
   <ReactQuill ref={ref} theme="snow" value={values.quill} onChange={handlerChange} name='quill' modules={module.toolbars} formats={module.formats}  />
-
   <ErrorMessage pesan={message.pesan} isError={message.isError} sukses={message.sukses}/>
   {isSubmit ? <button type='submit' className='button is-primary'>Publish</button> : 
   <button className='button is-primary' disabled>Publish</button> }

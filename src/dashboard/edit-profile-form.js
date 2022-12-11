@@ -126,60 +126,60 @@ const isValidUrl = urlString => {
 <UploadAvatar id={value.data.uid} data={value.data}/>
 {/* END UPLOAD INPUT */}
 <form className='is-flex is-flex-direction-column is-flex-gap-lg ' onSubmit={updateProfiles}>
-<div class="field">
-<label class="label text-white">Email</label>
-<div class="control">
-<input class="input  is-link has-text-dark" type="text" name='fullname' defaultValue={value.data.email} disabled/>
+<div className="field">
+<label className="label text-white">Email</label>
+<div className="control">
+<input className="input  is-link has-text-dark" type="text" name='fullname' defaultValue={value.data.email} disabled/>
 </div>
 </div>
 
-<div class="field">
-<label class="label text-white">Fullname</label>
-<div class="control">
-<input class="input  is-link has-text-dark" type="text" name='fullname' defaultValue={value.data.fullname} onChange={ handlerChange }/>
+<div className="field">
+<label className="label text-white">Fullname</label>
+<div className="control">
+<input className="input  is-link has-text-dark" type="text" name='fullname' defaultValue={value.data.fullname} onChange={ handlerChange }/>
 </div>
 </div>
 
-<div class="field">
-<label class="label text-white">Username</label>
-<div class="control">
-<input class="input  is-link" type="text" name='username' defaultValue={value.data.username} onChange={ handlerChange }/>
+<div className="field">
+<label className="label text-white">Username</label>
+<div className="control">
+<input className="input  is-link" type="text" name='username' defaultValue={value.data.username} onChange={ handlerChange }/>
 </div>
 </div>
 
-<div class="field">
-<label class="label text-white">Website</label>
-<div class="control">
-<input class="input  is-link" type="text" name='social_link' defaultValue={value.data.social_link} onChange={ handlerChange }/>
+<div className="field">
+<label className="label text-white">Website</label>
+<div className="control">
+<input className="input  is-link" type="text" name='social_link' defaultValue={value.data.social_link} onChange={ handlerChange }/>
 </div>
 </div>
 
-<div class="field">
-<label class="label text-white">Biodata</label>
-<div class="control biodata">
+<div className="field">
+<label className="label text-white">Biodata</label>
+<div className="control biodata">
 <ReactQuill ref={ref} theme="snow" value={datas.biodata} onChange={handlerQuillChange} name='quill' />
 </div>
 </div>
 
-<div class="field">
-<label class="label text-white">Education</label>
-<div class="control">
-<input class="input  is-link" type="text" name='education' defaultValue={value.data.education} onChange={ handlerChange }/>
+<div className="field">
+<label className="label text-white">Education</label>
+<div className="control">
+<input className="input  is-link" type="text" name='education' defaultValue={value.data.education} onChange={ handlerChange }/>
 </div>
 </div>
 
-<div class="field">
-<label class="label text-white">Job</label>
-<div class="control">
-<input class="input  is-link" type="text" name='job' defaultValue={value.data.job} onChange={ handlerChange }/>
+<div className="field">
+<label className="label text-white">Job</label>
+<div className="control">
+<input className="input  is-link" type="text" name='job' defaultValue={value.data.job} onChange={ handlerChange }/>
 </div>
 </div>
 
 <ErrorMessage pesan={message.pesan} isError={message.error} sukses={message.sukses}/>
 
-<div class="field">
-{message.isSubmit ? <button class="button is-primary w-100" type='submit' title="Disabled button" >Submit</button> :
-<button class="button is-primary w-100" title="Disabled button" disabled>Submit</button>}
+<div className="field">
+{message.isSubmit ? <button className="button is-primary w-100" type='submit' title="Disabled button" >Submit</button> :
+<button className="button is-primary w-100" title="Disabled button" disabled>Submit</button>}
 </div>
  </form>
    </div>

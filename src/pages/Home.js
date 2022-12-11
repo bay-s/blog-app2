@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import supabase from '../supabase-config';
 import AnimasiSkeleton from './animasi-skeleton';
 import Headers from './headers';
@@ -7,11 +7,11 @@ import PostCard from './post-card';
 import SidebarHome from './sidebar-home';
 
 
-const Home = () => {
+const Home = (props) => {
  const [post,setPost] = useState([])
  const [loader,setLoader] = useState(true)
  const [totalPost,setTotalPost] = useState(0)
- const [test,setTest] = useState(0)
+ const [modal,setModal] = useState(false)
  const [value,setValue] = useState({
   page:0,
   leftPage:totalPost,
@@ -39,13 +39,13 @@ const Home = () => {
   }if(error) console.log(error.message);
  }
 
- 
+
     return(
      <>
       <Headers />
  <div className='container is-fluid is-max-widescreen my-5 '>
  <article className='columns is-multilne home-container'>
-        <div className='column is-3 box bg-dark'>
+        <div className='column is-3 box bg-dark sidebars' ref={props.sidebars}>
             <SidebarHome />
         </div>
 <div className='column p-0 post'>
@@ -65,6 +65,13 @@ const Home = () => {
     </article>
     {/* END COLUMNS */}
     </div>
+
+    {/* MODAL */}
+<div class={props.modal  ? 'modal is-active' : "modal"}>
+  <div class="modal-background" onClick={props.closeModal}></div>
+  <button class="modal-close is-large" aria-label="close" onClick={props.closeModal}></button>
+ </div>
+    {/* END MODAL */}
     </> 
     )
 }

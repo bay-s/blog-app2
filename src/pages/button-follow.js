@@ -194,9 +194,9 @@ getIdFollowing = async () => {
 console.log( this.state.isFollow);
       const buttonFollow =
       this.state.isFollow ? 
-      <button class="button is-info is-primary is-rounded is-title is-size-7 is-small following" data-id={this.state.follower_id} data-following={this.state.following_id} data-follow={this.props.data.uid}
+      <button className="button is-info is-primary is-rounded is-title is-size-7 is-small following" data-id={this.state.follower_id} data-following={this.state.following_id} data-follow={this.props.data.uid}
       onClick={this.AddFollow}>Following</button>   
-      :       <button class="button is-primary is-rounded is-title is-size-7 is-small" data-following={this.state.following_id}  data-id={this.state.follower_id} data-follow={this.props.data.uid}
+      :       <button className="button is-primary is-rounded is-title is-size-7 is-small" data-following={this.state.following_id}  data-id={this.state.follower_id} data-follow={this.props.data.uid}
       onClick={this.AddFollow}>Follow</button>
   
         return(

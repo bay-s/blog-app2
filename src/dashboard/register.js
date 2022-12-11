@@ -142,7 +142,7 @@ class RegisterPages extends React.Component{
  {/* end col left */}
 <div className='column is-5  box bg-dark'>
 <RegisterForm RegisterUser={this.RegisterUser} handlerChange={this.handlerChange} isSubmit={this.state.isSubmit} />
- <div class="field is-flex is-flex-gap-md is-justify-content-center pb-4">
+ <div className="field is-flex is-flex-gap-md is-justify-content-center pb-4">
    <p className='is-title text-white'>Already have an Account ?</p>
         <Link to='/login/' className='has-text-primary has-text-weight-bold is-title'>Login</Link>
  </div>

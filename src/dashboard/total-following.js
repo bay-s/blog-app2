@@ -30,9 +30,9 @@ const TotalFollowing = () => {
     :
     followingUser.map(following => {
         return <div className='column is-4 '>
-        <div class="tile is-child box  bg-dark ">
-        <div class="level-item has-text-centered is-flex-gap-md">
-<figure class="image is-32x32">
+        <div className="tile is-child box  bg-dark ">
+        <div className="level-item has-text-centered is-flex-gap-md">
+<figure className="image is-32x32">
 <Avatar id={following.following_id}/>
 </figure>
         <Author id={following.following_id}/>
