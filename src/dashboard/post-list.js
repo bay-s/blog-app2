@@ -13,8 +13,7 @@ const PostList = (props) => {
   const deletePost = async (e) => {
     e.preventDefault()
     const id = parseInt(e.target.dataset.target)
-    const container = e.target.parentElement.parentElement
-    console.log(id);
+    const container = e.target.parentElement.parentElement.parentElement
     if(window.confirm("Are you sure want to delete this post ?")){
       const { data,error } = await supabase.from('posts')
        .delete()
@@ -23,7 +22,8 @@ const PostList = (props) => {
        if(data)  {
         alert("Delete post success")
         decrementPosts(id) 
-        container.classList.add('hide')
+        console.log( container);
+        container.classList.add('hides')
       }
        if(error) alert(`Something wrong ${error.message}`)
     }

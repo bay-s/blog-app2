@@ -106,7 +106,7 @@ function App() {
       {/* <Headers /> */}
       <Routes>
       <Route path='/' element={<Home sidebars={sidebars} closeModal={openSidebar} modal={open}/>} /> 
-      <Route path='/post/:id' element={<PostDetail />} /> 
+      <Route path='/post/:id' element={<PostDetail sidebars={sidebars} closeModal={openSidebar} modal={open}/>} /> 
       <Route path='/dashboard/:id' element={isLogin ? <DashBoard /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/dashboard/create-post/' element={isLogin ? <CreatePost /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/dashboard/edit-post/:id' element={isLogin ? <EditPost /> : <LoginPage  isLogin={isLogin}/>} />

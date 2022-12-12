@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import supabase from '../supabase-config';
 
 
-const SidebarHome = () => {
+const SidebarHome = (props) => {
     const [category,setCategory] = useState([])
     const [post,setPost] = useState([])
     const [search,setSearch] = useState('')
@@ -64,7 +64,7 @@ useEffect(() => {
      }) 
     return(
  <aside className='is-flex is-flex-column is-flex-gap-lg home-sidebar'>
-<h3 className='is-title is-size-3 is-bold main-title '>
+<h3 className='is-title is-size-3 is-bold main-title ' onClick={props.closeModal}>
 <Link className="main-title text-title" to='/'>SimpleForums</Link>
 </h3>
 <form className="field py-3" onSubmit={goToPosts}>

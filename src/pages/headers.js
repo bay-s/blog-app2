@@ -50,7 +50,7 @@ y = x;
   </div>
 
      <ul className='is-flex  is-flex-gap-xl '>
-        <li className='hvr-underline-from-center py-3'>
+        <li className='hvr-underline-from-center py-3 create'>
         {value.isLogin  ? <Link to='/dashboard/create-post' className=' has-text-white'>Create Post</Link>
         :  <Link to='/login/' className=' has-text-white'>Create Post</Link>
         }   
@@ -70,24 +70,24 @@ y = x;
 </li>
 <div class="dropdown-menu fade" id="dropdown-menu" role="menu">
   <div class="dropdown-content bg-dark dropdown-contents">
-    <Link className="dropdown-item" to={`/profiles/${value.data.username}`} >
+    <Link className="dropdown-item  is-flex align-center is-flex-gap-md" to={`/profiles/${value.data.username}`} >
     <span className="icon"><i className="fa fa-user text-white"></i></span>
     <span className='text-white'>My Profile</span>
     </Link>
-    <Link className="navbar-item" to='/dashboard/create-post'>
-    <span className="icon"><i className="fa fa-cog text-white"></i></span>
+    <Link className="dropdown-item is-flex align-center is-flex-gap-md" to='/dashboard/create-post'>
+    <span className="icon"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span>
     <span className='text-white'>Create Post</span>
     </Link>
-    <Link className="navbar-item" to='/dashboard/index/'>
-    <i class="fa fa-lock" aria-hidden="true"></i>
+    <Link className="dropdown-item is-flex align-center is-flex-gap-md" to='/dashboard/index/'>
+    <span className="icon"> <i class="fa fa-lock" aria-hidden="true"></i></span>
     <span className='text-white'>DashBoard</span>
     </Link>
-    <Link className="navbar-item" to='/dashboard/edit-profile'>
+    <Link className="dropdown-item is-flex align-center is-flex-gap-md" to='/dashboard/edit-profile'>
     <span className="icon"><i className="fa fa-cog text-white"></i></span>
     <span className='text-white'>Settings</span>
     </Link>
     <hr class="dropdown-divider" />
-    <a href="#" class="dropdown-item is-flex">
+    <a href="#" class="dropdown-item is-flex align-center is-flex-gap-md">
     <span className="icon"><i className="fa fa-sign-out text-white"></i></span>
     <span onClick={Logout} className='text-white'>Log Out</span>
     </a>

@@ -1032,7 +1032,7 @@ padding: 15px !important;
     top: 0 ;
     left: 0;
     z-index: 99;
-    width: 35% !important;
+    width: 250px !important;
     transform: translateX(-500px);
     transition: 500ms !important;
   }
@@ -1045,9 +1045,11 @@ padding: 15px !important;
     top:10px !important;
   }  
 
-  .home-sidebar h3{
+  .home-sidebar .main-title {
     display: block;
+    text-align: center;
   }
+
 
   .modal.is-active{
     display: block !important;
@@ -1055,6 +1057,10 @@ padding: 15px !important;
 
   .burger{
     display: block !important;
+  }
+
+  .create{
+    display: none !important;
   }
   }
 
@@ -1066,6 +1072,9 @@ padding: 15px !important;
 }
 
 @media (max-width:772px){
+  .actions .txt{
+    display: none;
+  }
   .home-container{
     display: flex !important;
     flex-direction: column-reverse !important;
@@ -1088,6 +1097,13 @@ padding: 15px !important;
  }
 }
 
+
+@media (max-width:585px){
+.actions ul {
+  gap: 1px !important;
+}
+}
+
 @media (max-width:550px) {
   .sidebar-container{
     flex-direction: column !important;
@@ -1100,7 +1116,17 @@ padding: 15px !important;
     font-size: 12px !important;
   }
 
+  .headers .main-title{
+    display: none;
+  }
 
+  .post-card .judul{
+    font-size: 18px !important;
+  }
+
+  .post-card .authors{
+    font-size: 13px !important;
+  }
  }
 
 /* === END RESPONSIVE ===== */

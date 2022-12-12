@@ -70,8 +70,8 @@ const postCard = post.length < 1 ? "" : post.map(posts => {
         <Headers />
  <div className='container is-fluid is-max-widescreen my-5 post'>
 <article className='columns is-multilne single-container'>
-<div className='column is-3 box bg-dark sidebars'>
-              <SidebarHome />
+<div className='column is-3 box bg-dark sidebars'  ref={props.sidebars}>
+              <SidebarHome closeModal={props.closeModal}/>
 </div>
 <div className='column p-0 px-4 is-flex-column is-flex-gap-lg'>
 {/* start post */}
@@ -101,6 +101,14 @@ dataComment.map(comment => {
       </article>
       {/* END COLUMNS */}
 </div>
+
+
+    {/* MODAL */}
+    <div class={props.modal  ? 'modal is-active' : "modal"}>
+  <div class="modal-background" onClick={props.closeModal}></div>
+  <button class="modal-close is-large" aria-label="close" onClick={props.closeModal}></button>
+ </div>
+    {/* END MODAL */}
       </> 
     )
 }

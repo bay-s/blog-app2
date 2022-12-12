@@ -6,7 +6,7 @@ import supabase from '../supabase-config'
 const NotificationList = () => {
  const {value} = useContext(AppContext);
  const [notif,setNotif] = useState([])
-console.log(value);
+
  useEffect(() => {
   const fetchNotif = async ()  => {
     const { data, error } = await supabase.from('notification')

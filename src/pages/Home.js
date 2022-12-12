@@ -39,14 +39,13 @@ const Home = (props) => {
   }if(error) console.log(error.message);
  }
 
-
     return(
      <>
       <Headers />
  <div className='container is-fluid is-max-widescreen my-5 '>
  <article className='columns is-multilne home-container'>
         <div className='column is-3 box bg-dark sidebars' ref={props.sidebars}>
-            <SidebarHome />
+        <SidebarHome closeModal={props.closeModal}/>
         </div>
 <div className='column p-0 post'>
 {/* start post */}

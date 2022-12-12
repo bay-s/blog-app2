@@ -9,7 +9,7 @@ const HasComment = async (id) => {
     if(error){
     console.log(error);
     }else{
-        console.log(data);
+        // console.log(data);
         return data
     }
 }

@@ -23,7 +23,6 @@ const Avatar= (props) => {
     },[])
 
 
-console.log(userComment);
     return(
 userComment.length < 1 ? "" : userComment.map(m => {
     return <img className="is-rounded avatars" src={m.avatar === '' ? akun : m.avatar} alt="IMAGES" />

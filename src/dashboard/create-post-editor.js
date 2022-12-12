@@ -128,6 +128,7 @@ const createPost = async (e) => {
         }
       }
     };
+
     const addCategory = async (e) => {
       e.preventDefault();
       //  setCatArr(catArr => [...catArr, text.category]);
@@ -138,7 +139,10 @@ const createPost = async (e) => {
      setArrValue({ ...arrValue, catArr: [...arrValue.catArr, text.category] });
       const { data, err } = await supabase
         .from("category")
-        .insert([{ category: text.category }])
+        .insert([{ 
+          category: text.category ,
+          user_id:value.data.uid
+        }])
         .select();
       if (err) console.log(err);
       if (data) console.log(data);
