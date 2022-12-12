@@ -132,7 +132,7 @@ setTabs(e.target.dataset.tabs)
       {
     value.data.username === data.username ?  <Link to='/dashboard/edit-profile/' className='button is-primary is-outlined is-small '>Edit Profilew</Link>
         :
-        <ButtonFollow id={id} current_user={value.data} data={data}/>
+        <ButtonFollow id={id} isLogin={value.isLogin} current_user={value.data} data={data}/>
       }
      </div>
   </div>

@@ -189,15 +189,20 @@ getIdFollowing = async () => {
                   console.log(error);
                 }
             }
-        
+      
+            allertMessage = (e) => {
+              e.preventDefault()
+              console.log("Test");
+              alert('You need login first')
+            }
     render(){
-console.log( this.state.isFollow);
+
       const buttonFollow =
       this.state.isFollow ? 
       <button className="button is-info is-primary is-rounded is-title is-size-7 is-small following" data-id={this.state.follower_id} data-following={this.state.following_id} data-follow={this.props.data.uid}
-      onClick={this.AddFollow}>Following</button>   
+       onClick={this.props.isLogin ? this.AddFollow : this.allertMessage}>Following</button>   
       :       <button className="button is-primary is-rounded is-title is-size-7 is-small" data-following={this.state.following_id}  data-id={this.state.follower_id} data-follow={this.props.data.uid}
-      onClick={this.AddFollow}>Follow</button>
+      onClick={this.props.isLogin ? this.AddFollow : this.allertMessage}>Follow</button>
   
         return(
            buttonFollow
