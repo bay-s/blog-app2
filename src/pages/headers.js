@@ -45,7 +45,7 @@ y = x;
 <div className="navbar-brand is-flex align-center is-flex-gap-md">
 <i class="fa fa-bars text-white  is-clickable is-size-4 burger" aria-hidden="true" onClick={value.openSidebar}></i>
     <Link className="navbar-item main-title hvr-underline-from-center" to='/'>
-    <h3 className='text-title is-title is-size-4 is-bold main-title '>SimpleForums</h3>
+    <h3 className='text-title is-title is-size-4 is-bold main-title '>ASD</h3>
     </Link>
   </div>
 
