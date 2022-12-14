@@ -7,6 +7,7 @@ import NotificationList from './notification-list';
 
 const Headers = () => {
 const {value} = useContext(AppContext);
+const urlArr = window.location.href.split("/")
 
 useEffect(() => {
      window.addEventListener('scroll',scrolls)
@@ -39,9 +40,13 @@ y = x;
 <header className='headers p-2 bg-dark' ref={header}>
 <nav className=" is-flex align-center is-flex-gap-xl justify-between bg-transparent container" role="navigation" aria-label="main navigation" id='navbar-home'>
 <div className="navbar-brand is-flex align-center is-flex-gap-md">
-<i class="fa fa-bars text-white  is-clickable is-size-4 burger" aria-hidden="true" onClick={value.openSidebar}></i>
+{
+  urlArr[3] === 'profiles' ? ""
+  :  <i class="fa fa-bars text-white  is-clickable is-size-4 burger" aria-hidden="true" onClick={value.openSidebar}></i>
+}
+
     <Link className="navbar-item main-title hvr-underline-from-center" to='/'>
-    <h3 className='text-title is-title is-size-4 is-bold main-title '>SimpleForums</h3>
+    <h3 className={urlArr[3] === 'profiles' ? 'text-title is-title is-size-4 is-bold ' : 'text-title is-title is-size-4 is-bold main-title'}>SimpleForums</h3>
     </Link>
   </div>
 

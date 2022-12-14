@@ -41,6 +41,8 @@ const Home = (props) => {
   }if(error) console.log(error.message);
  }
 
+
+
     return(
      <>
       <Headers />
@@ -52,7 +54,7 @@ const Home = (props) => {
 <div className='column p-0 post'>
 {/* start post */}
 {post.length < 1 ? "" : post.map(posts => {
-  return loader ? <AnimasiSkeleton /> : <PostCard posts={posts} />
+  return loader ? <AnimasiSkeleton /> : <PostCard posts={posts} key={posts.id}/>
 })
 }
   {/* END POST */}
@@ -69,7 +71,7 @@ const Home = (props) => {
 
     {/* MODAL */}
 <div class={value.open  ? 'modal is-active' : "modal"}>
-  <div class="modal-background" onClick={value.openSidebarl}></div>
+  <div class="modal-background" onClick={value.openSidebar}></div>
   <button class="modal-close is-large" aria-label="close" onClick={value.openSidebar}></button>
  </div>
     {/* END MODAL */}

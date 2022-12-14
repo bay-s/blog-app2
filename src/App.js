@@ -29,7 +29,6 @@ function App() {
 
   useEffect(() => {
     const user = getUsers()
-
     supabase.auth.onAuthStateChange((event, session) => {
       if (event == 'SIGNED_IN') {
         // console.log('SIGNED_IN', session)
@@ -51,12 +50,25 @@ function App() {
       }
     })
 
+    window.addEventListener('resize', function(event) {
+      if(getWidth() >= 850) {
+        setOpen(false)
+        sidebars.current.classList.remove('slides')
+      }
+    });
+    // END RESIZE EVENT LISTENER
   },[])
 
-  const openModal = e => {
-    e.preventDefault()
-    setOpen(!open)
-  }
+
+ const getWidth = () => {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+ }
 
   const getUsers = async () => {
     const { data: { user } } = await supabase.auth.getUser()
@@ -95,7 +107,6 @@ function App() {
   const value = {
     data,
     users,
-    openModal,
     isLogin,
     openSidebar,
     sidebars,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import supabase from '../supabase-config';
 import AnimasiSkeleton from './animasi-skeleton';
 import Headers from './headers';
@@ -7,10 +7,12 @@ import PostCard from './post-card';
 import SidebarHome  from './sidebar-home';
 import { useParams } from 'react-router-dom';
 import ErrorMessage from '../dashboard/error-message';
+import { AppContext } from '../App';
 
 
 
 const SearchResult = (props) => {
+ const {value} = useContext(AppContext)
  const {id} = useParams()
  const [post,setPost] = useState([])
  const [loader,setLoader] = useState(true)
@@ -18,6 +20,7 @@ const [message,setMessage] = useState({
     pesan:'',
     error:false
 })
+
  useEffect(() => {
     searchPost()
  },[post])
@@ -59,7 +62,7 @@ const [message,setMessage] = useState({
       <Headers />
  <div className='container is-fluid is-max-widescreen my-5 post'>
  <article className='columns is-multilne home-container'>
-        <div className='column is-3 box bg-dark'>
+        <div className='column is-3 box bg-dark sidebars' ref={value.sidebars}>
             <SidebarHome />
         </div>
 <div className='column p-0'>
@@ -82,6 +85,13 @@ const [message,setMessage] = useState({
     </article>
     {/* END COLUMNS */}
     </div>
+
+{/* MODAL */}
+<div class={value.open  ? 'modal is-active' : "modal"}>
+  <div class="modal-background" onClick={value.openSidebar}></div>
+  <button class="modal-close is-large" aria-label="close" onClick={value.openSidebar}></button>
+ </div>
+{/* END MODAL */}
     </> 
     )
 }

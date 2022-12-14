@@ -11,7 +11,7 @@ import CommentCard from './comment-card'
 import ErrorMessage from '../dashboard/error-message'
 import { AppContext } from '../App'
 
-const PostDetail = (props) => {
+const PostDetail = () => {
 const {value} = useContext(AppContext)
 const {id} = useParams()
 const [post,setPost] = useState([])
@@ -25,7 +25,7 @@ const [message,setMessage] = useState({
 useEffect(() => {
  fetchPost()
 },[post])
-// },[post])
+
 const fetchPost = async () => {
  const comments = await HasComment(id);
  setDataComment(comments);
@@ -61,7 +61,7 @@ error:false,
 
 
 const postCard = post.length < 1 ? "" : post.map(posts => {
-  return <PostCardSingle  posts={posts} />
+  return <PostCardSingle  posts={posts} key={id}/>
  })
 
 
@@ -82,13 +82,13 @@ const postCard = post.length < 1 ? "" : post.map(posts => {
 {/* START COMMENT FORM */}
 <div className='box bg-dark p-6' id='comment-container'>
 <div className={!value.isLogin ? 'hide' : ''}>
-<CommentForm id={id} key={post[0]} post={post[0]} />
+<CommentForm id={id} key={id} post={post[0]} />
 </div>
 {/* DISPLAY COMMENT */}
 <article className='is-flex-column is-flex-gap-md py-4'>
 {dataComment == undefined ? "" :
 dataComment.map(comment => {
-  return <CommentCard key={dataComment} comment={comment} post={post[0]}/>
+  return <CommentCard key={comment.id} comment={comment} post={post[0]}/>
 })
 }
 </article>

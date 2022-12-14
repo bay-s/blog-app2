@@ -46,16 +46,6 @@ const data = {
   isSave
 }
 
-// const postIncrement = async () => {
-//   const { updata, err }= await supabase
-//   .rpc('increment_post', { x: 1, row_id: value.data.id})
-//   if(updata){
-//       alert("Remove likes sukes")
-//       console.log(updata);
-//     }if(err){
-//      console.log(err);
-//     }
-// }
 
 return(
 <div id="app">

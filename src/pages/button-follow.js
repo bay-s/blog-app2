@@ -18,13 +18,12 @@ class ButtonFollow extends React.Component{
         this.getIdFollower()
         this.getIdFollowing()
         }
-        componentDidUpdate(){
-          this.getIdFollower()
-          this.getIdFollowing()
-          }  
+        // componentDidUpdate(){
+        //   this.getIdFollower()
+        //   this.getIdFollowing()
+        //   }  
         getIdFollower = async () => {
           const id = this.props.current_user.uid
-          console.log(id);
           const { data, error } = await supabase
           .from('follower')
           .select()

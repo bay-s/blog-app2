@@ -8,6 +8,7 @@ import Avatar from '../dashboard/avatar';
 import { useReadingTime } from "react-hook-reading-time";
 
 const PostCard = (props) => {
+  const urlArr = window.location.href.split("/")
 
    const  {
     text, // 1 min read
@@ -36,6 +37,7 @@ const PostCard = (props) => {
           {/* POST CONTENT */}
 <div className='p-3 px-5 is-flex-column justify-start is-flex-gap-lg'>
            {/* AVATAR */}
+<div className='is-flex justify-between'>
 <div className='is-flex align-center is-flex-gap-lg'>
 <figure className="image is-32x32">
 <Avatar  id={props.posts.author_id}/>
@@ -44,6 +46,10 @@ const PostCard = (props) => {
 <Author id={props.posts.author_id}/>
 <p className="subtitle is-7 has-text-grey">{timeDifference(props.posts.created_at)}</p>
 </div>
+</div>
+<span className='is-size-7 text-white min-read-top'>
+{text}
+</span>
 </div>
  {/* END AVATAR */}
 <div>
@@ -63,18 +69,17 @@ const PostCard = (props) => {
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <i className="fa fa-comment-o" aria-hidden="true"></i>
   <span className='is-size-7'>{props.posts.total_comment}</span>
-  <span className='is-size-7 txt'>{props.posts.total_comment < 1 ? 'Add a Comment' : 'Comment' }</span>
+  <span className={urlArr[3] === 'profiles' ? 'hide' : 'is-size-7 txt'}>{props.posts.total_comment < 1 ? 'Add a Comment' : 'Comment' }</span>
   </li>
 </ul>
 <ul className='is-flex is-flex-gap-sm align-center'>
 <li>
-<span className='is-size-7'>
+<span className='is-size-7 min-read-butt'>
 {text}
 </span>
 </li>
-<li className='is-flex align-center is-flex-gap-md is-clickable bookmark'>
+<li className='is-clickable bookmark'>
   <i className="fa fa-bookmark-o" aria-hidden="true"></i>
-  <span className='is-size-7 txt'>Bookmark</span>
 </li>
 </ul>
 

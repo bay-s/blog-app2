@@ -1021,10 +1021,31 @@ height: 550px !important;
   display: none !important;
 }
 
+.min-read-top{
+  display:none;
+}
+
+
 @media (max-width:1024px){
 #navbar-home{
   margin: 0 20px !important;
 }
+}
+
+
+
+/* 900PX */
+
+@media (max-width:935px){
+  #profile-container {
+    padding: 0 10px;
+  }
+  #profile-container .top{
+width: 100%;
+  }
+  #profile-container .bottom{
+    width: 100%;
+      }
 }
 
 @media (max-width:900px){
@@ -1100,7 +1121,9 @@ padding: 15px !important;
 
 /* 770PX */
 @media (max-width:772px){
-
+  #post-saved-container{
+    margin: 20px 0 !important;
+  }
   #app .container.is-fluid{
     padding: 0 30px !important;
   }
@@ -1247,6 +1270,13 @@ font-size: 12px !important;
     font-size: 13px !important;
   }
   
+  .profile-info{
+    flex-direction: column;
+  }
+
+  #post-saved-container{
+    margin: 20px 0 !important;
+  }
  }
 
 
@@ -1254,6 +1284,16 @@ font-size: 12px !important;
 #navbar-main{
   margin:0 20px !important;
 }
+
+.min-read-butt{
+  display: none;
+}
+
+
+.min-read-top{
+  display:block;
+}
+
 
 #comment-form .quill{
   margin-bottom: 60px !important;

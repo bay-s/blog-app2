@@ -73,7 +73,9 @@ return(
 </li>
 </div>
  {/* end post action */}
- <hr />
+<div className='px-5'>
+<hr className='divider'/>
+</div>
  {/* NEXT POST */}
 <PostPreview id={posts.id} key={posts.id}/>
 {/* PREV  POST */}

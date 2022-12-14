@@ -68,7 +68,10 @@ const updateProfiles = async (e) => {
     isSubmit:true
   })
 
-  if(!isValidUrl(datas.social_link)) {
+  if(datas.social_link === ''){
+
+  }
+  else if(!isValidUrl(datas.social_link )){
     setMessage({
       pesan:`URL ARE NOT VALID URL `,
       error:true,

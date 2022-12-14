@@ -19,6 +19,7 @@ const Profiles = (props) => {
     const [data,setData] = useState([])
 
     useEffect(() => {
+   
       const getUserDetail = async () => {
         const {data,error} = await supabase
         .from('users')
@@ -35,7 +36,7 @@ const Profiles = (props) => {
           fetchPost(datas)
           setNotFound(false)
           bookmarkPosts(datas)
-          console.log(data);
+          // console.log(data);
         }
       }
       getUserDetail()
@@ -48,7 +49,7 @@ const Profiles = (props) => {
      .select('*', { count: 'exact' })
      .eq('author_id',datas)
      if(data){
-       console.log(data);
+      //  console.log(data);
        setPost(data)
      }if(error) console.log(error.message);
     }
@@ -71,7 +72,7 @@ const Profiles = (props) => {
       .select()
       .eq('id',id)
       if(data){
-        console.log(data);
+        // console.log(data);
         setBookmark(data)
       }if(error) console.log(error.message);
     } 
@@ -85,12 +86,12 @@ setTabs(e.target.dataset.tabs)
 
      const postCard = post.length < 1 ? '' :
      post.map(posts => {
-       return <PostCard posts={posts} />
+       return <PostCard posts={posts} key={posts.id}/>
      })
    
      const bookmarkPost = bookmark.length < 1 ? '' :
-     bookmark.map(posts => {
-       return <PostCard posts={posts} key={posts}/>
+     bookmark.map((posts ,index)=> {
+       return <PostCard posts={posts} key={index}/>
      })
 
 
@@ -101,8 +102,8 @@ setTabs(e.target.dataset.tabs)
   notFound ? <Navigate to="*" replace={true} />  
   :
 <div className='container is-fluid is-max-widescreen my-5 post'>
-  <div className='columns is-multiline is-centered'>
-  <section className='column is-9 box  bg-dark'>
+  <div className='columns is-multiline is-centered' id='profile-container'>
+  <section className='column is-9 box top bg-dark'>
   <article className='is-flex-column is-flex-gap-xl'>
 
   <figure class="image is-128x128 mx-auto">
@@ -117,7 +118,7 @@ setTabs(e.target.dataset.tabs)
     
      <div className={data.biodata == null ? "hide" : "biodata"} dangerouslySetInnerHTML={createMarkup(data.biodata)} />  
 
-     <div className='is-flex align-center is-flex-gap-lg justify-center'>
+     <div className='is-flex align-center is-flex-gap-lg justify-center profile-info'>
       <p className='is-flex align-center is-flex-gap-md'>
       <i class="fa fa-calendar is-size-7" aria-hidden="true"></i>
       <span className='is-size-7'>Joined on</span>
@@ -139,13 +140,13 @@ setTabs(e.target.dataset.tabs)
   </article>
   <hr className='divider'/>
  <div className='columns is-multiline'>
-     <div className={data.education === '' || null ?  'hide' : 'column is-flex-column text-center has-text-white'}>
+     <div className={!data.education ?  'hide' : 'column is-flex-column text-center has-text-white'}>
       <h1 className='text-title is-bold is-title'>Education</h1>
       <span>
     {data.education}
       </span>
      </div>
-     <div className={data.job === null || '' ? 'hide' : 'column is-flex-column text-center has-text-white'}>
+     <div className={!data.education  ? 'hide' : 'column is-flex-column text-center has-text-white'}>
       <h1 className='text-title is-bold is-title'>Work</h1>
       <span>
       {data.job}
@@ -154,7 +155,7 @@ setTabs(e.target.dataset.tabs)
  </div>
 </section>
 {/* START POST HISTORY */}
-<section className='is-flex-column column is-9  box bg-transparent'>
+<section className='column is-9 box bg-transparent bottom' >
   <div className='columns is-multiline'>
   <div className='column is-3 p-0 is-flex-column is-flex-gap-lg '>
     <ul className='is-flex-column actions bg-dark p-2'>
@@ -183,7 +184,7 @@ setTabs(e.target.dataset.tabs)
     </ul>
 
   </div>
-     <div className='column is-9 p-0 fade'>
+     <div className='column is-9 p-0 fade' id='post-saved-container'>
       {
       tabs === 'post' ? postCard : bookmarkPost
       }
