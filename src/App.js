@@ -97,7 +97,9 @@ function App() {
     users,
     openModal,
     isLogin,
-    openSidebar
+    openSidebar,
+    sidebars,
+    open
   }
 
   return (
@@ -105,8 +107,8 @@ function App() {
 <BrowserRouter>
       {/* <Headers /> */}
       <Routes>
-      <Route path='/' element={<Home sidebars={sidebars} closeModal={openSidebar} modal={open}/>} /> 
-      <Route path='/post/:id' element={<PostDetail sidebars={sidebars} closeModal={openSidebar} modal={open}/>} /> 
+      <Route path='/' element={<Home />} /> 
+      <Route path='/post/:id' element={<PostDetail />} /> 
       <Route path='/dashboard/:id' element={isLogin ? <DashBoard /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/dashboard/create-post/' element={isLogin ? <CreatePost /> : <LoginPage  isLogin={isLogin}/>} />
       <Route path='/dashboard/edit-post/:id' element={isLogin ? <EditPost /> : <LoginPage  isLogin={isLogin}/>} />

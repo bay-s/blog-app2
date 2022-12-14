@@ -19,7 +19,7 @@ const PostCardSingle = (props) => {
          
 return(
 <div className="tile is-parent p-0">
- <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column p-0">
+ <article className="tile is-child box bg-dark is-flex-gap-sm is-flex is-flex-column p-0 post-single">
        {posts.post_thumbnail !== '' ? 
 <div className="card-image mb-2 feature-image-container">
 <figure className="image is-16by9 feature-image" >

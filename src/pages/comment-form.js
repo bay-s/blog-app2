@@ -11,6 +11,7 @@ import { AppContext } from '../App';
 const CommentForm = (props) => {
     const {value} = useContext(AppContext)
     const [isSubmit, setIsSubmit] = useState(false);
+    const [hide,setHide] = useState(false)
     const [message, setMessage] = useState({
       pesan: "",
       isError: false,
@@ -74,19 +75,25 @@ const CommentForm = (props) => {
        if(err) console.log(err);
        else console.log(datas);   
      }
+
+     const openForm = (e) => {
+      e.preventDefault()
+      setHide(!hide)
+     }
     return(
 <section className="section is-main-section p-1">
-<form className='is-flex is-flex-column is-flex-gap-md ' onSubmit={postComment}>
+<form className='is-flex is-flex-column is-flex-gap-md ' id='comment-form' onSubmit={postComment}>
 <h3 className='text-title is-title  mb-5'>
 Leave a Comment
 </h3>
-<div className='is-flex is-flex-gap-xl'>
-<figure className="image is-48x48">
+<div className='is-flex is-flex-gap-xl' id='quill-comment-field'>
+<figure className="image is-32x32">
   <Avatar id={value.data.uid}/>
 </figure>
 <div className='w-100'>
-<ReactQuill  ref={values.ref} theme="snow" value={values.quill} name='quill'  modules={module.toolbars} formats={module.formats} onChange={handlerChange}/>
-<div className='button-quill'>
+<textarea className={!hide ? "textarea bg-transparent is-primary" : 'hide'} placeholder="Add a coment" onClick={openForm}></textarea>
+<ReactQuill className={hide ? '' : 'hide'} ref={values.ref} theme="snow" value={values.quill} name='quill'  modules={module.simple}  onChange={handlerChange}/>
+<div className={hide ? 'button-quill' : 'hide'}>
 {isSubmit ? <button type='submit' className='button is-primary '>Submit</button> :
   <button className='button is-primary mt-3' disabled>Submit</button>}
 </div>

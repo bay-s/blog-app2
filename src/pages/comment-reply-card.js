@@ -43,8 +43,10 @@ const ReplyCard = (props) => {
     return(
 <div className='border box bg-transparent is-flex is-flex-column is-flex-gap-md p-4'>
 {/* AUTHOR AVATAR */}
-<div className='is-flex align-start is-flex-gap-md'>
- <figure className="image is-32x32">
+<div className='is-flex align-start is-flex-gap-md reply-card-avatar'>
+{/* AVATAR LEFT */}
+<div className='is-flex align-center is-flex-gap-md'>
+<figure className="image is-32x32">
  <Avatar id={reply.author_id} />
 </figure>
 <div className='is-flex-column'>
@@ -53,13 +55,17 @@ const ReplyCard = (props) => {
 {timeDifference(reply.created_at)}
  </span>
 </div>
-<div className='is-flex align-center is-flex-gap-lg mx-6'>
+</div>
+{/* END AVATAR LEFT */}
+{/* AVATAR RIGHT */}
+<div className='is-flex align-center is-flex-gap-lg mx-6 reply-info'>
 <Author id={reply.author_id}/> 
 <span className='is-size-7 text-white'>
 has replied to 
 </span>
  <Author id={reply.receive_id}/>
 </div>
+{/* END AVATAR RIGHT*/}
   </div>
   {/* END AUTHOR AVATAR */}
 <div className='px-1 mb-2' dangerouslySetInnerHTML={createMarkup(reply)} />

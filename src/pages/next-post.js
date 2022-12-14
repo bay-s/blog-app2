@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AppContext } from '../App'
 import supabase from '../supabase-config'
 
 const  PostPreview =  (props) => {
+  const {value} = useContext(AppContext)
  const [nextPost,setNextPost] = useState([])
 const [prevPost,setPrevPost] = useState([])
 
@@ -11,6 +13,7 @@ const [prevPost,setPrevPost] = useState([])
   const { data, error } = await supabase
   .from('posts')
   .select()
+  .eq('author_id',value.data.uid)
   .gt('id', props.id)
   .order('id', { ascending: true }) 
   .limit(1)
@@ -39,7 +42,7 @@ const [prevPost,setPrevPost] = useState([])
 
 
  return(
-<div className='is-flex justify-between is-flex-gap-xl align-center p-6' >
+<div className='is-flex justify-between is-flex-gap-xl align-center p-6' id='post-rec' >
 <div className={prevPost == undefined  ? 'hide' : 'is-flex is-flex-column is-flex-gap-sm navbar-start align-start'}>
    <span className='is-flex align-center is-flex-gap-md'>
    <i className="fa fa-long-arrow-left text-white" aria-hidden="true"></i>

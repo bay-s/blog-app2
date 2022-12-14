@@ -7,7 +7,7 @@ import NotificationList from './notification-list';
 
 const Headers = () => {
 const {value} = useContext(AppContext);
-const [dropDown,setDropDown] = useState(false)
+
 useEffect(() => {
      window.addEventListener('scroll',scrolls)
 },[])
@@ -35,10 +35,6 @@ y = x;
     console.log(error);
   }
 
-  const openDropDown = e => {
-    e.preventDefault()
-    setDropDown(!dropDown)
-  }
     return(
 <header className='headers p-2 bg-dark' ref={header}>
 <nav className=" is-flex align-center is-flex-gap-xl justify-between bg-transparent container" role="navigation" aria-label="main navigation" id='navbar-home'>
@@ -58,8 +54,9 @@ y = x;
   
         {value.isLogin ?  <NotificationList /> : ''}
         {/* START DROPDOWN */}
-<div class={dropDown ? "dropdown is-right is-active" : "dropdown is-right"}>
-<li className={value.isLogin ? 'hvr-underline-from-center py-3 is-clickable akun' : 'hide'} onClick={openDropDown}>
+
+<div class="dropdown is-right is-hoverable">
+<li className={value.isLogin ? 'hvr-underline-from-center py-3 is-clickable akun' : 'hide'}>
 <div className="is-flex align-center is-flex-gap-md"
 >
 <figure className="image is-24x24">

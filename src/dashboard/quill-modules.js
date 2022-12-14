@@ -16,7 +16,14 @@ import ReactQuill from 'react-quill';
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
         'link', 'image'
-      ]
+      ],
+      simple:{
+        toolbar: [
+          [{ 'header': [1, 2, false] }],
+          ['link', 'image'],
+          ['clean']
+        ]
+      },
   }
 
   console.log(module);

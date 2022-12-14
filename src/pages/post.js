@@ -70,8 +70,8 @@ const postCard = post.length < 1 ? "" : post.map(posts => {
         <Headers />
  <div className='container is-fluid is-max-widescreen my-5 post'>
 <article className='columns is-multilne single-container'>
-<div className='column is-3 box bg-dark sidebars'  ref={props.sidebars}>
-              <SidebarHome closeModal={props.closeModal}/>
+<div className='column is-3 box bg-dark sidebars'  ref={value.sidebars}>
+     <SidebarHome closeModal={value.openSidebar}/>
 </div>
 <div className='column p-0 px-4 is-flex-column is-flex-gap-lg'>
 {/* start post */}
@@ -80,7 +80,7 @@ const postCard = post.length < 1 ? "" : post.map(posts => {
 {/* END POST */}
 
 {/* START COMMENT FORM */}
-<div className='box bg-dark p-6'>
+<div className='box bg-dark p-6' id='comment-container'>
 <div className={!value.isLogin ? 'hide' : ''}>
 <CommentForm id={id} key={post[0]} post={post[0]} />
 </div>
@@ -93,7 +93,6 @@ dataComment.map(comment => {
 }
 </article>
   {/* END DISPLAY */}
-
 </div>
 {/* END COMMENT FORM */}
 </div>
@@ -104,9 +103,9 @@ dataComment.map(comment => {
 
 
     {/* MODAL */}
-    <div class={props.modal  ? 'modal is-active' : "modal"}>
-  <div class="modal-background" onClick={props.closeModal}></div>
-  <button class="modal-close is-large" aria-label="close" onClick={props.closeModal}></button>
+<div class={value.open  ? 'modal is-active' : "modal"}>
+  <div class="modal-background" onClick={value.openSidebar}></div>
+  <button class="modal-close is-large" aria-label="close" onClick={value.openSidebar}></button>
  </div>
     {/* END MODAL */}
       </> 

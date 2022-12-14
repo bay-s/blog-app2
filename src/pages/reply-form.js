@@ -79,7 +79,8 @@ const ReplyForm = (props) => {
 return(
 <section className="section is-main-section p-0">
 <form className='is-flex is-flex-column is-flex-gap-md ' onSubmit={postComment}>
-<ReactQuill ref={values.ref} theme="snow" value={values.quill} name='quill'  modules={module.toolbars} formats={module.formats} onChange={handlerChange}/>
+
+<ReactQuill ref={values.ref} theme="snow" value={values.quill} name='quill'  formats={module.formats} onChange={handlerChange}/>
 {/* START BUTTON */}
 <div className='is-flex align-center navbar-start is-flex-gap-md button-quill'>
 <span className='button is-clickable' onClick={props.opensReply}>Cancel</span>

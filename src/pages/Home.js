@@ -1,4 +1,5 @@
-import React, { useEffect,useState } from 'react'
+import React, { useContext, useEffect,useState } from 'react'
+import { AppContext } from '../App';
 import supabase from '../supabase-config';
 import AnimasiSkeleton from './animasi-skeleton';
 import Headers from './headers';
@@ -8,15 +9,16 @@ import SidebarHome from './sidebar-home';
 
 
 const Home = (props) => {
+ const {value} = useContext(AppContext)
  const [post,setPost] = useState([])
  const [loader,setLoader] = useState(true)
  const [totalPost,setTotalPost] = useState(0)
  const [modal,setModal] = useState(false)
- const [value,setValue] = useState({
-  page:0,
-  leftPage:totalPost,
-  counts:4
-  })
+//  const [value,setValue] = useState({
+//   page:0,
+//   leftPage:totalPost,
+//   counts:4
+//   })
 
  useEffect(() => {
   fetchPost()
@@ -44,8 +46,8 @@ const Home = (props) => {
       <Headers />
  <div className='container is-fluid is-max-widescreen my-5 '>
  <article className='columns is-multilne home-container'>
-        <div className='column is-3 box bg-dark sidebars' ref={props.sidebars}>
-        <SidebarHome closeModal={props.closeModal}/>
+        <div className='column is-3 box bg-dark sidebars' ref={value.sidebars}>
+        <SidebarHome closeModal={value.openSidebar}/>
         </div>
 <div className='column p-0 post'>
 {/* start post */}
@@ -56,7 +58,7 @@ const Home = (props) => {
   {/* END POST */}
   
  {/* PAGINATION */}
-<Pagination setValue={setValue} totalPost={totalPost} value={value} />
+{/* <Pagination setValue={setValue} totalPost={totalPost} value={value} /> */}
 {/* END PAGINATION */}
 </div>
         {/* end column card */}
@@ -66,9 +68,9 @@ const Home = (props) => {
     </div>
 
     {/* MODAL */}
-<div class={props.modal  ? 'modal is-active' : "modal"}>
-  <div class="modal-background" onClick={props.closeModal}></div>
-  <button class="modal-close is-large" aria-label="close" onClick={props.closeModal}></button>
+<div class={value.open  ? 'modal is-active' : "modal"}>
+  <div class="modal-background" onClick={value.openSidebarl}></div>
+  <button class="modal-close is-large" aria-label="close" onClick={value.openSidebar}></button>
  </div>
     {/* END MODAL */}
     </> 

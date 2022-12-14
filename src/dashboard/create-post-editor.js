@@ -327,7 +327,7 @@ const { data, error } = await supabase.storage.from('images')
 </div>
 <ReactQuill ref={ref} theme="snow" value={values.quill} onChange={handlerChange} name='quill'  modules={module.toolbars} formats={module.formats} />
 <ErrorMessage pesan={message.pesan} isError={message.isError} sukses={message.sukses}/>
-  {button()}
+ {button()}
 </form>
 </section>
 {/* END EDITOR */}

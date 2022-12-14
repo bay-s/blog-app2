@@ -281,7 +281,7 @@ const data = {
 <div id="app">
 <Header />
 <div class="container is-fluid my-5 pt-3 ">
-<div className='columns is-multiline'>
+<div className='columns is-multiline edit-post'>
 {/* START SIDEBAR */}
 <div className='column is-2 bg-dark'>
 <Sidebar />
@@ -289,7 +289,7 @@ const data = {
 {/* END SIDEBAR */}
 {/* START COLUMN RIGHT */}
 <div className='column is-10'>
-<div className='columns is-multiline'>
+<div className='columns is-multiline '>
 <div className='column is-9  p-0 px-4'>
 {/* start table */}
 <section class="section is-main-section box bg-dark">
@@ -311,13 +311,13 @@ const data = {
   </label>
 </div>
 
-<div className={post.post_thumbnail === null || '' ? 'hide' : ''} >
+<div className={post.post_thumbnail === '' || null ? 'hide' : ''} >
 <figure className="image is-96x96">
 <img src={post.post_thumbnail} />
 </figure>
 </div>
 
-<button className={post.post_thumbnail === null || '' ? 'hide' : "button is-outlined is-danger is-small"} onClick={removeImage}>Remove</button>
+<button className={post.post_thumbnail === '' || null ? 'hide' : "button is-outlined is-danger is-small"} onClick={removeImage}>Remove</button>
 </div>
 {/* END THUMBNAIL ATTACH */}
 <div className="field">

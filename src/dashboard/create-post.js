@@ -61,7 +61,7 @@ return(
 <div id="app">
 <Header />
 <div className="container is-fluid my-5 pt-3 ">
-<div className='columns is-multiline'>
+<div className='columns is-multiline edit-post'>
 {/* START SIDEBAR */}
 <div className='column is-2 bg-dark'>
 <Sidebar />

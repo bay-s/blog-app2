@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { useParams ,Navigate} from 'react-router-dom';
+import { AppContext } from '../App';
 import Header from '../pages/header';
 import Bookmarked from './bookmarked';
 import Comment from './comment';
@@ -19,9 +20,9 @@ const string_id = id.toString().toLowerCase()
 <div id="app">
 <Header />
 <div className="container is-fluid my-5">
-<div className='columns is-multiline dashboard-container'>
+<div className='columns is-multiline '>
 {/* START SIDEBAR */}
-<div className='column is-3 bg-dark my-3'>
+<div className='column is-3 bg-dark my-3 ' >
 <Sidebar />
 </div>
 {/* END SIDEBAR */}
