@@ -61,7 +61,7 @@ return(
 <ul className='is-flex is-flex-gap-lg align-center'>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <LikesAction post={posts} user={value.data}  isLogin={value.isLogin} />
-  <span className='is-size-7'>{posts.total_likes < 1 ? '0' : posts.total_likes}</span>
+  <span className='is-size-7'>{posts.total_likes}</span>
   </li>
   <li className='is-flex align-center is-flex-gap-md is-clickable'>
   <i className="fa fa-comment-o" aria-hidden="true"></i>
