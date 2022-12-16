@@ -62,7 +62,7 @@ addLikes = async (e) => {
          e.target.classList.add('likes')
          this.UpdateLikes(id,total_likes)
          this.setState({isLikes:true})
-         PushNotifications('likes',author_id,id,this.props.user.uid)
+        //  PushNotifications('likes',author_id,id,this.props.user.uid)
         }
       }
       console.log(total_likes);

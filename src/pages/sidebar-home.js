@@ -89,7 +89,7 @@ useEffect(() => {
    </div>
 
    <div className='is-flex is-flex-column is-flex-gap-md p-3'>
-     <h3 className='is-title text-title is-bold is-size-5'>
+     <h3 className={post.length < 1 ? 'hide' : 'is-title text-title is-bold is-size-5'}>
      Popular Post
      </h3>
      <ul className='is-flex is-flex-column is-flex-gap-md menu-list'>
